@@ -1,6 +1,9 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
+#include <libintl.h>
+#define _(String) gettext (String)
+
 #include "mtype.h"
 #include "monster.h"
 #include "map.h"
