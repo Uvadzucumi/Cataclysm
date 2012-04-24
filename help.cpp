@@ -2,17 +2,8 @@
 #include "keypress.h"
 
 #ifndef LINE_XOXO
-	#define LINE_XOXO 4194424
-	#define LINE_OXOX 4194417
-	#define LINE_XXOO 4194413
-	#define LINE_OXXO 4194412
-	#define LINE_OOXX 4194411
-	#define LINE_XOOX 4194410
-	#define LINE_XXXO 4194420
-	#define LINE_XXOX 4194422
-	#define LINE_XOXX 4194421
-	#define LINE_OXXX 4194423
-	#define LINE_XXXX 4194414
+// LINE defined in output.h (Uvadzucumi)
+	#include "output.h"
 #endif
 
 void game::help()
