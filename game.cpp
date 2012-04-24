@@ -2077,7 +2077,11 @@ void game::draw()
   col_temp = c_cyan;
  else if (temperature >  32)
   col_temp = c_ltblue;
- wprintz(w_status, col_temp, _(" %dF"), temperature);
+#ifdef TEMPERATURE_IN_CELSIUS 
+ wprintz(w_status, col_temp, " %dС", (temperature-32)*5/9);
+#else
+ wprintz(w_status, col_temp, " %dF", temperature);
+#endif
  mvwprintz(w_status, 0, 41, c_white, _("%s, day %d"),
            season_name[turn.season].c_str(), turn.day + 1);
  if (run_mode != 0)

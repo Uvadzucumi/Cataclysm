@@ -5,7 +5,8 @@
 #WARNINGS = -Wall
 DEBUG = -g
 #PROFILE = -pg
-DEFS = -DLOCALEDIR=\"locale\" -DPACKAGE=\"cataclysm\"
+#additional defs
+DEFS = -DLOCALEDIR=\"locale\" -DPACKAGE=\"cataclysm\" -DTEMPERATURE_IN_CELSIUS
 
 ODIR = obj
 DDIR = .deps
