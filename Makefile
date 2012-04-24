@@ -5,6 +5,7 @@
 #WARNINGS = -Wall
 DEBUG = -g
 #PROFILE = -pg
+DEFS = -DLOCALEDIR=\"locale\" -DPACKAGE=\"cataclysm\"
 
 ODIR = obj
 DDIR = .deps
@@ -39,7 +40,7 @@ $(DDIR):
 	@mkdir $(DDIR)
 
 $(ODIR)/%.o: %.cpp
-	$(CXX) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CFLAGS) $(DEFS) -c $< -o $@
 
 clean:
 	rm -f $(TARGET) $(ODIR)/*.o
