@@ -17,7 +17,10 @@
 int main(int argc, char *argv[])
 {
  srand(time(NULL));
-
+// for mulltilangual
+ setlocale (LC_ALL, "");
+ bindtextdomain (PACKAGE, LOCALEDIR);
+ textdomain (PACKAGE);
 // ncurses stuff
  initscr(); // Initialize ncurses
  noecho();  // Don't echo keypresses
