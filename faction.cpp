@@ -192,12 +192,12 @@ void faction::randomize()
 
  if (one_in(4)) {
   do
-   name = "The " + noun + " of " + invent_name();
+   name = _("The ") + noun + _(" of ") + invent_name();
   while (name.length() > MAX_FAC_NAME_SIZE);
  }
  else if (one_in(2)) {
   do
-   name = "The " + invent_adj() + " " + noun;
+   name = _("The ") + invent_adj() + " " + noun;
   while (name.length() > MAX_FAC_NAME_SIZE);
  }
  else {
@@ -209,16 +209,16 @@ void faction::randomize()
     adj = faction_adj_bad[rng(0, 14)];
    else
     adj = faction_adj_neu[rng(0, 14)];
-   name = "The " + adj + " " + noun;
+   name = _("The ") + adj + " " + noun;
    if (one_in(4))
-    name += " of " + invent_name();
+    name += _(" of ") + invent_name();
   } while (name.length() > MAX_FAC_NAME_SIZE);
  }
 }
 
 void faction::make_army()
 {
- name = "The army";
+ name = _("The army");
  omx = 0;
  omy = 0;
  mapx = OMAPX / 2;
@@ -301,15 +301,15 @@ facval_data[v].name.c_str());
 
 std::string faction::describe()
 {
- std::string ret = name + " have the ultimate goal of " +
-                   facgoal_data[goal].name + ". Their primary concern is " +
+ std::string ret = name + _(" have the ultimate goal of ") +
+                   facgoal_data[goal].name + _(". Their primary concern is ") +
                    facjob_data[job1].name;
  if (job2 == FACJOB_NULL)
   ret += ".";
  else
-  ret += ", but they are also involved in " + facjob_data[job2].name + ".";
+  ret += _(", but they are also involved in ") + facjob_data[job2].name + ".";
  if (values != 0) {
-  ret += " They are known for ";
+  ret += _(" They are known for ");
   for (int i = 0; i < NUM_FACVALS; i++) {
    if (has_value(faction_value(i)))
     ret += facval_data[i].name + ", ";
@@ -320,7 +320,7 @@ std::string faction::describe()
   ret.replace(pos, 2, ".");
   pos = ret.find_last_of(",");
   if (pos != std::string::npos)
-   ret.replace(pos, 2, ", and ");
+   ret.replace(pos, 2, _(", and "));
  }
  return ret;
 }
@@ -492,35 +492,35 @@ std::string invent_adj()
 std::string fac_ranking_text(int val)
 {
  if (val <= -100)
-  return "Archenemy";
+  return _("Archenemy");
  if (val <= -80)
-  return "Wanted Dead";
+  return _("Wanted Dead");
  if (val <= -60)
-  return "Enemy of the People";
+  return _("Enemy of the People");
  if (val <= -40)
-  return "Wanted Criminal";
+  return _("Wanted Criminal");
  if (val <= -20)
-  return "Not Welcome";
+  return _("Not Welcome");
  if (val <= -10)
-  return "Pariah";
+  return _("Pariah");
  if (val <=  -5)
-  return "Disliked";
+  return _("Disliked");
  if (val >= 100)
-  return "Hero";
+  return _("Hero");
  if (val >= 80)
-  return "Idol";
+  return _("Idol");
  if (val >= 60)
-  return "Beloved";
+  return _("Beloved");
  if (val >= 40)
-  return "Highly Valued";
+  return _("Highly Valued");
  if (val >= 20)
-  return "Valued";
+  return _("Valued");
  if (val >= 10)
-  return "Well-Liked";
+  return _("Well-Liked");
  if (val >= 5)
-  return "Liked";
+  return _("Liked");
 
- return "Neutral";
+ return _("Neutral");
 }
 
 // Used in game.cpp
@@ -528,31 +528,31 @@ std::string fac_respect_text(int val)
 {
 // Respected, feared, etc.
  if (val >= 100)
-  return "Legendary";
+  return _("Legendary");
  if (val >= 80)
-  return "Unchallenged";
+  return _("Unchallenged");
  if (val >= 60)
-  return "Mighty";
+  return _("Mighty");
  if (val >= 40)
-  return "Famous";
+  return _("Famous");
  if (val >= 20)
-  return "Well-Known";
+  return _("Well-Known");
  if (val >= 10)
-  return "Spoken Of";
+  return _("Spoken Of");
 
 // Disrepected, laughed at, etc.
  if (val <= -100)
-  return "Worthless Scum";
+  return _("Worthless Scum");
  if (val <= -80)
-  return "Vermin";
+  return _("Vermin");
  if (val <= -60)
-  return "Despicable";
+  return _("Despicable");
  if (val <= -40)
-  return "Parasite";
+  return _("Parasite");
  if (val <= -20)
-  return "Leech";
+  return _("Leech");
  if (val <= -10)
-  return "Laughingstock";
+  return _("Laughingstock");
  
- return "Neutral";
+ return _("Neutral");
 }

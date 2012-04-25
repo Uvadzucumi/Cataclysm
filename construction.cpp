@@ -41,53 +41,53 @@ void game::init_construction()
  *  items after a deconstruction.
  */
 
- CONSTRUCT("Dig Pit", 0, &construct::able_dig, &construct::done_pit);
+ CONSTRUCT(_("Dig Pit"), 0, &construct::able_dig, &construct::done_pit);
   STAGE(t_pit_shallow, 10);
    TOOL(itm_shovel, NULL);
   STAGE(t_pit, 10);
    TOOL(itm_shovel, NULL);
 
- CONSTRUCT("Spike Pit", 0, &construct::able_pit, &construct::done_trap_pit);
+ CONSTRUCT(_("Spike Pit"), 0, &construct::able_pit, &construct::done_trap_pit);
   STAGE(t_pit_spiked, 5);
    COMP(itm_spear_wood, 4, NULL);
 
- CONSTRUCT("Fill Pit", 0, &construct::able_pit, &construct::done_fill_pit);
+ CONSTRUCT(_("Fill Pit"), 0, &construct::able_pit, &construct::done_fill_pit);
   STAGE(t_pit_shallow, 5);
    TOOL(itm_shovel, NULL);
   STAGE(t_dirt, 5);
    TOOL(itm_shovel, NULL);
 
- CONSTRUCT("Clean Broken Window", 0, &construct::able_broken_window,
+ CONSTRUCT(_("Clean Broken Window"), 0, &construct::able_broken_window,
                                      &construct::done_nothing);
   STAGE(t_window_empty, 5);
 
- CONSTRUCT("Remove Window Pane",  1, &construct::able_window_pane,
+ CONSTRUCT(_("Remove Window Pane"),  1, &construct::able_window_pane,
                                      &construct::done_window_pane);
   STAGE(t_window_empty, 10);
    TOOL(itm_hammer, itm_rock, itm_hatchet, NULL);
    TOOL(itm_screwdriver, itm_knife_butter, itm_toolset, NULL);
 
- CONSTRUCT("Repair Door", 1, &construct::able_door_broken,
+ CONSTRUCT(_("Repair Door"), 1, &construct::able_door_broken,
                              &construct::done_nothing);
   STAGE(t_door_c, 10);
    TOOL(itm_hammer, itm_hatchet, itm_nailgun, NULL);
    COMP(itm_2x4, 3, NULL);
    COMP(itm_nail, 12, NULL);
 
- CONSTRUCT("Board Up Door", 0, &construct::able_door, &construct::done_nothing);
+ CONSTRUCT(_("Board Up Door"), 0, &construct::able_door, &construct::done_nothing);
   STAGE(t_door_boarded, 8);
    TOOL(itm_hammer, itm_hatchet, itm_nailgun, NULL);
    COMP(itm_2x4, 4, NULL);
    COMP(itm_nail, 8, NULL);
 
- CONSTRUCT("Board Up Window", 0, &construct::able_window,
+ CONSTRUCT(_("Board Up Window"), 0, &construct::able_window,
                                  &construct::done_nothing);
   STAGE(t_window_boarded, 5);
    TOOL(itm_hammer, itm_hatchet, itm_nailgun, NULL);
    COMP(itm_2x4, 4, NULL);
    COMP(itm_nail, 8, NULL);
 
- CONSTRUCT("Build Wall", 2, &construct::able_empty, &construct::done_nothing);
+ CONSTRUCT(_("Build Wall"), 2, &construct::able_empty, &construct::done_nothing);
   STAGE(t_wall_half, 10);
    TOOL(itm_hammer, itm_hatchet, itm_nailgun, NULL);
    COMP(itm_2x4, 10, NULL);
@@ -97,14 +97,14 @@ void game::init_construction()
    COMP(itm_2x4, 10, NULL);
    COMP(itm_nail, 20, NULL);
 
- CONSTRUCT("Build Window", 3, &construct::able_wall_wood,
+ CONSTRUCT(_("Build Window"), 3, &construct::able_wall_wood,
                               &construct::done_nothing);
   STAGE(t_window_empty, 10);
    TOOL(itm_saw, NULL);
   STAGE(t_window, 5);
    COMP(itm_glass_sheet, 1, NULL);
 
- CONSTRUCT("Build Door", 4, &construct::able_wall_wood,
+ CONSTRUCT(_("Build Door"), 4, &construct::able_wall_wood,
                               &construct::done_nothing);
   STAGE(t_door_frame, 15);
    TOOL(itm_saw, NULL);
@@ -124,7 +124,7 @@ void game::init_construction()
    COMP(itm_2x4, 5, itm_nail, 8, NULL);
 */
 
- CONSTRUCT("Build Roof", 4, &construct::able_between_walls,
+ CONSTRUCT(_("Build Roof"), 4, &construct::able_between_walls,
                             &construct::done_nothing);
   STAGE(t_floor, 40);
    TOOL(itm_hammer, itm_hatchet, itm_nailgun, NULL);
@@ -138,13 +138,13 @@ void game::construction_menu()
  WINDOW *w_con = newwin(25, 80, 0, 0);
  wborder(w_con, LINE_XOXO, LINE_XOXO, LINE_OXOX, LINE_OXOX,
                 LINE_OXXO, LINE_OOXX, LINE_XXOO, LINE_XOOX );
- mvwprintz(w_con, 0, 1, c_red, "Construction");
+ mvwprintz(w_con, 0, 1, c_red, _("Construction"));
  mvwputch(w_con,  0, 30, c_white, LINE_OXXX);
  mvwputch(w_con, 24, 30, c_white, LINE_XXOX);
  for (int i = 1; i < 24; i++)
   mvwputch(w_con, i, 30, c_white, LINE_XOXO);
 
- mvwprintz(w_con,  1, 31, c_white, "Difficulty:");
+ mvwprintz(w_con,  1, 31, c_white, _("Difficulty:"));
 
  wrefresh(w_con);
 
@@ -191,7 +191,7 @@ void game::construction_menu()
    for (int n = 0; n < current_con->stages.size(); n++) {
     nc_color color_stage = (player_can_build(u, total_inv, current_con, n) ?
                             c_white : c_dkgray);
-    mvwprintz(w_con, posy, 31, color_stage, "Stage %d: %s", n + 1,
+    mvwprintz(w_con, posy, 31, color_stage, _("Stage %d: %s"), n + 1,
               terlist[current_con->stages[n].terrain].name.c_str());
     posy++;
 // Print tools
@@ -221,7 +221,7 @@ void game::construction_menu()
         posy++;
         posx = 33;
        }
-       mvwprintz(w_con, posy, posx, c_white, "OR");
+       mvwprintz(w_con, posy, posx, c_white, _("OR"));
        posx += 3;
       }
      }
@@ -267,7 +267,7 @@ void game::construction_menu()
         posy++;
         posx = 33;
        }
-       mvwprintz(w_con, posy, posx, c_white, "OR");
+       mvwprintz(w_con, posy, posx, c_white, _("OR"));
        posx += 3;
       }
      }
@@ -299,7 +299,7 @@ void game::construction_menu()
      place_construction(constructions[select]);
      ch = 'q';
     } else {
-     popup("You can't build that!");
+     popup(_("You can't build that!"));
      for (int i = 1; i < 24; i++)
       mvwputch(w_con, i, 30, c_white, LINE_XOXO);
      update_info = true;
@@ -390,11 +390,11 @@ void game::place_construction(constructable *con)
    }
   }
  }
- mvprintz(0, 0, c_red, "Pick a direction in which to construct:");
+ mvprintz(0, 0, c_red, _("Pick a direction in which to construct:"));
  int dirx, diry;
  get_direction(dirx, diry, input());
  if (dirx == -2) {
-  add_msg("Invalid direction.");
+  add_msg(_("Invalid direction."));
   return;
  }
  dirx += u.posx;
@@ -405,7 +405,7 @@ void game::place_construction(constructable *con)
    point_is_okay = true;
  }
  if (!point_is_okay) {
-  add_msg("You cannot build there!");
+  add_msg(_("You cannot build there!"));
   return;
  }
 

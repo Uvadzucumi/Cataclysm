@@ -1166,7 +1166,7 @@ bool npc::wield(game *g, int index)
  i_remn(index);
  int linet;
  if (g->u_see(posx, posy, linet))
-  g->add_msg("%s wields a %s.", name.c_str(), weapon.tname().c_str());
+  g->add_msg(_("%s wields a %s."), name.c_str(), weapon.tname().c_str());
  return true;
 }
 
@@ -1458,10 +1458,10 @@ void npc::say(game *g, std::string line, ...)
  int junk;
  parse_tags(line, &(g->u), this);
  if (g->u_see(posx, posy, junk)) {
-  g->add_msg("%s says, \"%s\"", name.c_str(), line.c_str());
+  g->add_msg(_("%s says, \"%s\""), name.c_str(), line.c_str());
   g->sound(posx, posy, 16, "");
  } else {
-  std::string sound = name + " saying, \"" + line + "\"";
+  std::string sound = name + _(" saying, \"") + line + "\"";
   g->sound(posx, posy, 16, sound);
  }
 }
@@ -1715,20 +1715,20 @@ bool npc::emergency(int danger)
 void npc::told_to_help(game *g)
 {
  if (!is_following() && personality.altruism < 0) {
-  say(g, "Screw you!");
+  say(g, _("Screw you!"));
   return;
  }
  if (is_following()) {
   if (personality.altruism + 4 * op_of_u.value + personality.bravery >
       danger_assessment(g)) {
-   say(g, "I've got your back!");
+   say(g, _("I've got your back!"));
    attitude = NPCATT_DEFEND;
   }
   return;
  }
  if (int((personality.altruism + personality.bravery) / 4) >
      danger_assessment(g)) {
-  say(g, "Alright, I got you covered!");
+  say(g, _("Alright, I got you covered!"));
   attitude = NPCATT_DEFEND;
  }
 }
@@ -1741,14 +1741,14 @@ void npc::told_to_wait(game *g)
  }
  if (5 + op_of_u.value + op_of_u.trust + personality.bravery * 2 >
      danger_assessment(g)) {
-  say(g, "Alright, I'll wait here.");
+  say(g, _("Alright, I'll wait here."));
   if (one_in(3))
    op_of_u.trust--;
   attitude = NPCATT_WAIT;
  } else {
   if (one_in(2))
    op_of_u.trust--;
-  say(g, "No way, man!");
+  say(g, _("No way, man!"));
  }
 }
  
@@ -1759,10 +1759,10 @@ void npc::told_to_leave(game *g)
   return;
  }
  if (danger_assessment(g) - personality.bravery > op_of_u.value) {
-  say(g, "No way, I need you!");
+  say(g, _("No way, I need you!"));
   op_of_u.trust -= 2;
  } else {
-  say(g, "Alright, see you later.");
+  say(g, _("Alright, see you later."));
   op_of_u.trust -= 2;
   op_of_u.value -= 1;
  }
@@ -1808,12 +1808,12 @@ void npc::print_info(WINDOW* w)
 // is a blank line. w is 13 characters tall, and we can't use the last one
 // because it's a border as well; so we have lines 6 through 11.
 // w is also 48 characters wide - 2 characters for border = 46 characters for us
- mvwprintz(w, 6, 1, c_white, "NPC: %s", name.c_str());
- mvwprintz(w, 7, 1, c_red, "Wielding %s%s", (weapon.type->id == 0 ? "" : "a "),
+ mvwprintz(w, 6, 1, c_white, _("NPC: %s"), name.c_str());
+ mvwprintz(w, 7, 1, c_red, _("Wielding %s%s"), (weapon.type->id == 0 ? "" : "a "),
                                      weapon.tname().c_str());
  std::string wearing;
  std::stringstream wstr;
- wstr << "Wearing: ";
+ wstr << _("Wearing: ");
  for (int i = 0; i < worn.size(); i++) {
   if (i > 0)
    wstr << ", ";
@@ -1836,7 +1836,7 @@ void npc::print_info(WINDOW* w)
 std::string npc::short_description()
 {
  std::stringstream ret;
- ret << "Wielding " << weapon.tname() << ";   " << "Wearing: ";
+ ret << _("Wielding ") << weapon.tname() << ";   " << _("Wearing: ");
  for (int i = 0; i < worn.size(); i++) {
   if (i > 0)
    ret << ", ";
@@ -1850,72 +1850,72 @@ std::string npc::opinion_text()
 {
  std::stringstream ret;
  if (op_of_u.trust <= -10)
-  ret << "Completely untrusting";
+  ret << _("Completely untrusting");
  else if (op_of_u.trust <= -6)
-  ret << "Very untrusting";
+  ret << _("Very untrusting");
  else if (op_of_u.trust <= -3)
-  ret << "Untrusting";
+  ret << _("Untrusting");
  else if (op_of_u.trust <= 2)
-  ret << "Uneasy";
+  ret << _("Uneasy");
  else if (op_of_u.trust <= 5)
-  ret << "Trusting";
+  ret << _("Trusting");
  else if (op_of_u.trust < 10)
-  ret << "Very trusting";
+  ret << _("Very trusting");
  else
-  ret << "Completely trusting";
+  ret << _("Completely trusting");
 
- ret << " (Trust " << op_of_u.trust << "); ";
+ ret << _(" (Trust ") << op_of_u.trust << "); ";
 
  if (op_of_u.fear <= -10)
-  ret << "Thinks you're laughably harmless";
+  ret << _("Thinks you're laughably harmless");
  else if (op_of_u.fear <= -6)
-  ret << "Thinks you're harmless";
+  ret << _("Thinks you're harmless");
  else if (op_of_u.fear <= -3)
-  ret << "Unafraid";
+  ret << _("Unafraid");
  else if (op_of_u.fear <= 2)
-  ret << "Wary";
+  ret << _("Wary");
  else if (op_of_u.fear <= 5)
-  ret << "Afraid";
+  ret << _("Afraid");
  else if (op_of_u.fear < 10)
-  ret << "Very afraid";
+  ret << _("Very afraid");
  else
-  ret << "Terrified";
+  ret << _("Terrified");
 
- ret << " (Fear " << op_of_u.fear << "); ";
+ ret << _(" (Fear ") << op_of_u.fear << "); ";
 
  if (op_of_u.value <= -10)
-  ret << "Considers you a major liability";
+  ret << _("Considers you a major liability");
  else if (op_of_u.value <= -6)
-  ret << "Considers you a burden";
+  ret << _("Considers you a burden");
  else if (op_of_u.value <= -3)
-  ret << "Considers you an annoyance";
+  ret << _("Considers you an annoyance");
  else if (op_of_u.value <= 2)
-  ret << "Doesn't care about you";
+  ret << _("Doesn't care about you");
  else if (op_of_u.value <= 5)
-  ret << "Values your presence";
+  ret << _("Values your presence");
  else if (op_of_u.value < 10)
-  ret << "Treasures you";
+  ret << _("Treasures you");
  else
-  ret << "Best Friends Forever!";
+  ret << _("Best Friends Forever!");
 
- ret << " (Value " << op_of_u.value << "); ";
+ ret << _(" (Value ") << op_of_u.value << "); ";
 
  if (op_of_u.anger <= -10)
-  ret << "You can do no wrong!";
+  ret << _("You can do no wrong!");
  else if (op_of_u.anger <= -6)
-  ret << "You're good people";
+  ret << _("You're good people");
  else if (op_of_u.anger <= -3)
-  ret << "Thinks well of you";
+  ret << _("Thinks well of you");
  else if (op_of_u.anger <= 2)
-  ret << "Ambivalent";
+  ret << _("Ambivalent");
  else if (op_of_u.anger <= 5)
-  ret << "Pissed off";
+  ret << _("Pissed off");
  else if (op_of_u.anger < 10)
-  ret << "Angry";
+  ret << _("Angry");
  else
-  ret << "About to kill you";
+  ret << _("About to kill you");
 
- ret << " (Anger " << op_of_u.anger << ")";
+ ret << _(" (Anger ") << op_of_u.anger << ")";
 
  return ret.str();
 }
@@ -1937,7 +1937,7 @@ void npc::die(game *g, bool your_fault)
 {
  int j;
  if (g->u_see(posx, posy, j))
-  g->add_msg("%s dies!", name.c_str());
+  g->add_msg(_("%s dies!"), name.c_str());
  if (your_fault && !g->u.has_trait(PF_HEARTLESS)) {
   if (is_friend())
    g->u.add_morale(MORALE_KILLED_FRIEND, -500);

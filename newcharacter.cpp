@@ -233,8 +233,8 @@ void draw_tabs(WINDOW* w)
  mvwputch(w, 0,50, c_ltgray, LINE_OOXX);
  mvwputch(w, 0,73, c_ltgray, LINE_OOXX);
 
- mvwprintz(w, 1, 4, c_ltgray, "\
-   STATS            TRAITS            SKILLS            DESCRIPTION   ");
+ mvwprintz(w, 1, 4, c_ltgray, _("\
+   STATS            TRAITS            SKILLS            DESCRIPTION   "));
 
  mvwputch(w, 1, 4, c_ltgray, LINE_XOXO);
  mvwputch(w, 1,14, c_ltgray, LINE_XOXO);
@@ -270,9 +270,9 @@ int set_stats(WINDOW* w, player *u, int &points)
  mvwputch(w, 2, 50, c_ltgray, LINE_XXOX);
  mvwputch(w, 2, 57, c_ltgray, LINE_XXOX);
  mvwputch(w, 2, 73, c_ltgray, LINE_XXOX);
- mvwprintz(w, 1, 5, h_ltgray, "  STATS  ");
+ mvwprintz(w, 1, 5, h_ltgray, _("  STATS  "));
 
- mvwprintz(w, 11, 0, c_ltgray, "\
+ mvwprintz(w, 11, 0, c_ltgray, _("\
    j/k, 8/2, or arrows select\n\
     a statistic.\n\
    l, 6, or right arrow\n\
@@ -281,92 +281,92 @@ int set_stats(WINDOW* w, player *u, int &points)
     decreases the statistic.\n\
 \n\
    > Takes you to the next tab.\n\
-   < Returns you to the main menu.");
+   < Returns you to the main menu."));
 
  do {
-  mvwprintz(w,  3, 2, c_ltgray, "Points left: %d  ", points);
+  mvwprintz(w,  3, 2, c_ltgray, _("Points left: %d  "), points);
   switch (sel) {
   case 1:
    if (u->str_max >= HIGH_STAT)
-    mvwprintz(w, 3, 33, c_ltred, "Increasing Str further costs 2 points.");
+    mvwprintz(w, 3, 33, c_ltred, _("Increasing Str further costs 2 points."));
    else
     mvwprintz(w, 3, 33, c_black, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-   mvwprintz(w, 6,  2, COL_STAT_ACT, "Strength:     %d  ", u->str_max);
-   mvwprintz(w, 7,  2, c_ltgray,     "Dexterity:    %d  ", u->dex_max);
-   mvwprintz(w, 8,  2, c_ltgray,     "Intelligence: %d  ", u->int_max);
-   mvwprintz(w, 9,  2, c_ltgray,     "Perception:   %d  ", u->per_max);
-   mvwprintz(w, 6, 33, COL_STAT_ACT, "Base HP: %d                                 ",
+   mvwprintz(w, 6,  2, COL_STAT_ACT, _("Strength:     %d  "), u->str_max);
+   mvwprintz(w, 7,  2, c_ltgray,     _("Dexterity:    %d  "), u->dex_max);
+   mvwprintz(w, 8,  2, c_ltgray,     _("Intelligence: %d  "), u->int_max);
+   mvwprintz(w, 9,  2, c_ltgray,     _("Perception:   %d  "), u->per_max);
+   mvwprintz(w, 6, 33, COL_STAT_ACT, _("Base HP: %d                                 "),
              calc_HP(u->str_max, u->has_trait(PF_TOUGH)));
-   mvwprintz(w, 7, 33, COL_STAT_ACT, "Carry weight: %d lbs                        ",
+   mvwprintz(w, 7, 33, COL_STAT_ACT, _("Carry weight: %d lbs                        "),
              u->weight_capacity(false) / 4);
-   mvwprintz(w, 8, 33, COL_STAT_ACT, "Melee damage: %d                            ",
+   mvwprintz(w, 8, 33, COL_STAT_ACT, _("Melee damage: %d                            "),
              u->base_damage(false));
-   mvwprintz(w, 9, 33, COL_STAT_ACT, "  Strength also makes you more resistant to ");
-   mvwprintz(w,10, 33, COL_STAT_ACT, "many diseases and poisons, and makes actions");
-   mvwprintz(w,11, 33, COL_STAT_ACT, "which require brute force more effective.   ");
+   mvwprintz(w, 9, 33, COL_STAT_ACT, _("  Strength also makes you more resistant to "));
+   mvwprintz(w,10, 33, COL_STAT_ACT, _("many diseases and poisons, and makes actions"));
+   mvwprintz(w,11, 33, COL_STAT_ACT, _("which require brute force more effective.   "));
    break;
 
   case 2:
    if (u->dex_max >= HIGH_STAT)
-    mvwprintz(w, 3, 33, c_ltred, "Increasing Dex further costs 2 points.");
+    mvwprintz(w, 3, 33, c_ltred, _("Increasing Dex further costs 2 points."));
    else
     mvwprintz(w, 3, 33, c_black, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-   mvwprintz(w, 6,  2, c_ltgray,     "Strength:     %d  ", u->str_max);
-   mvwprintz(w, 7,  2, COL_STAT_ACT, "Dexterity:    %d  ", u->dex_max);
-   mvwprintz(w, 8,  2, c_ltgray,     "Intelligence: %d  ", u->int_max);
-   mvwprintz(w, 9,  2, c_ltgray,     "Perception:   %d  ", u->per_max);
-   mvwprintz(w, 6, 33, COL_STAT_ACT, "Melee to-hit bonus: +%d                      ",
+   mvwprintz(w, 6,  2, c_ltgray,     _("Strength:     %d  "), u->str_max);
+   mvwprintz(w, 7,  2, COL_STAT_ACT, _("Dexterity:    %d  "), u->dex_max);
+   mvwprintz(w, 8,  2, c_ltgray,     _("Intelligence: %d  "), u->int_max);
+   mvwprintz(w, 9,  2, c_ltgray,     _("Perception:   %d  "), u->per_max);
+   mvwprintz(w, 6, 33, COL_STAT_ACT, _("Melee to-hit bonus: +%d                      "),
              u->base_to_hit(false));
-   mvwprintz(w, 7, 33, COL_STAT_ACT, "                                            ");
-   mvwprintz(w, 7, 33, COL_STAT_ACT, "Ranged %s: %s%d",
-             (u->ranged_dex_mod(false) <= 0 ? "bonus" : "penalty"),
+   mvwprintz(w, 7, 33, COL_STAT_ACT, _("                                            "));
+   mvwprintz(w, 7, 33, COL_STAT_ACT, _("Ranged %s: %s%d"),
+             (u->ranged_dex_mod(false) <= 0 ? _("bonus") : _("penalty")),
              (u->ranged_dex_mod(false) <= 0 ? "+" : "-"),
              abs(u->ranged_dex_mod(false)));
    mvwprintz(w, 8, 33, COL_STAT_ACT, "                                            ");
-   mvwprintz(w, 8, 33, COL_STAT_ACT, "Throwing %s: %s%d",
-             (u->throw_dex_mod(false) <= 0 ? "bonus" : "penalty"),
+   mvwprintz(w, 8, 33, COL_STAT_ACT, _("Throwing %s: %s%d"),
+             (u->throw_dex_mod(false) <= 0 ? _("bonus") : _("penalty")),
              (u->throw_dex_mod(false) <= 0 ? "+" : "-"),
              abs(u->throw_dex_mod(false)));
-   mvwprintz(w, 9, 33, COL_STAT_ACT, "  Dexterity also enhances many actions which");
-   mvwprintz(w,10, 33, COL_STAT_ACT, "require finesse.                            ");
-   mvwprintz(w,11, 33, COL_STAT_ACT, "                                            ");
+   mvwprintz(w, 9, 33, COL_STAT_ACT, _("  Dexterity also enhances many actions which"));
+   mvwprintz(w,10, 33, COL_STAT_ACT, _("require finesse.                            "));
+   mvwprintz(w,11, 33, COL_STAT_ACT, _("                                            "));
    break;
 
   case 3:
    if (u->int_max >= HIGH_STAT)
-    mvwprintz(w, 3, 33, c_ltred, "Increasing Int further costs 2 points.");
+    mvwprintz(w, 3, 33, c_ltred, _("Increasing Int further costs 2 points."));
    else
     mvwprintz(w, 3, 33, c_black, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-   mvwprintz(w, 6,  2, c_ltgray,     "Strength:     %d  ", u->str_max);
-   mvwprintz(w, 7,  2, c_ltgray,     "Dexterity:    %d  ", u->dex_max);
-   mvwprintz(w, 8,  2, COL_STAT_ACT, "Intelligence: %d  ", u->int_max);
-   mvwprintz(w, 9,  2, c_ltgray,     "Perception:   %d  ", u->per_max);
-   mvwprintz(w, 6, 33, COL_STAT_ACT, "Skill comprehension: %d%%%%                     ",
+   mvwprintz(w, 6,  2, c_ltgray,     _("Strength:     %d  "), u->str_max);
+   mvwprintz(w, 7,  2, c_ltgray,     _("Dexterity:    %d  "), u->dex_max);
+   mvwprintz(w, 8,  2, COL_STAT_ACT, _("Intelligence: %d  "), u->int_max);
+   mvwprintz(w, 9,  2, c_ltgray,     _("Perception:   %d  "), u->per_max);
+   mvwprintz(w, 6, 33, COL_STAT_ACT, _("Skill comprehension: %d%%%%                     "),
              u->comprehension_percent(sk_null, false));
-   mvwprintz(w, 7, 33, COL_STAT_ACT, "Read times: %d%%%%                              ",
+   mvwprintz(w, 7, 33, COL_STAT_ACT, _("Read times: %d%%%%                              "),
              u->read_speed(false));
-   mvwprintz(w, 8, 33, COL_STAT_ACT, "  Intelligence is also used when crafting,  ");
-   mvwprintz(w, 9, 33, COL_STAT_ACT, "installing bionics, and interacting with    ");
-   mvwprintz(w,10, 33, COL_STAT_ACT, "NPCs.                                       ");
+   mvwprintz(w, 8, 33, COL_STAT_ACT, _("  Intelligence is also used when crafting,  "));
+   mvwprintz(w, 9, 33, COL_STAT_ACT, _("installing bionics, and interacting with    "));
+   mvwprintz(w,10, 33, COL_STAT_ACT, _("NPCs.                                       "));
    mvwprintz(w,11, 33, COL_STAT_ACT, "                                            ");
    break;
 
   case 4:
    if (u->per_max >= HIGH_STAT)
-    mvwprintz(w, 3, 33, c_ltred, "Increasing Per further costs 2 points.");
+    mvwprintz(w, 3, 33, c_ltred, _("Increasing Per further costs 2 points."));
    else
     mvwprintz(w, 3, 33, c_black, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-   mvwprintz(w, 6,  2, c_ltgray,     "Strength:     %d  ", u->str_max);
-   mvwprintz(w, 7,  2, c_ltgray,     "Dexterity:    %d  ", u->dex_max);
-   mvwprintz(w, 8,  2, c_ltgray,     "Intelligence: %d  ", u->int_max);
-   mvwprintz(w, 9,  2, COL_STAT_ACT, "Perception:   %d  ", u->per_max);
+   mvwprintz(w, 6,  2, c_ltgray,     _("Strength:     %d  "), u->str_max);
+   mvwprintz(w, 7,  2, c_ltgray,     _("Dexterity:    %d  "), u->dex_max);
+   mvwprintz(w, 8,  2, c_ltgray,     _("Intelligence: %d  "), u->int_max);
+   mvwprintz(w, 9,  2, COL_STAT_ACT, _("Perception:   %d  "), u->per_max);
    mvwprintz(w, 6, 33, COL_STAT_ACT, "                                            ");
-   mvwprintz(w, 6, 33, COL_STAT_ACT, "Ranged %s: %s%d",
-             (u->ranged_per_mod(false) <= 0 ? "bonus" : "penalty"),
+   mvwprintz(w, 6, 33, COL_STAT_ACT, _("Ranged %s: %s%d"),
+             (u->ranged_per_mod(false) <= 0 ? _("bonus") : _("penalty")),
              (u->ranged_per_mod(false) <= 0 ? "+" : "-"),
              abs(u->ranged_per_mod(false)));
-   mvwprintz(w, 7, 33, COL_STAT_ACT, "  Perception is also used for detecting     ");
-   mvwprintz(w, 8, 33, COL_STAT_ACT, "traps and other things of interest.         ");
+   mvwprintz(w, 7, 33, COL_STAT_ACT, _("  Perception is also used for detecting     "));
+   mvwprintz(w, 8, 33, COL_STAT_ACT, _("traps and other things of interest.         "));
    mvwprintz(w, 9, 33, COL_STAT_ACT, "                                            ");
    mvwprintz(w,10, 33, COL_STAT_ACT, "                                            ");
    mvwprintz(w,11, 33, COL_STAT_ACT, "                                            ");
@@ -428,7 +428,7 @@ int set_stats(WINDOW* w, player *u, int &points)
     u->per_max++;
    }
   }
-  if (ch == '<' && query_yn("Return to main menu?"))
+  if (ch == '<' && query_yn(_("Return to main menu?")))
    return -1;
   if (ch == '>')
    return 1;
@@ -465,7 +465,7 @@ int set_traits(WINDOW* w, player *u, int &points)
  mvwputch(w, 2,50, c_ltgray, LINE_XXOX);
  mvwputch(w, 2,57, c_ltgray, LINE_XXOX);
  mvwputch(w, 2,73, c_ltgray, LINE_XXOX);
- mvwprintz(w, 1,22, h_ltgray, "  TRAITS  ");
+ mvwprintz(w, 1,22, h_ltgray, _("  TRAITS  "));
 
  for (int i = 0; i < 16; i++) {
   mvwprintz(w, 5 + i, 40, c_dkgray, "\
@@ -475,8 +475,8 @@ int set_traits(WINDOW* w, player *u, int &points)
  mvwprintz(w,11,32, c_ltgray, "h   l");
  mvwprintz(w,12,32, c_ltgray, "<   >");
  mvwprintz(w,13,32, c_ltgray, "4   6");
- mvwprintz(w,15,32, c_ltgray, "Space");
- mvwprintz(w,16,31, c_ltgray,"Toggles");
+ mvwprintz(w,15,32, c_ltgray, _("Space"));
+ mvwprintz(w,16,31, c_ltgray,_("Toggles"));
 
  int cur_adv = 1, cur_dis = PF_SPLIT + 1, cur_trait, traitmin, traitmax, xoff;
  nc_color col_on, col_off, hi_on, hi_off;
@@ -484,7 +484,7 @@ int set_traits(WINDOW* w, player *u, int &points)
 			// selecting disadvantages
 
  do {
-  mvwprintz(w,  3, 2, c_ltgray, "Points left: %d  ", points);
+  mvwprintz(w,  3, 2, c_ltgray, _("Points left: %d  "), points);
   mvwprintz(w,  3,20, c_ltgreen, "%s%d/%d", (num_good < 10 ? " " : ""),
                                  num_good, MAX_TRAIT_POINTS);
   mvwprintz(w,  3,33, c_ltred, "%s%d/%d", (num_bad < 10 ? " " : ""),
@@ -507,10 +507,10 @@ int set_traits(WINDOW* w, player *u, int &points)
    traitmax = PF_SPLIT;
    mvwprintz(w,  3, 40, c_ltgray, "                                       ");
    if (traits[cur_adv].points > 0)
-    mvwprintz(w,  3, 40, COL_TR_GOOD, "%s costs %d points",
+    mvwprintz(w,  3, 40, COL_TR_GOOD, _("%s costs %d points"),
               traits[cur_adv].name.c_str(), traits[cur_adv].points);
    else
-    mvwprintz(w,  3, 40, COL_TR_GOOD, "%s earns %d points",
+    mvwprintz(w,  3, 40, COL_TR_GOOD, _("%s earns %d points"),
               traits[cur_adv].name.c_str(), traits[cur_adv].points * -1);
    mvwprintz(w, 22, 0, COL_TR_GOOD, "%s", traits[cur_adv].description.c_str());
   } else {
@@ -523,7 +523,7 @@ int set_traits(WINDOW* w, player *u, int &points)
    traitmin = PF_SPLIT + 1;
    traitmax = PF_MAX;
    mvwprintz(w,  3, 40, c_ltgray, "                                       ");
-   mvwprintz(w,  3, 40, COL_TR_BAD, "%s costs %d points",
+   mvwprintz(w,  3, 40, COL_TR_BAD, _("%s costs %d points"),
              traits[cur_dis].name.c_str(), traits[cur_dis].points);
    mvwprintz(w, 22, 0, COL_TR_BAD, "%s", traits[cur_dis].description.c_str());
   }
@@ -627,14 +627,14 @@ int set_traits(WINDOW* w, player *u, int &points)
       else
        num_bad += traits[cur_trait].points;
      } else
-      mvwprintz(w,  3, 2, c_red, "Points left: %d  ", points);
+      mvwprintz(w,  3, 2, c_red, _("Points left: %d  "), points);
     } else if (using_adv && num_good + traits[cur_trait].points >
                             MAX_TRAIT_POINTS)
-     popup("Sorry, but you can only take %d points of advantages.",
+     popup(_("Sorry, but you can only take %d points of advantages."),
            MAX_TRAIT_POINTS);
     else if (!using_adv && num_bad - traits[cur_trait].points >
                            MAX_TRAIT_POINTS)
-     popup("Sorry, but you can only take %d points of disadvantages.",
+     popup(_("Sorry, but you can only take %d points of disadvantages."),
            MAX_TRAIT_POINTS);
     else if (points >= traits[cur_trait].points) {
      u->toggle_trait(cur_trait);
@@ -673,12 +673,12 @@ int set_skills(WINDOW* w, player *u, int &points)
  mvwputch(w, 2,50, c_ltgray, LINE_XXOO);
  mvwputch(w, 2,57, c_ltgray, LINE_XXOX);
  mvwputch(w, 2,73, c_ltgray, LINE_XXOX);
- mvwprintz(w,1,40, h_ltgray, "  SKILLS  ");
+ mvwprintz(w,1,40, h_ltgray, _("  SKILLS  "));
  
  int cur_sk = 1;
 
  do {
-  mvwprintz(w,  3, 2, c_ltgray, "Points left: %d  ", points);
+  mvwprintz(w,  3, 2, c_ltgray, _("Points left: %d  "), points);
 // Clear the bottom of the screen.
   mvwprintz(w, 22, 0, c_ltgray, "\
                                                                              ");
@@ -687,10 +687,10 @@ int set_skills(WINDOW* w, player *u, int &points)
   mvwprintz(w, 24, 0, c_ltgray, "\
                                                                              ");
   if (points >= u->sklevel[cur_sk] + 1)
-   mvwprintz(w,  3, 30, COL_SKILL_USED, "Upgrading %s costs %d points         ",
+   mvwprintz(w,  3, 30, COL_SKILL_USED, _("Upgrading %s costs %d points         "),
              skill_name(cur_sk).c_str(), u->sklevel[cur_sk] + 1);
   else
-   mvwprintz(w,  3, 30, c_ltred, "Upgrading %s costs %d points         ",
+   mvwprintz(w,  3, 30, c_ltred, _("Upgrading %s costs %d points         "),
              skill_name(cur_sk).c_str(), u->sklevel[cur_sk] + 1);
   mvwprintz(w, 22, 0, COL_SKILL_USED, skill_description(cur_sk).c_str());
 
@@ -791,19 +791,19 @@ int set_description(WINDOW* w, player *u, int &points)
  mvwputch(w, 2,50, c_ltgray, LINE_XXOX);
  mvwputch(w, 2,57, c_ltgray, LINE_XOOX);
  mvwputch(w, 2,73, c_ltgray, LINE_XXOO);
- mvwprintz(w,1,58, h_ltgray, "  DESCRIPTION  ");
- mvwprintz(w,  3, 2, c_ltgray, "Points left: %d  ", points);
+ mvwprintz(w,1,58, h_ltgray, _("  DESCRIPTION  "));
+ mvwprintz(w,  3, 2, c_ltgray, _("Points left: %d  "), points);
 
- mvwprintz(w, 6, 2, c_ltgray, "\
-Name: ______________________________     (Press TAB to move off this line)");
- mvwprintz(w, 8, 2, c_ltgray, "\
-Gender: Male Female                      (Press spacebar to toggle)");
- mvwprintz(w,10, 2, c_ltgray, "\
-When your character is finished and you're ready to start playing, press >");
- mvwprintz(w,12, 2, c_ltgray, "\
-To go back and review your character, press <");
- mvwprintz(w, 14, 2, c_green, "\
-To save this character as a template, press !.");
+ mvwprintz(w, 6, 2, c_ltgray, _("\
+Name: ______________________________     (Press TAB to move off this line)"));
+ mvwprintz(w, 8, 2, c_ltgray, _("\
+Gender: Male Female                      (Press spacebar to toggle)"));
+ mvwprintz(w,10, 2, c_ltgray, _("\
+When your character is finished and you're ready to start playing, press >"));
+ mvwprintz(w,12, 2, c_ltgray, _("\
+To go back and review your character, press <"));
+ mvwprintz(w, 14, 2, c_green, _("\
+To save this character as a template, press !."));
  
  int line = 1;
  bool noname = false;
@@ -811,11 +811,11 @@ To save this character as a template, press !.");
 
  do {
   if (u->male) {
-   mvwprintz(w, 8, 10, c_ltred, "Male");
-   mvwprintz(w, 8, 15, c_ltgray, "Female");
+   mvwprintz(w, 8, 10, c_ltred, _("Male"));
+   mvwprintz(w, 8, 15, c_ltgray, _("Female"));
   } else {
-   mvwprintz(w, 8, 10, c_ltgray, "Male");
-   mvwprintz(w, 8, 15, c_ltred, "Female");
+   mvwprintz(w, 8, 10, c_ltgray, _("Male"));
+   mvwprintz(w, 8, 15, c_ltred, _("Female"));
   }
 
   if (!noname) {
@@ -824,9 +824,9 @@ To save this character as a template, press !.");
     wprintz(w, h_ltgray, "_");
   }
   if (line == 2)
-   mvwprintz(w, 8, 2, h_ltgray, "Gender:");
+   mvwprintz(w, 8, 2, h_ltgray, _("Gender:"));
   else
-   mvwprintz(w, 8, 2, c_ltgray, "Gender:");
+   mvwprintz(w, 8, 2, c_ltgray, _("Gender:"));
 
   wrefresh(w);
   ch = input();
@@ -838,13 +838,13 @@ To save this character as a template, press !.");
 
   if (ch == '>') {
    if (points > 0)
-    mvwprintz(w,  3, 2, c_red, "\
-Points left: %d    You must use the rest of your points!", points);
+    mvwprintz(w,  3, 2, c_red, _("\
+Points left: %d    You must use the rest of your points!"), points);
    else if (u->name.size() == 0) {
-    mvwprintz(w, 6, 8, h_ltgray, "______NO NAME ENTERED!!!!_____");
+    mvwprintz(w, 6, 8, h_ltgray, _("______NO NAME ENTERED!!!!_____"));
     noname = true;
     wrefresh(w);
-   } else if (query_yn("Are you SURE you're finished?"))
+   } else if (query_yn(_("Are you SURE you're finished?")))
     return 1;
    else
     refresh();
@@ -852,10 +852,10 @@ Points left: %d    You must use the rest of your points!", points);
    return -1;
   } else if (ch == '!') {
    if (points > 0) {
-    popup("You cannot save a template with unused points!");
+    popup(_("You cannot save a template with unused points!"));
    } else
     save_template(u);
-   mvwprintz(w,12, 2, c_ltgray,"To go back and review your character, press <");
+   mvwprintz(w,12, 2, c_ltgray,_("To go back and review your character, press <"));
    wrefresh(w);
   } else {
    switch (line) {
@@ -908,7 +908,7 @@ int calc_HP(int strength, bool tough)
 
 void save_template(player *u)
 {
- std::string name = string_input_popup("Name of template:");
+ std::string name = string_input_popup(_("Name of template:"));
  if (name.length() == 0)
   return;
  std::stringstream playerfile;

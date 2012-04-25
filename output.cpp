@@ -277,7 +277,7 @@ void debugmsg(const char *mes, ...)
  vsprintf(buff, mes, ap);
  va_end(ap);
  attron(c_red);
- mvprintw(0, 0, "DEBUG: %s                \n  Press spacebar...", buff);
+ mvprintw(0, 0, _("DEBUG: %s                \n  Press spacebar..."), buff);
  while(getch() != ' ');
  attroff(c_red);
 }

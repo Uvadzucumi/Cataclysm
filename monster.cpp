@@ -126,10 +126,10 @@ std::string monster::name_with_armor()
 {
  std::string ret = type->name;
  switch (type->mat) {
-  case VEGGY: ret += "'s thick bark";    break;
-  case FLESH: ret += "'s thick hide";    break;
+  case VEGGY: ret += _("'s thick bark");    break;
+  case FLESH: ret += _("'s thick hide");    break;
   case IRON:
-  case STEEL: ret += "'s armor plating"; break;
+  case STEEL: ret += _("'s armor plating"); break;
  }
  return ret;
 }
@@ -143,43 +143,43 @@ void monster::print_info(game *g, WINDOW* w)
  mvwprintz(w, 6, 1, c_white, "%s ", type->name.c_str());
  switch (attitude(&(g->u))) {
   case MATT_FRIEND:
-   wprintz(w, h_white, "Friendly!");
+   wprintz(w, h_white, _("Friendly!"));
    break;
   case MATT_FLEE:
-   wprintz(w, c_green, "Fleeing!");
+   wprintz(w, c_green, _("Fleeing!"));
    break;
   case MATT_IGNORE:
-   wprintz(w, c_ltgray, "Ignoring");
+   wprintz(w, c_ltgray, _("Ignoring"));
    break;
   case MATT_FOLLOW:
-   wprintz(w, c_yellow, "Tracking");
+   wprintz(w, c_yellow, _("Tracking"));
    break;
   case MATT_ATTACK:
-   wprintz(w, c_red, "Hostile!");
+   wprintz(w, c_red, _("Hostile!"));
    break;
   default:
-   wprintz(w, h_red, "BUG: Behavior unnamed");
+   wprintz(w, h_red, _("BUG: Behavior unnamed"));
    break;
  }
  std::string damage_info;
  nc_color col;
  if (hp == type->hp) {
-  damage_info = "It is uninjured";
+  damage_info = _("It is uninjured");
   col = c_green;
  } else if (hp >= type->hp * .8) {
-  damage_info = "It is lightly injured";
+  damage_info = _("It is lightly injured");
   col = c_ltgreen;
  } else if (hp >= type->hp * .6) {
-  damage_info = "It is moderately injured";
+  damage_info = _("It is moderately injured");
   col = c_yellow;
  } else if (hp >= type->hp * .3) {
-  damage_info = "It is heavily injured";
+  damage_info = _("It is heavily injured");
   col = c_yellow;
  } else if (hp >= type->hp * .1) {
-  damage_info = "It is severly injured";
+  damage_info = _("It is severly injured");
   col = c_ltred;
  } else {
-  damage_info = "it is nearly dead";
+  damage_info = _("it is nearly dead");
   col = c_red;
  }
  mvwprintz(w, 7, 1, col, damage_info.c_str());
@@ -526,11 +526,11 @@ void monster::hit_monster(game *g, int i)
 
  if (dice(numdice, 10) <= dice(dodgedice, 10)) {
   if (g->u_see(this, junk))
-   g->add_msg("The %s misses the %s!", name().c_str(), target->name().c_str());
+   g->add_msg(_("The %s misses the %s!"), name().c_str(), target->name().c_str());
   return;
  }
  if (g->u_see(this, junk))
-  g->add_msg("The %s hits the %s!", name().c_str(), target->name().c_str());
+  g->add_msg(_("The %s hits the %s!"), name().c_str(), target->name().c_str());
  int damage = dice(type->melee_dice, type->melee_sides);
  if (target->hurt(damage))
   g->kill_mon(i);

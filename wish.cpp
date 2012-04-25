@@ -21,7 +21,7 @@ void game::wish()
  do {
   werase(w_info);
   werase(w_list);
-  mvwprintw(w_list, 0, 0, "Wish for a: ");
+  mvwprintw(w_list, 0, 0, _("Wish for a: "));
   if (search) {
    found = false;
    if (ch == '\n') {
@@ -116,7 +116,7 @@ void game::wish()
   if (!search_results.empty())
    mvwprintz(w_list, 0, 11, c_green, "%s               ", pattern.c_str());
   else if (pattern.length() > 0)
-   mvwprintz(w_list, 0, 11, c_red, "%s not found!            ",pattern.c_str());
+   mvwprintz(w_list, 0, 11, c_red, _("%s not found!            "),pattern.c_str());
   if (a < 0) {
    a = 0;
    shift--;
@@ -151,7 +151,7 @@ void game::wish()
    ch = input();
  } while (ch != '\n');
  clear();
- mvprintw(0, 0, "\nWish granted - %d (%d).", tmp.type->id, itm_antibiotics);
+ mvprintw(0, 0, _("\nWish granted - %d (%d)."), tmp.type->id, itm_antibiotics);
  tmp.invlet = nextinv;
  u.i_add(tmp);
  advance_nextinv();
@@ -175,7 +175,7 @@ void game::monster_wish()
  do {
   werase(w_info);
   werase(w_list);
-  mvwprintw(w_list, 0, 0, "Spawn a: ");
+  mvwprintw(w_list, 0, 0, _("Spawn a: "));
   if (search) {
    found = false;
    if (ch == '\n') {
@@ -267,7 +267,7 @@ void game::monster_wish()
   if (!search_results.empty())
    mvwprintz(w_list, 0, 11, c_green, "%s               ", pattern.c_str());
   else if (pattern.length() > 0)
-   mvwprintz(w_list, 0, 11, c_red, "%s not found!            ",pattern.c_str());
+   mvwprintz(w_list, 0, 11, c_red, _("%s not found!            "),pattern.c_str());
   if (a < 0) {
    a = 0;
    shift--;
@@ -322,7 +322,7 @@ void game::mutation_wish()
  do {
   werase(w_info);
   werase(w_list);
-  mvwprintw(w_list, 0, 0, "Mutate: ");
+  mvwprintw(w_list, 0, 0, _("Mutate: "));
   if (search) {
    found = false;
    if (ch == '\n') {
@@ -417,7 +417,7 @@ void game::mutation_wish()
   if (!search_results.empty())
    mvwprintz(w_list, 0, 11, c_green, "%s               ", pattern.c_str());
   else if (pattern.length() > 0)
-   mvwprintz(w_list, 0, 11, c_red, "%s not found!            ",pattern.c_str());
+   mvwprintz(w_list, 0, 11, c_red, _("%s not found!            "),pattern.c_str());
   if (a < 0) {
    a = 0;
    shift--;
@@ -434,24 +434,24 @@ void game::mutation_wish()
     col = h_white;
    mvwprintz(w_list, i, 0, col, traits[i-1+shift].name.c_str());
   }
-  mvwprintw(w_info, 1, 0, mutation_data[a+shift].valid ? "Valid" : "Nonvalid");
+  mvwprintw(w_info, 1, 0, mutation_data[a+shift].valid ? _("Valid") : _("Nonvalid"));
   int line2 = 2;
-  mvwprintw(w_info, line2, 0, "Prereqs:");
+  mvwprintw(w_info, line2, 0, _("Prereqs:"));
   for (int j = 0; j < mutation_data[a+shift].prereqs.size(); j++) {
    mvwprintw(w_info, line2, 9, traits[ mutation_data[a+shift].prereqs[j] ].name.c_str());
    line2++;
   }
-  mvwprintw(w_info, line2, 0, "Cancels:");
+  mvwprintw(w_info, line2, 0, _("Cancels:"));
   for (int j = 0; j < mutation_data[a+shift].cancels.size(); j++) {
    mvwprintw(w_info, line2, 9, traits[ mutation_data[a+shift].cancels[j] ].name.c_str());
    line2++;
   }
-  mvwprintw(w_info, line2, 0, "Becomes:");
+  mvwprintw(w_info, line2, 0, _("Becomes:"));
   for (int j = 0; j < mutation_data[a+shift].replacements.size(); j++) {
    mvwprintw(w_info, line2, 9, traits[ mutation_data[a+shift].replacements[j] ].name.c_str());
    line2++;
   }
-  mvwprintw(w_info, line2, 0, "Add-ons:");
+  mvwprintw(w_info, line2, 0, _("Add-ons:"));
   for (int j = 0; j < mutation_data[a+shift].additions.size(); j++) {
    mvwprintw(w_info, line2, 9, traits[ mutation_data[a+shift].additions[j] ].name.c_str());
    line2++;

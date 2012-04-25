@@ -228,7 +228,7 @@ void overmap::delete_note(int x, int y)
 
 point overmap::display_notes()
 {
- std::string title = "Notes:";
+ std::string title = _("Notes:");
  WINDOW* w_notes = newwin(25, 80, 0, 0);
  const int maxitems = 20;	// Number of items to show at one time.
  char ch = '.';
@@ -266,16 +266,16 @@ point overmap::display_notes()
   if(last_line == -1)
    last_line = 23;
   if (start > 0)
-   mvwprintw(w_notes, maxitems + 4, 0, "< Go Back");
+   mvwprintw(w_notes, maxitems + 4, 0, _("< Go Back"));
   if (cur_it < notes.size())
-   mvwprintw(w_notes, maxitems + 4, 12, "> More notes"); 
+   mvwprintw(w_notes, maxitems + 4, 12, _("> More notes")); 
   if(ch >= 'a' && ch <= 't'){
    int chosen_line = (int)(ch % (int)'a');
    if(chosen_line < last_line)
     return point(notes[start + chosen_line].x, notes[start + chosen_line].y); 
   }
-  mvwprintz(w_notes, 0, 40, c_white, "Press letter to center on note");
-  mvwprintz(w_notes, 24, 40, c_white, "Spacebar - Return to map  ");
+  mvwprintz(w_notes, 0, 40, c_white, _("Press letter to center on note"));
+  mvwprintz(w_notes, 24, 40, c_white, _("Spacebar - Return to map  "));
   wrefresh(w_notes);
   ch = getch();
  } while(ch != ' ');
@@ -953,20 +953,20 @@ void overmap::draw(WINDOW *w, game *g, int &cursx, int &cursy,
     mvwprintz(w, 1, 53, oterlist[cur_ter].color, "%s",
               oterlist[cur_ter].name.c_str());
    } else
-    mvwprintz(w, 1, 51, c_dkgray, "# Unexplored");
+    mvwprintz(w, 1, 51, c_dkgray, _("# Unexplored"));
 
    if (target.x != -1 && target.y != -1) {
     int distance = rl_dist(origx, origy, target.x, target.y);
-    mvwprintz(w, 3, 51, c_white, "Distance to target: %d", distance);
+    mvwprintz(w, 3, 51, c_white, _("Distance to target: %d"), distance);
    }
-   mvwprintz(w, 17, 51, c_magenta,           "Use movement keys to pan.  ");
-   mvwprintz(w, 18, 51, c_magenta,           "0 - Center map on character");
-   mvwprintz(w, 19, 51, c_magenta,           "t - Toggle legend          ");
-   mvwprintz(w, 20, 51, c_magenta,           "/ - Search                 ");
-   mvwprintz(w, 21, 51, c_magenta,           "N - Add a note             ");
-   mvwprintz(w, 22, 51, c_magenta,           "D - Delete a note          ");
-   mvwprintz(w, 23, 51, c_magenta,           "L - List notes             ");
-   mvwprintz(w, 24, 51, c_magenta,           "Esc or q - Return to game  ");
+   mvwprintz(w, 17, 51, c_magenta,           _("Use movement keys to pan.  "));
+   mvwprintz(w, 18, 51, c_magenta,           _("0 - Center map on character"));
+   mvwprintz(w, 19, 51, c_magenta,           _("t - Toggle legend          "));
+   mvwprintz(w, 20, 51, c_magenta,           _("/ - Search                 "));
+   mvwprintz(w, 21, 51, c_magenta,           _("N - Add a note             "));
+   mvwprintz(w, 22, 51, c_magenta,           _("D - Delete a note          "));
+   mvwprintz(w, 23, 51, c_magenta,           _("L - List notes             "));
+   mvwprintz(w, 24, 51, c_magenta,           _("Esc or q - Return to game  "));
   }
 // Done with all drawing!
   wrefresh(w);
@@ -1003,12 +1003,12 @@ point overmap::choose_point(game *g)
    ret = point(-1, -1);
   else if (ch == 'N') {
    timeout(-1);
-   add_note(cursx, cursy, string_input_popup(49, "Enter note")); // 49 char max
+   add_note(cursx, cursy, string_input_popup(49, _("Enter note"))); // 49 char max
    timeout(BLINK_SPEED);
   } else if(ch == 'D'){
    timeout(-1);
    if (has_note(cursx, cursy)){
-    bool res = query_yn("Really delete note?");
+    bool res = query_yn(_("Really delete note?"));
     if (res == true)
      delete_note(cursx, cursy);
    }
@@ -1025,7 +1025,7 @@ point overmap::choose_point(game *g)
   } else if (ch == '/') {
    int tmpx = cursx, tmpy = cursy;
    timeout(-1);
-   std::string term = string_input_popup("Search term:");
+   std::string term = string_input_popup(_("Search term:"));
    timeout(BLINK_SPEED);
    draw(w_map, g, cursx, cursy, origx, origy, ch, blink);
    point found = find_note(point(cursx, cursy), term);
@@ -1039,13 +1039,13 @@ point overmap::choose_point(game *g)
       //Draw search box
       wborder(w_search, LINE_XOXO, LINE_XOXO, LINE_OXOX, LINE_OXOX,
               LINE_OXXO, LINE_OOXX, LINE_XXOO, LINE_XOOX );
-      mvwprintz(w_search, 1, 1, c_red, "Find place:");
+      mvwprintz(w_search, 1, 1, c_red, _("Find place:"));
       mvwprintz(w_search, 2, 1, c_ltblue, "                         ");
       mvwprintz(w_search, 2, 1, c_ltblue, "%s", term.c_str());
       mvwprintz(w_search, 4, 1, c_white,
-       "'<' '>' Cycle targets.");
-      mvwprintz(w_search, 10, 1, c_white, "Enter/Spacebar to select.");
-      mvwprintz(w_search, 11, 1, c_white, "q to return.");
+       _("'<' '>' Cycle targets."));
+      mvwprintz(w_search, 10, 1, c_white, _("Enter/Spacebar to select."));
+      mvwprintz(w_search, 11, 1, c_white, _("q to return."));
       ch = input();
       if (ch == ERR)
        blink = !blink;
@@ -2249,8 +2249,8 @@ void overmap::place_radios()
   for (int j = 0; j < OMAPY; j++) {
    if (ter(i, j) == ot_radio_tower)
     radios.push_back(radio_tower(i*2, j*2, rng(80, 200),
-   "This is the emergency broadcast system.  Please proceed quickly and calmly \
-to your designated evacuation point."));
+   _("This is the emergency broadcast system.  Please proceed quickly and calmly \
+to your designated evacuation point.")));
   }
  }
 }

@@ -105,9 +105,9 @@ int player::hit_mon(game *g, monster *z)
   z->add_effect(ME_HIT_BY_PLAYER, 100); // Flag as attacked by us
  int j;
  bool can_see = (is_u || g->u_see(posx, posy, j));
- std::string You  = (is_u ? "You"  : name);
- std::string Your = (is_u ? "Your" : name + "'s");
- std::string your = (is_u ? "your" : (male ? "his" : "her"));
+ std::string You  = (is_u ? _("You")  : name);
+ std::string Your = (is_u ? _("Your") : name + "'s");
+ std::string your = (is_u ? _("your") : (male ? _("his") : _("her")));
 
 // Types of combat (may overlap!)
  bool unarmed  = unarmed_attack(),
@@ -195,9 +195,9 @@ int player::hit_mon(game *g, monster *z)
 // Bonus unarmed attack!
   if (is_u || can_see) {
    switch (rng(1, 2)) {
-    case 1: g->add_msg("%s elbow%s the %s!", You.c_str(), (is_u ? "" : "s"),
+    case 1: g->add_msg(_("%s elbow%s the %s!"), You.c_str(), (is_u ? "" : "s"),
                        z->name().c_str()); break;
-    case 2: g->add_msg("%s knee%s the %s!", You.c_str(), (is_u ? "" : "s"),
+    case 2: g->add_msg(_("%s knee%s the %s!"), You.c_str(), (is_u ? "" : "s"),
                        z->name().c_str()); break;
    }
   }
@@ -236,9 +236,9 @@ int player::hit_mon(game *g, monster *z)
       maxstab = sklevel[sk_stabbing] * 15 + weapon.volume() * 4;
   int monster_penalty = rng(minstab, maxstab);
   if (monster_penalty >= 150)
-   g->add_msg("You force the %s to the ground!", z->name().c_str());
+   g->add_msg(_("You force the %s to the ground!"), z->name().c_str());
   else if (monster_penalty >= 50)
-   g->add_msg("The %s is skewered and flinches!", z->name().c_str());
+   g->add_msg(_("The %s is skewered and flinches!"), z->name().c_str());
   z->moves -= monster_penalty;
   cutting_penalty = weapon.damage_cut() * 4 + z_armor * 8 -
                     dice(sklevel[sk_stabbing], 10);
@@ -307,27 +307,27 @@ int player::hit_mon(game *g, monster *z)
      dam += 5;
     headshot &= z->hp < dam && one_in(2);
     if (headshot && can_see)
-     g->add_msg("%s claws pierce the %s's skull!", Your.c_str(),
+     g->add_msg(_("%s claws pierce the %s's skull!"), Your.c_str(),
                 z->name().c_str());
     else if (can_see)
-     g->add_msg("%s claws stab straight through the %s!", Your.c_str(),
+     g->add_msg(_("%s claws stab straight through the %s!"), Your.c_str(),
                 z->name().c_str());
    } else if (has_trait(PF_TALONS)) {
     dam += 2;
     headshot &= z->hp < dam && one_in(2);
     if (headshot && can_see)
-     g->add_msg("%s talons tear the %s's head open!", Your.c_str(),
+     g->add_msg(_("%s talons tear the %s's head open!"), Your.c_str(),
                 z->name().c_str());
     else if (can_see)
-     g->add_msg("%s bur%s %s talons into the %s!", You.c_str(),(is_u?"y":"ies"),
+     g->add_msg(_("%s bur%s %s talons into the %s!"), You.c_str(),(is_u?"y":"ies"),
                 your.c_str(), z->name().c_str());
    } else {
     headshot &= z->hp < dam && one_in(2);
     if (headshot && can_see)
-     g->add_msg("%s crush%s the %s's skull in a single blow!", 
+     g->add_msg(_("%s crush%s the %s's skull in a single blow!"), 
                 You.c_str(), (is_u ? "" : "es"), z->name().c_str());
     else if (can_see)
-     g->add_msg("%s deliver%s a crushing punch!",You.c_str(),(is_u ? "" : "s"));
+     g->add_msg(_("%s deliver%s a crushing punch!"),You.c_str(),(is_u ? "" : "s"));
    }
    if (z->hp > 0 && rng(1, 5) < sklevel[sk_unarmed])
     z->add_effect(ME_STUNNED, 1 + sklevel[sk_unarmed]);
@@ -354,26 +354,26 @@ int player::hit_mon(game *g, monster *z)
 
     if (stabbing) {
      if (headshot && can_see)
-      g->add_msg("%s %s stabs through the %s's skull!", Your.c_str(),
+      g->add_msg(_("%s %s stabs through the %s's skull!"), Your.c_str(),
                  weapon.tname(g).c_str(), z->name().c_str());
      else if (can_see)
-      g->add_msg("%s stab %s %s through the %s!", You.c_str(), your.c_str(),
+      g->add_msg(_("%s stab %s %s through the %s!"), You.c_str(), your.c_str(),
                  weapon.tname(g).c_str(), z->name().c_str());
     } else {
      if (headshot && can_see)
-      g->add_msg("%s %s slices the %s's head off!", Your.c_str(),
+      g->add_msg(_("%s %s slices the %s's head off!"), Your.c_str(),
                  weapon.tname(g).c_str(), z->name().c_str());
      else
-      g->add_msg("%s %s cuts the %s deeply!", Your.c_str(),
+      g->add_msg(_("%s %s cuts the %s deeply!"), Your.c_str(),
                  weapon.tname(g).c_str(), z->name().c_str());
     }
    } else if (bashing) {
     headshot &= z->hp < dam;
     if (headshot && can_see)
-     g->add_msg("%s crush%s the %s's skull!", You.c_str(), (is_u ? "" : "es"),
+     g->add_msg(_("%s crush%s the %s's skull!"), You.c_str(), (is_u ? "" : "es"),
                 z->name().c_str());
     else if (can_see)
-     g->add_msg("%s crush%s the %s's body!", You.c_str(), (is_u ? "" : "es"),
+     g->add_msg(_("%s crush%s the %s's body!"), You.c_str(), (is_u ? "" : "es"),
                 z->name().c_str());
    }
   }	// End of not-unarmed
@@ -393,7 +393,7 @@ int player::hit_mon(game *g, monster *z)
  if (shock_them) {
   power_level -= 2;
   if (can_see)
-   g->add_msg("%s shock%s the %s!", You.c_str(), (is_u ? "" : "s"),
+   g->add_msg(_("%s shock%s the %s!"), You.c_str(), (is_u ? "" : "s"),
               z->name().c_str());
   int shock = rng(2, 5);
   dam += shock * rng(1, 3);
@@ -402,7 +402,7 @@ int player::hit_mon(game *g, monster *z)
  if (drain_them) {
   charge_power(rng(0, 4));
   if (can_see)
-   g->add_msg("%s drain%s the %s's body heat!", You.c_str(), (is_u ? "" : "s"),
+   g->add_msg(_("%s drain%s the %s's body heat!"), You.c_str(), (is_u ? "" : "s"),
               z->name().c_str());
   dam += rng(4, 10);
   z->moves -= rng(80, 120);
@@ -430,14 +430,14 @@ int player::hit_mon(game *g, monster *z)
  if (can_poison && has_trait(PF_POISONOUS)) {
   z->add_effect(ME_POISONED, 6);
   if (is_u)
-   g->add_msg("You poison the %s!", z->name().c_str());
+   g->add_msg(_("You poison the %s!"), z->name().c_str());
  }
 
  if (z->has_flag(MF_ELECTRIC) && conductive) {
   hurtall(rng(0, 1));
   moves -= rng(0, 50);
   if (is_u)
-   g->add_msg("Contact with the %s shocks you!", z->name().c_str());
+   g->add_msg(_("Contact with the %s shocks you!"), z->name().c_str());
  }
 
 // Make a rather quiet sound, to alert any nearby monsters
@@ -447,7 +447,7 @@ int player::hit_mon(game *g, monster *z)
  if (weapon.made_of(GLASS) &&
      rng(0, weapon.volume() + 8) < weapon.volume() + str_cur) {
   if (can_see)
-   g->add_msg("%s %s shatters!", Your.c_str(), weapon.tname(g).c_str());
+   g->add_msg(_("%s %s shatters!"), Your.c_str(), weapon.tname(g).c_str());
   g->sound(posx, posy, 16, "");
 // Dump its contents on the ground
   for (int i = 0; i < weapon.contents.size(); i++)
@@ -461,9 +461,9 @@ int player::hit_mon(game *g, monster *z)
 
  if (dam <= 0) {
   if (is_u)
-   g->add_msg("You hit the %s, but do no damage.", z->name().c_str());
+   g->add_msg(_("You hit the %s, but do no damage."), z->name().c_str());
   else if (can_see)
-   g->add_msg("%s's %s hits the %s, but does no damage.", You.c_str(),
+   g->add_msg(_("%s's %s hits the %s, but does no damage."), You.c_str(),
               weapon.tname(g).c_str(), z->name().c_str());
   practice(sk_melee, rng(2, 5));
   if (unarmed)
@@ -477,11 +477,11 @@ int player::hit_mon(game *g, monster *z)
   return 0;
  }
  if (is_u)
-  g->add_msg("You hit the %s for %d damage.", z->name().c_str(), dam);
+  g->add_msg(_("You hit the %s for %d damage."), z->name().c_str(), dam);
  else if (can_see)
-  g->add_msg("%s hits the %s with %s %s.", You.c_str(), z->name().c_str(),
-             (male ? "his" : "her"),
-             (weapon.type->id == 0 ? "fists" : weapon.tname(g).c_str()));
+  g->add_msg(_("%s hits the %s with %s %s."), You.c_str(), z->name().c_str(),
+             (male ? _("his") : _("her")),
+             (weapon.type->id == 0 ? _("fists") : weapon.tname(g).c_str()));
  practice(sk_melee, rng(5, 10));
  if (unarmed)
   practice(sk_unarmed, rng(5, 10));
@@ -495,13 +495,13 @@ int player::hit_mon(game *g, monster *z)
 // Penalize the player if their cutting weapon got stuck
  if (!unarmed && dam < z->hp && cutting_penalty > dice(str_cur * 2, 20)) {
   if (is_u)
-   g->add_msg("Your %s gets stuck in the %s, pulling it out of your hands!",
+   g->add_msg(_("Your %s gets stuck in the %s, pulling it out of your hands!"),
               weapon.tname().c_str(), z->type->name.c_str());
-  z->add_item(remove_weapon());
   if (weapon.has_flag(IF_SPEAR) || weapon.has_flag(IF_STAB))
    z->speed *= .7;
   else
    z->speed *= .85;
+  z->add_item(remove_weapon());
  } else {
   if (dam >= z->hp) {
    cutting_penalty /= 2;
@@ -510,7 +510,7 @@ int player::hit_mon(game *g, monster *z)
   if (cutting_penalty > 0)
    moves -= cutting_penalty;
   if (cutting_penalty >= 50 && is_u)
-   g->add_msg("Your %s gets stuck in the %s, but you yank it free.",
+   g->add_msg(_("Your %s gets stuck in the %s, but you yank it free."),
               weapon.tname().c_str(), z->type->name.c_str());
   if (weapon.has_flag(IF_SPEAR) || weapon.has_flag(IF_STAB))
    z->speed *= .9;
@@ -531,11 +531,11 @@ void player::stumble(game *g)
   stumble_pen = rng(0, stumble_pen);
  if (!is_npc()) {	// Only display messages if this is the player
   if (stumble_pen >= 60)
-   g->add_msg("You miss and stumble with the momentum.");
+   g->add_msg(_("You miss and stumble with the momentum."));
   else if (stumble_pen >= 10)
-   g->add_msg("You swing wildly and miss.");
+   g->add_msg(_("You swing wildly and miss."));
   else
-   g->add_msg("You miss.");
+   g->add_msg(_("You miss."));
  }
  moves -= stumble_pen;
 }
@@ -741,9 +741,9 @@ int player::base_damage(bool real_life)
 std::vector<special_attack> player::mutation_attacks(monster *z)
 {
  bool is_u = (!is_npc());// Affects how we'll display messages
- std::string You  = (is_u ? "You"  : name);
- std::string Your = (is_u ? "Your" : name + "'s");
- std::string your = (is_u ? "your" : (male ? "his" : "her"));
+ std::string You  = (is_u ? _("You")  : name);
+ std::string Your = (is_u ? _("Your") : name + "'s");
+ std::string your = (is_u ? _("your") : (male ? _("his") : _("her")));
 
  std::vector<special_attack> ret;
  std::stringstream text;
@@ -751,7 +751,7 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
  if (has_trait(PF_FANGS) && !wearing_something_on(bp_mouth) &&
      one_in(20 - dex_cur - sklevel[sk_unarmed])) {
   special_attack tmp;
-  text << You << " sink" << (is_u ? " " : "s ") << your << " fangs into the " <<
+  text << You << _(" sink") << (is_u ? " " : "s ") << your << _(" fangs into the ") <<
           z->name() << "!";
   tmp.text = text.str();
   tmp.stab = 20;
@@ -760,8 +760,8 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
 
  if (has_trait(PF_MANDIBLES) && one_in(22 - dex_cur - sklevel[sk_unarmed])) {
   special_attack tmp;
-  text << You << " slice" << (is_u ? " " : "s ") << "the " << z->name() <<
-          " with " << your << " mandibles!";
+  text << You << _(" slice") << (is_u ? " " : "s ") << _("the ") << z->name() <<
+          _(" with ") << your << _(" mandibles!");
   tmp.text = text.str();
   tmp.cut = 12;
   ret.push_back(tmp);
@@ -769,7 +769,7 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
 
  if (has_trait(PF_BEAK) && one_in(15 - dex_cur - sklevel[sk_unarmed])) {
   special_attack tmp;
-  text << You << " peck" << (is_u ? " " : "s ") << "the " << z->name() << "!";
+  text << You << _(" peck") << (is_u ? " " : "s ") << _("the ") << z->name() << "!";
   tmp.text = text.str();
   tmp.stab = 15;
   ret.push_back(tmp);
@@ -777,8 +777,8 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
   
  if (has_trait(PF_HOOVES) && one_in(25 - dex_cur - 2 * sklevel[sk_unarmed])) {
   special_attack tmp;
-  text << You << " kick" << (is_u ? " " : "s ") << "the " << z->name() <<
-          " with " << your << " hooves!";
+  text << You << _(" kick") << (is_u ? " " : "s ") << _("the ") << z->name() <<
+          _(" with ") << your << _(" hooves!");
   tmp.text = text.str();
   tmp.bash = str_cur * 3;
   if (tmp.bash > 40)
@@ -788,8 +788,8 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
 
  if (has_trait(PF_HORNS) && one_in(20 - dex_cur - sklevel[sk_unarmed])) {
   special_attack tmp;
-  text << You << " headbutt" << (is_u ? " " : "s ") << "the " << z->name() <<
-          " with " << your << " horns!";
+  text << You << _(" headbutt") << (is_u ? " " : "s ") << _("the ") << z->name() <<
+          _(" with ") << your << _(" horns!");
   tmp.text = text.str();
   tmp.bash = 3;
   tmp.stab = 3;
@@ -798,8 +798,8 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
 
  if (has_trait(PF_HORNS_CURLED) && one_in(20 - dex_cur - sklevel[sk_unarmed])) {
   special_attack tmp;
-  text << You << " headbutt" << (is_u ? " " : "s ") << "the " << z->name() <<
-          " with " << your << " curled horns!";
+  text << You << _(" headbutt") << (is_u ? " " : "s ") << _("the ") << z->name() <<
+          _(" with ") << your << _(" curled horns!");
   tmp.text = text.str();
   tmp.bash = 14;
   ret.push_back(tmp);
@@ -807,8 +807,8 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
 
  if (has_trait(PF_HORNS_POINTED) && one_in(22 - dex_cur - sklevel[sk_unarmed])){
   special_attack tmp;
-  text << You << " stab" << (is_u ? " " : "s ") << "the " << z->name() <<
-          " with " << your << " pointed horns!";
+  text << You << _(" stab") << (is_u ? " " : "s ") << _("the ") << z->name() <<
+          _(" with ") << your << _(" pointed horns!");
   tmp.text = text.str();
   tmp.stab = 24;
   ret.push_back(tmp);
@@ -816,8 +816,8 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
 
  if (has_trait(PF_ANTLERS) && one_in(20 - dex_cur - sklevel[sk_unarmed])) {
   special_attack tmp;
-  text << You << " butt" << (is_u ? " " : "s ") << "the " << z->name() <<
-          " with " << your << " antlers!";
+  text << You << _(" butt") << (is_u ? " " : "s ") << _("the ") << z->name() <<
+          _(" with ") << your << _(" antlers!");
   tmp.text = text.str();
   tmp.bash = 4;
   ret.push_back(tmp);
@@ -825,8 +825,8 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
 
  if (has_trait(PF_TAIL_STING) && one_in(3) && one_in(10 - dex_cur)) {
   special_attack tmp;
-  text << You << " sting" << (is_u ? " " : "s ") << "the " << z->name() <<
-          " with " << your << " tail!";
+  text << You << _(" sting") << (is_u ? " " : "s ") << _("the ") << z->name() <<
+          _(" with ") << your << _(" tail!");
   tmp.text = text.str();
   tmp.stab = 20;
   ret.push_back(tmp);
@@ -834,8 +834,8 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
 
  if (has_trait(PF_TAIL_CLUB) && one_in(3) && one_in(10 - dex_cur)) {
   special_attack tmp;
-  text << You << " hit" << (is_u ? " " : "s ") << "the " << z->name() <<
-          " with " << your << " tail!";
+  text << You << _(" hit") << (is_u ? " " : "s ") << _("the ") << z->name() <<
+          _(" with ") << your << _(" tail!");
   tmp.text = text.str();
   tmp.bash = 18;
   ret.push_back(tmp);
@@ -855,8 +855,8 @@ std::vector<special_attack> player::mutation_attacks(monster *z)
    if (one_in(18 - dex_cur - sklevel[sk_unarmed])) {
     special_attack tmp;
     text.str("");
-    text << You << " slap" << (is_u ? " " : "s ") << "the " << z->name() <<
-            " with " << your << " tentacle!";
+    text << You << _(" slap") << (is_u ? " " : "s ") << _("the ") << z->name() <<
+            _(" with ") << your << _(" tentacle!");
     tmp.text = text.str();
     tmp.bash = str_cur / 2;
     ret.push_back(tmp);

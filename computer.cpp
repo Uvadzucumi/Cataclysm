@@ -74,11 +74,11 @@ void computer::use(game *g)
  wborder(w_terminal, LINE_XOXO, LINE_XOXO, LINE_OXOX, LINE_OXOX,
                      LINE_OXXO, LINE_OOXX, LINE_XXOO, LINE_XOOX );
  
- print_line("Logging into %s...", name.c_str());
+ print_line(_("Logging into %s..."), name.c_str());
 
  if (security > 0) {
-  print_error("ERROR!  Access denied!");
-  switch (query_ynq("Bypass security?")) {
+  print_error(_("ERROR!  Access denied!"));
+  switch (query_ynq(_("Bypass security?"))) {
   case 'q':
   case 'Q':
    shutdown_terminal();
@@ -86,7 +86,7 @@ void computer::use(game *g)
 
   case 'n':
   case 'N':
-   print_line("Shutting down... press any key.");
+   print_line(_("Shutting down... press any key."));
    getch();
    shutdown_terminal();
    return;
@@ -95,7 +95,7 @@ void computer::use(game *g)
   case 'Y':
    if (!hack_attempt(&(g->u))) {
     if (failures.size() == 0) {
-     print_line("Maximum login attempts exceeded. Press any key...");
+     print_line(_("Maximum login attempts exceeded. Press any key..."));
      getch();
      shutdown_terminal();
      return;
@@ -105,13 +105,13 @@ void computer::use(game *g)
     return;
    } else { // Successful hack attempt
     security = 0;
-    print_line("Login successful.  Press any key...");
+    print_line(_("Login successful.  Press any key..."));
     getch();
     reset_terminal();
    }
   }
  } else { // No security
-  print_line("Login successful.  Press any key...");
+  print_line(_("Login successful.  Press any key..."));
   getch();
   reset_terminal();
  }
@@ -122,10 +122,10 @@ void computer::use(game *g)
  do {
   //reset_terminal();
   print_line("");
-  print_line("%s - Root Menu", name.c_str());
+  print_line(_("%s - Root Menu"), name.c_str());
   for (int i = 0; i < options.size(); i++)
    print_line("%d - %s", i + 1, options[i].name.c_str());
-  print_line("Q - Quit and shut down");
+  print_line(_("Q - Quit and shut down"));
   print_line("");
  
   char ch;
@@ -138,8 +138,8 @@ void computer::use(game *g)
    ch -= '1'; // So '1' -> 0; index in options.size()
    computer_option current = options[ch];
    if (current.security > 0) {
-    print_error("Password required.");
-    if (query_bool("Hack into system?")) {
+    print_error(_("Password required."));
+    if (query_bool(_("Hack into system?"))) {
      if (!hack_attempt(&(g->u), current.security)) {
       activate_random_failure(g);
       shutdown_terminal();
@@ -246,7 +246,7 @@ void computer::activate_function(game *g, computer_action action)
 
   case COMPACT_OPEN:
    g->m.translate(t_door_metal_locked, t_floor);
-   print_line("Doors opened.");
+   print_line(_("Doors opened."));
    break;
 
   case COMPACT_SAMPLE:
@@ -277,10 +277,10 @@ void computer::activate_function(game *g, computer_action action)
    break;
 
   case COMPACT_RELEASE:
-   g->sound(g->u.posx, g->u.posy, 40, "An alarm sounds!");
+   g->sound(g->u.posx, g->u.posy, 40, _("An alarm sounds!"));
    g->m.translate(t_reinforced_glass_h, t_floor);
    g->m.translate(t_reinforced_glass_v, t_floor);
-   print_line("Containment shields opened.");
+   print_line(_("Containment shields opened."));
    break;
 
   case COMPACT_TERMINATE:
@@ -295,7 +295,7 @@ void computer::activate_function(game *g, computer_action action)
       g->kill_mon(mondex);
     }
    }
-   print_line("Subjects terminated.");
+   print_line(_("Subjects terminated."));
    break;
 
   case COMPACT_PORTAL:
@@ -319,7 +319,7 @@ void computer::activate_function(game *g, computer_action action)
    break;
 
   case COMPACT_CASCADE: {
-   if (!query_bool("WARNING: Resonance cascade carries severe risk!  Continue?"))
+   if (!query_bool(_("WARNING: Resonance cascade carries severe risk!  Continue?")))
     return;
    std::vector<point> cascade_points;
    for (int i = g->u.posx - 10; i <= g->u.posx + 10; i++) {
@@ -372,7 +372,7 @@ void computer::activate_function(game *g, computer_action action)
     } while(tmp.find_first_of('%') != 0 && getline(fin, tmp));
    }
    print_line(" %s", log.c_str());
-   print_line("Press any key...");
+   print_line(_("Press any key..."));
    getch();
   } break;
 
@@ -391,7 +391,7 @@ void computer::activate_function(game *g, computer_action action)
      tmp.seen(i, j) = true;
    }
    tmp.save(g->u.name, g->cur_om.posx, g->cur_om.posy, 0);
-   print_line("Surface map data downloaded.");
+   print_line(_("Surface map data downloaded."));
   } break;
 
   case COMPACT_MAP_SEWER: {
@@ -411,7 +411,7 @@ void computer::activate_function(game *g, computer_action action)
           g->cur_om.ter(i, j) <= ot_sewage_treatment_under))
      g->cur_om.seen(i, j) = true;
    }
-   print_line("Sewage map data downloaded.");
+   print_line(_("Sewage map data downloaded."));
   } break;
 
 
@@ -420,7 +420,7 @@ void computer::activate_function(game *g, computer_action action)
 // Target Acquisition.
    point target = tmp_om.choose_point(g);
    if (target.x == -1) {
-    print_line("Launch canceled.");
+    print_line(_("Launch canceled."));
     return;
    }
 // Figure out where the glass wall is...
@@ -473,7 +473,7 @@ void computer::activate_function(game *g, computer_action action)
    for (int i = 0; i < names.size(); i++)
     print_line(names[i].c_str());
    if (more > 0)
-    print_line("%d OTHERS FOUND...");
+    print_line(_("%d OTHERS FOUND..."));
   } break;
 
   case COMPACT_ELEVATOR_ON:
@@ -483,12 +483,12 @@ void computer::activate_function(game *g, computer_action action)
       g->m.ter(x, y) = t_elevator_control;
     }
    }
-   print_line("Elevator activated.");
+   print_line(_("Elevator activated."));
    break;
 
   case COMPACT_AMIGARA_LOG: // TODO: This is static, move to data file?
-   print_line("NEPower Mine(%d:%d) Log", g->levx, g->levy);
-   print_line("\
+   print_line(_("NEPower Mine(%d:%d) Log"), g->levx, g->levy);
+   print_line(_("\
 ENTRY 47:\n\
 Our normal mining routine has unearthed a hollow chamber.  This would not be\n\
 out of the ordinary, save for the odd, perfectly vertical faultline found.\n\
@@ -499,12 +499,12 @@ ENTRY 48:\n\
 The concavities are between 10 and 20 feet tall, and run the length of the\n\
 faultline.  Each one is vaguely human in shape, but with the proportions of\n\
 the limbs, neck and head greatly distended, all twisted and curled in on\n\
-themselves.\n");
-   if (!query_bool("Continue reading?"))
+themselves.\n"));
+   if (!query_bool(_("Continue reading?")))
     return;
    reset_terminal();
-   print_line("NEPower Mine(%d:%d) Log", g->levx, g->levy);
-   print_line("\
+   print_line(_("NEPower Mine(%d:%d) Log"), g->levx, g->levy);
+   print_line(_("\
 ENTRY 49:\n\
 We've stopped mining operations in this area, obviously, until archaeologists\n\
 have the chance to inspect the area.  This is going to set our schedule back\n\
@@ -516,12 +516,12 @@ ENTRY 52:\n\
 Still waiting on the archaeologists.  We've done a little light insepction of\n\
 the faultline; our sounding equipment is insufficient to measure the depth of\n\
 the concavities.  The equipment is rated at 15 miles depth, but it isn't made\n\
-for such narrow tunnels, so it's hard to say exactly how far back they go.\n");
-   if (!query_bool("Continue reading?"))
+for such narrow tunnels, so it's hard to say exactly how far back they go.\n"));
+   if (!query_bool(_("Continue reading?")))
     return;
    reset_terminal();
-   print_line("NEPower Mine(%d:%d) Log", g->levx, g->levy);
-   print_line("\
+   print_line(_("NEPower Mine(%d:%d) Log"), g->levx, g->levy);
+   print_line(_("\
 ENTRY 54:\n\
 I noticed a couple of the guys down in the chamber with a chisel, breaking\n\
 off a piece of the sheer wall.  I'm looking the other way.  It's not like\n\
@@ -535,8 +535,8 @@ if they get hurt we'll be shut down for god knows how long.\n\
 \n\
 ENTRY 58:\n\
 They're bringing in ANOTHER CREW?  Christ, it's just some cave carvings!  I\n\
-know that's sort of a big deal, but come on, these guys can't handle it?\n");
-   if (!query_bool("Continue reading?"))
+know that's sort of a big deal, but come on, these guys can't handle it?\n"));
+   if (!query_bool(_("Continue reading?")))
     return;
    reset_terminal();
    for (int i = 0; i < 10; i++)
@@ -544,17 +544,17 @@ know that's sort of a big deal, but come on, these guys can't handle it?\n");
    print_line("");
    print_line("");
    print_line("");
-   print_line("AMIGARA PROJECT");
+   print_line(_("AMIGARA PROJECT"));
    print_line("");
    print_line("");
-   if (!query_bool("Continue reading?"))
+   if (!query_bool(_("Continue reading?")))
     return;
    reset_terminal();
-   print_line("\
+   print_line(_("\
 SITE %d%d%d%d%d\n\
-PERTINANT FOREMAN LOGS WILL BE PREPENDED TO NOTES",
+PERTINANT FOREMAN LOGS WILL BE PREPENDED TO NOTES"),
 g->cur_om.posx, g->cur_om.posy, g->levx, g->levy, abs(g->levz));
-   print_line("\n\
+   print_line(_("\n\
 MINE OPERATIONS SUSPENDED; CONTROL TRANSFERRED TO AMIGARA PROJECT UNDER\n\
    IMPERATIVE 2:07B\n\
 FAULTLINE SOUNDING HAS PLACED DEPTH AT 30.09 KM\n\
@@ -562,11 +562,11 @@ DAMAGE TO FAULTLINE DISCOVERED; NEPOWER MINE CREW PLACED UNDER ARREST FOR\n\
    VIOLATION OF REGULATION 87.08 AND TRANSFERRED TO LAB 89-C FOR USE AS\n\
    SUBJECTS\n\
 QUALITIY OF FAULTLINE NOT COMPROMISED\n\
-INITIATING STANDARD TREMOR TEST...");
+INITIATING STANDARD TREMOR TEST..."));
    print_gibberish_line();
    print_gibberish_line();
    print_line("");
-   print_error("FILE CORRUPTED, PRESS ANY KEY...");
+   print_error(_("FILE CORRUPTED, PRESS ANY KEY..."));
    getch();
    reset_terminal();
    break;
@@ -579,7 +579,7 @@ INITIATING STANDARD TREMOR TEST...");
 
   case COMPACT_DOWNLOAD_SOFTWARE:
    if (!g->u.has_amount(itm_usb_drive, 1))
-    print_error("USB drive required!");
+    print_error(_("USB drive required!"));
    else {
     mission *miss = g->find_mission(mission_id);
     if (miss == NULL) {
@@ -591,7 +591,7 @@ INITIATING STANDARD TREMOR TEST...");
     int index = g->u.pick_usb();
     g->u.inv[index].contents.clear();
     g->u.inv[index].put_in(software);
-    print_line("Software downloaded.");
+    print_line(_("Software downloaded."));
    }
    break;
 
@@ -600,36 +600,36 @@ INITIATING STANDARD TREMOR TEST...");
     for (int y = g->u.posy - 2; y <= g->u.posy + 2; y++) {
      if (g->m.ter(x, y) == t_centrifuge) {
       if (g->m.i_at(x, y).empty())
-       print_error("ERROR: Please place sample in centrifuge.");
+       print_error(_("ERROR: Please place sample in centrifuge."));
       else if (g->m.i_at(x, y).size() > 1)
-       print_error("ERROR: Please remove all but one sample from centrifuge.");
+       print_error(_("ERROR: Please remove all but one sample from centrifuge."));
       else if (g->m.i_at(x, y)[0].type->id != itm_vacutainer)
-       print_error("ERROR: Please use vacutainer-contained samples.");
+       print_error(_("ERROR: Please use vacutainer-contained samples."));
       else if (g->m.i_at(x, y)[0].contents.empty())
-       print_error("ERROR: Vacutainer empty.");
+       print_error(_("ERROR: Vacutainer empty."));
       else if (g->m.i_at(x, y)[0].contents[0].type->id != itm_blood)
-       print_error("ERROR: Please only use blood samples.");
+       print_error(_("ERROR: Please only use blood samples."));
       else { // Success!
        item *blood = &(g->m.i_at(x, y)[0].contents[0]);
        if (blood->corpse == NULL || blood->corpse->id == mon_null)
-        print_line("Result:  Human blood, no pathogens found.");
+        print_line(_("Result:  Human blood, no pathogens found."));
        else if (blood->corpse->sym == 'Z') {
-        print_line("Result:  Human blood.  Unknown pathogen found.");
-        print_line("Pathogen bonded to erythrocytes and leukocytes.");
-        if (query_bool("Download data?")) {
+        print_line(_("Result:  Human blood.  Unknown pathogen found."));
+        print_line(_("Pathogen bonded to erythrocytes and leukocytes."));
+        if (query_bool(_("Download data?"))) {
          if (!g->u.has_amount(itm_usb_drive, 1))
-          print_error("USB drive required!");
+          print_error(_("USB drive required!"));
          else {
           item software(g->itypes[itm_software_blood_data], 0);
           int index = g->u.pick_usb();
           g->u.inv[index].contents.clear();
           g->u.inv[index].put_in(software);
-          print_line("Software downloaded.");
+          print_line(_("Software downloaded."));
          }
         }
        } else
-        print_line("Result: Unknown blood type.  Test nonconclusive.");
-       print_line("Press any key...");
+        print_line(_("Result: Unknown blood type.  Test nonconclusive."));
+       print_line(_("Press any key..."));
        getch();
       }
      }
@@ -664,7 +664,7 @@ void computer::activate_failure(game *g, computer_failure fail)
    break;
 
   case COMPFAIL_ALARM:
-   g->sound(g->u.posx, g->u.posy, 60, "An alarm sounds!");
+   g->sound(g->u.posx, g->u.posy, 60, _("An alarm sounds!"));
    if (g->levz > 0 && !g->event_queued(EVENT_WANTED))
     g->add_event(EVENT_WANTED, int(g->turn) + 300, 0, g->levx, g->levy);
    break;
@@ -679,7 +679,7 @@ void computer::activate_failure(game *g, computer_failure fail)
      tries++;
     } while (!g->is_empty(mx, my) && tries < 10);
     if (tries != 10) {
-     g->add_msg("Manhacks drop from compartments in the ceiling.");
+     g->add_msg(_("Manhacks drop from compartments in the ceiling."));
      monster robot(g->mtypes[mon_manhack]);
      robot.spawn(mx, my);
      g->z.push_back(robot);
@@ -697,7 +697,7 @@ void computer::activate_failure(game *g, computer_failure fail)
      tries++;
     } while (!g->is_empty(mx, my) && tries < 10);
     if (tries != 10) {
-     g->add_msg("Secubots emerge from compartments in the floor.");
+     g->add_msg(_("Secubots emerge from compartments in the floor."));
      monster robot(g->mtypes[mon_secubot]);
      robot.spawn(mx, my);
      g->z.push_back(robot);
@@ -706,12 +706,12 @@ void computer::activate_failure(game *g, computer_failure fail)
   } break;
 
   case COMPFAIL_DAMAGE:
-   g->add_msg("The console electrocutes you!");
+   g->add_msg(_("The console electrocutes you!"));
    g->u.hurtall(rng(1, 10));
    break;
 
   case COMPFAIL_PUMP_EXPLODE:
-   g->add_msg("The pump explodes!");
+   g->add_msg(_("The pump explodes!"));
    for (int x = 0; x < SEEX * MAPSIZE; x++) {
     for (int y = 0; y < SEEY * MAPSIZE; y++) {
      if (g->m.ter(x, y) == t_sewage_pump) {
@@ -723,7 +723,7 @@ void computer::activate_failure(game *g, computer_failure fail)
    break;
 
   case COMPFAIL_PUMP_LEAK:
-   g->add_msg("Sewage leaks!");
+   g->add_msg(_("Sewage leaks!"));
    for (int x = 0; x < SEEX * MAPSIZE; x++) {
     for (int y = 0; y < SEEY * MAPSIZE; y++) {
      if (g->m.ter(x, y) == t_sewage_pump) {
@@ -760,23 +760,23 @@ void computer::activate_failure(game *g, computer_failure fail)
    break;
 
   case COMPFAIL_DESTROY_BLOOD:
-   print_error("ERROR: Disruptive Spin");
+   print_error(_("ERROR: Disruptive Spin"));
    for (int x = g->u.posx - 2; x <= g->u.posx + 2; x++) {
     for (int y = g->u.posy - 2; y <= g->u.posy + 2; y++) {
      if (g->m.ter(x, y) == t_centrifuge) {
       for (int i = 0; i < g->m.i_at(x, y).size(); i++) {
        if (g->m.i_at(x, y).empty())
-        print_error("ERROR: Please place sample in centrifuge.");
+        print_error(_("ERROR: Please place sample in centrifuge."));
        else if (g->m.i_at(x, y).size() > 1)
-        print_error("ERROR: Please remove all but one sample from centrifuge.");
+        print_error(_("ERROR: Please remove all but one sample from centrifuge."));
        else if (g->m.i_at(x, y)[0].type->id != itm_vacutainer)
-        print_error("ERROR: Please use vacutainer-contained samples.");
+        print_error(_("ERROR: Please use vacutainer-contained samples."));
        else if (g->m.i_at(x, y)[0].contents.empty())
-        print_error("ERROR: Vacutainer empty.");
+        print_error(_("ERROR: Vacutainer empty."));
        else if (g->m.i_at(x, y)[0].contents[0].type->id != itm_blood)
-        print_error("ERROR: Please only use blood samples.");
+        print_error(_("ERROR: Please only use blood samples."));
        else {
-        print_error("ERROR: Blood sample destroyed.");
+        print_error(_("ERROR: Blood sample destroyed."));
         g->m.i_at(x, y)[i].contents.clear();
        }
       }

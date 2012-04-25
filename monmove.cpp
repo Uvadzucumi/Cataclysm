@@ -469,47 +469,47 @@ void monster::hit_player(game *g, player &p)
  bool is_npc = p.is_npc();
  int  junk;
  bool u_see = (!is_npc || g->u_see(p.posx, p.posy, junk));
- std::string you  = (is_npc ? p.name : "you");
- std::string your = (is_npc ? p.name + "'s" : "your");
- std::string Your = (is_npc ? p.name + "'s" : "Your");
+ std::string you  = (is_npc ? p.name : _("you"));
+ std::string your = (is_npc ? p.name + "'s" : _("your"));
+ std::string Your = (is_npc ? p.name + "'s" : _("Your"));
  body_part bphit;
  int side = rng(0, 1);
  int dam = hit(g, p, bphit);
  if (dam == 0 && u_see)
-  g->add_msg("The %s misses %s.", name().c_str(), you.c_str());
+  g->add_msg(_("The %s misses %s."), name().c_str(), you.c_str());
  else if (dam > 0) {
   if (u_see)
-   g->add_msg("The %s hits %s %s.", name().c_str(), your.c_str(),
+   g->add_msg(_("The %s hits %s %s."), name().c_str(), your.c_str(),
               body_part_name(bphit, side).c_str());
   if (!is_npc) {
    if (g->u.activity.type == ACT_RELOAD)
-    g->add_msg("You stop reloading.");
+    g->add_msg(_("You stop reloading."));
    else if (g->u.activity.type == ACT_READ)
-    g->add_msg("You stop reading.");
+    g->add_msg(_("You stop reading."));
    else if (g->u.activity.type == ACT_CRAFT)
-    g->add_msg("You stop crafting.");
+    g->add_msg(_("You stop crafting."));
    g->u.activity.type = ACT_NULL;
   }
   if (p.has_active_bionic(bio_ods)) {
    if (u_see)
-    g->add_msg("%s offensive defense system shocks it!", Your.c_str());
+    g->add_msg(_("%s offensive defense system shocks it!"), Your.c_str());
    hurt(rng(10, 40));
   }
   if (p.encumb(bphit) == 0 &&
       (p.has_trait(PF_SPINES) || p.has_trait(PF_QUILLS))) {
    int spine = rng(1, (p.has_trait(PF_QUILLS) ? 20 : 8));
-   g->add_msg("%s %s puncture it!", Your.c_str(),
-              (g->u.has_trait(PF_QUILLS) ? "quills" : "spines"));
+   g->add_msg(_("%s %s puncture it!"), Your.c_str(),
+              (g->u.has_trait(PF_QUILLS) ? _("quills") : _("spines")));
    hurt(spine);
   }
   p.hit(g, bphit, side, dam, type->melee_cut);
   if (has_flag(MF_VENOM)) {
    if (!is_npc)
-    g->add_msg("You're poisoned!");
+    g->add_msg(_("You're poisoned!"));
    p.add_disease(DI_POISON, 30, g);
   } else if (has_flag(MF_BADVENOM)) {
    if (!is_npc)
-    g->add_msg("You feel poison flood your body, wracking you with pain...");
+    g->add_msg(_("You feel poison flood your body, wracking you with pain..."));
    p.add_disease(DI_BADPOISON, 40, g);
   }
  }

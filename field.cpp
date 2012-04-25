@@ -554,20 +554,20 @@ void map::step_in_field(int x, int y, game *g)
 
   case fd_acid:
    if (cur->density == 3) {
-    g->add_msg("The acid burns your legs and feet!");
+    g->add_msg(_("The acid burns your legs and feet!"));
     g->u.hit(g, bp_feet, 0, 0, rng(4, 10));
     g->u.hit(g, bp_feet, 1, 0, rng(4, 10));
     g->u.hit(g, bp_legs, 0, 0, rng(2,  8));
     g->u.hit(g, bp_legs, 1, 0, rng(2,  8));
    } else {
-    g->add_msg("The acid burns your feet!");
+    g->add_msg(_("The acid burns your feet!"));
     g->u.hit(g, bp_feet, 0, 0, rng(cur->density, 4 * cur->density));
     g->u.hit(g, bp_feet, 1, 0, rng(cur->density, 4 * cur->density));
    }
    break;
 
  case fd_sap:
-  g->add_msg("The sap sticks to you!");
+  g->add_msg(_("The sap sticks to you!"));
   g->u.add_disease(DI_SAP, cur->density * 2, g);
   if (cur->density == 1)
    remove_field(x, y);
@@ -578,18 +578,18 @@ void map::step_in_field(int x, int y, game *g)
   case fd_fire:
    if (!g->u.has_active_bionic(bio_heatsink)) {
     if (cur->density == 1) {
-     g->add_msg("You burn your legs and feet!");
+     g->add_msg(_("You burn your legs and feet!"));
      g->u.hit(g, bp_feet, 0, 0, rng(2, 6));
      g->u.hit(g, bp_feet, 1, 0, rng(2, 6));
      g->u.hit(g, bp_legs, 0, 0, rng(1, 4));
      g->u.hit(g, bp_legs, 1, 0, rng(1, 4));
     } else if (cur->density == 2) {
-     g->add_msg("You're burning up!");
+     g->add_msg(_("You're burning up!"));
      g->u.hit(g, bp_legs, 0, 0,  rng(2, 6));
      g->u.hit(g, bp_legs, 1, 0,  rng(2, 6));
      g->u.hit(g, bp_torso, 0, 4, rng(4, 9));
     } else if (cur->density == 3) {
-     g->add_msg("You're set ablaze!");
+     g->add_msg(_("You're set ablaze!"));
      g->u.hit(g, bp_legs, 0, 0, rng(2, 6));
      g->u.hit(g, bp_legs, 1, 0, rng(2, 6));
      g->u.hit(g, bp_torso, 0, 4, rng(4, 9));
@@ -624,30 +624,30 @@ void map::step_in_field(int x, int y, game *g)
   case fd_nuke_gas:
    g->u.radiation += rng(0, cur->density * (cur->density + 1));
    if (cur->density == 3) {
-    g->add_msg("This radioactive gas burns!");
+    g->add_msg(_("This radioactive gas burns!"));
     g->u.hurtall(rng(1, 3));
    }
    break;
 
   case fd_flame_burst:
-   g->add_msg("You're torched by flames!");
+   g->add_msg(_("You're torched by flames!"));
    g->u.hit(g, bp_legs, 0, 0,  rng(2, 6));
    g->u.hit(g, bp_legs, 1, 0,  rng(2, 6));
    g->u.hit(g, bp_torso, 0, 4, rng(4, 9));
    break;
 
   case fd_electricity:
-   g->add_msg("You're electrocuted!");
+   g->add_msg(_("You're electrocuted!"));
    g->u.hurtall(rng(1, cur->density));
    if (one_in(8 - cur->density) && !one_in(30 - g->u.str_cur)) {
-    g->add_msg("You're paralyzed!");
+    g->add_msg(_("You're paralyzed!"));
     g->u.moves -= cur->density * 150;
    }
    break;
 
   case fd_fatigue:
    if (rng(0, 2) < cur->density) {
-    g->add_msg("You're violently teleported!");
+    g->add_msg(_("You're violently teleported!"));
     g->u.hurtall(cur->density);
     g->teleport();
    }
@@ -809,7 +809,7 @@ void map::mon_in_field(int x, int y, game *g, monster *z)
      int mon_hit = g->mon_at(newposx, newposy), t;
      if (mon_hit != -1) {
       if (g->u_see(z, t))
-       g->add_msg("The %s teleports into a %s, killing them both!",
+       g->add_msg(_("The %s teleports into a %s, killing them both!"),
                   z->name().c_str(), g->z[mon_hit].name().c_str());
       g->explode_mon(mon_hit);
      } else {
