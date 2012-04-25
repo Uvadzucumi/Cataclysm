@@ -21,34 +21,34 @@ mission_type(id, name, goal, diff, val, urgent, place, start, end, fail) )
 // The order of missions should match enum mission_id in mission.h
  int id = -1;
 
- MISSION("Null mission", MGOAL_NULL, 0, 0, false,
+ MISSION(_("Null mission"), MGOAL_NULL, 0, 0, false,
          &mission_place::never, &mission_start::standard,
          &mission_end::standard, &mission_fail::standard);
 
- MISSION("Find Antibiotics", MGOAL_FIND_ITEM, 2, 1500, true,
+ MISSION(_("Find Antibiotics"), MGOAL_FIND_ITEM, 2, 1500, true,
 	&mission_place::always, &mission_start::infect_npc,
 	&mission_end::heal_infection, &mission_fail::kill_npc);
   ORIGINS(ORIGIN_OPENER_NPC, NULL);
   ITEM(itm_antibiotics);
   DEADLINE(24, 48); // 1 - 2 days
 
- MISSION("Retrieve Software", MGOAL_FIND_ANY_ITEM, 2, 800, false,
+ MISSION(_("Retrieve Software"), MGOAL_FIND_ANY_ITEM, 2, 800, false,
 	&mission_place::near_town, &mission_start::place_npc_software,
 	&mission_end::standard, &mission_fail::standard);
   ORIGINS(ORIGIN_OPENER_NPC, NULL);
 
- MISSION("Analyze Zombie Blood", MGOAL_FIND_ITEM, 8, 2500, false,
+ MISSION(_("Analyze Zombie Blood"), MGOAL_FIND_ITEM, 8, 2500, false,
 	&mission_place::always, &mission_start::reveal_hospital,
 	&mission_end::standard, &mission_fail::standard);
   ORIGINS(ORIGIN_SECONDARY);
   ITEM(itm_software_blood_data);
 
- MISSION("Find Lost Dog", MGOAL_FIND_MONSTER, 3, 1000, false,
+ MISSION(_("Find Lost Dog"), MGOAL_FIND_MONSTER, 3, 1000, false,
 	&mission_place::near_town, &mission_start::place_dog,
 	&mission_end::standard, &mission_fail::standard);
   ORIGINS(ORIGIN_OPENER_NPC, NULL);
 
- MISSION("Kill Zombie Mom", MGOAL_KILL_MONSTER, 5, 1200, true,
+ MISSION(_("Kill Zombie Mom"), MGOAL_KILL_MONSTER, 5, 1200, true,
 	&mission_place::near_town, &mission_start::place_zombie_mom,
 	&mission_end::standard, &mission_fail::standard);
   ORIGINS(ORIGIN_OPENER_NPC, NULL);

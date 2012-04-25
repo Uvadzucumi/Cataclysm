@@ -55,9 +55,9 @@ void weather_effect::thunder(game *g)
  very_wet(g);
  if (one_in(THUNDER_CHANCE)) {
   if (g->levz >= 0)
-   g->add_msg("You hear a distant rumble of thunder.");
+   g->add_msg(_("You hear a distant rumble of thunder."));
   else if (!g->u.has_trait(PF_BADHEARING) && one_in(1 - 3 * g->levz))
-   g->add_msg("You hear a rumble of thunder from above.");
+   g->add_msg(_("You hear a rumble of thunder from above."));
  }
 }
 
@@ -75,7 +75,7 @@ void weather_effect::lightning(game *g)
   point hit;
   if (strike.size() > 0) {
    hit = strike[rng(0, strike.size() - 1)];
-   g->add_msg("Lightning strikes nearby!");
+   g->add_msg(_("Lightning strikes nearby!"));
    g->explosion(hit.x, hit.y, 10, 0, one_in(4));
   }
  }
@@ -85,13 +85,13 @@ void weather_effect::light_acid(game *g)
 {
  wet(g);
  if (int(g->turn) % 10 == 0 && PLAYER_OUTSIDE)
-  g->add_msg("The acid rain stings, but is harmless for now...");
+  g->add_msg(_("The acid rain stings, but is harmless for now..."));
 }
 
 void weather_effect::acid(game *g)
 {
  if (PLAYER_OUTSIDE) {
-  g->add_msg("The acid rain burns!");
+  g->add_msg(_("The acid rain burns!"));
   if (one_in(6))
    g->u.hit(g, bp_head, 0, 0, 1);
   if (one_in(10)) {

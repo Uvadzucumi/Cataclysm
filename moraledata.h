@@ -5,29 +5,29 @@
 #include "morale.h"
 
 std::string morale_data[NUM_MORALE_TYPES] = {
-"This is a bug",
-"Enjoyed %i",
-"Music",
-"Marloss Bliss",
-"Good Feeling",
+_("This is a bug"),
+_("Enjoyed %i"),
+_("Music"),
+_("Marloss Bliss"),
+_("Good Feeling"),
 
-"Nicotine Craving",
-"Caffeine Craving",
-"Alcohol Craving",
-"Opiate Craving",
-"Speed Craving",
-"Cocaine Craving",
+_("Nicotine Craving"),
+_("Caffeine Craving"),
+_("Alcohol Craving"),
+_("Opiate Craving"),
+_("Speed Craving"),
+_("Cocaine Craving"),
 
-"Disliked %i",
-"Ate Meat",
-"Wet",
-"Bad Feeling",
-"Killed Innocent",
-"Killed Friend",
-"Killed Mother",
+_("Disliked %i"),
+_("Ate Meat"),
+_("Wet"),
+_("Bad Feeling"),
+_("Killed Innocent"),
+_("Killed Friend"),
+_("Killed Mother"),
 
-"Moodswing",
-"Read %i",
+_("Moodswing"),
+_("Read %i"),
 };
 
 #endif

@@ -2,6 +2,8 @@
 #define _BODYPART_H_
 
 #include <string>
+#include <libintl.h>
+#define _(String) gettext (String)
 
 enum body_part {
  bp_head = 0,

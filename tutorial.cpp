@@ -21,7 +21,7 @@ void tutorial_game::init(game *g)
  g->u.per_cur = g->u.per_max;
  g->u.int_cur = g->u.int_max;
  g->u.dex_cur = g->u.dex_max;
- g->u.name = "John Smith";
+ g->u.name = _("John Smith");
  g->levx = 100;
  g->levy = 100;
  g->cur_om = overmap(g, 0, 0, TUTORIAL_Z - 1);

@@ -138,14 +138,14 @@ direction direction_from(int x1, int y1, int x2, int y2)
 std::string direction_name(direction dir)
 {
  switch (dir) {
-  case NORTH:     return "north";
-  case NORTHEAST: return "northeast";
-  case EAST:      return "east";
-  case SOUTHEAST: return "southeast";
-  case SOUTH:     return "south";
-  case SOUTHWEST: return "southwest";
-  case WEST:      return "west";
-  case NORTHWEST: return "northwest";
+  case NORTH:     return _("north");
+  case NORTHEAST: return _("northeast");
+  case EAST:      return _("east");
+  case SOUTHEAST: return _("southeast");
+  case SOUTH:     return _("south");
+  case SOUTHWEST: return _("southwest");
+  case WEST:      return _("west");
+  case NORTHWEST: return _("northwest");
  }
  return "WEIRD DIRECTION_NAME() BUG";
 }
