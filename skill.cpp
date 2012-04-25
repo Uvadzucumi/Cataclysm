@@ -4,193 +4,193 @@ std::string skill_name(int sk)
 {
  switch (sk) {
  case sk_null:
-  return "nothing";
+  return _("nothing");
  case sk_dodge:
-  return "dodge";
+  return _("dodge");
  case sk_melee:
-  return "melee";
+  return _("melee");
  case sk_unarmed:
-  return "unarmed combat";
+  return _("unarmed combat");
  case sk_bashing:
-  return "bashing weapons";
+  return _("bashing weapons");
  case sk_cutting:
-  return "cutting weapons";
+  return _("cutting weapons");
  case sk_stabbing:
-  return "piercing weapons";
+  return _("piercing weapons");
  case sk_throw:
-  return "throwing";
+  return _("throwing");
  case sk_gun:
-  return "firearms";
+  return _("firearms");
  case sk_pistol:
-  return "handguns";
+  return _("handguns");
  case sk_shotgun:
-  return "shotguns";
+  return _("shotguns");
  case sk_smg:
-  return "submachine guns";
+  return _("submachine guns");
  case sk_rifle:
-  return "rifles";
+  return _("rifles");
  case sk_archery:
-  return "archery";
+  return _("archery");
  case sk_launcher:
-  return "grenade launcher";
+  return _("grenade launcher");
  case sk_computer:
-  return "computers";
+  return _("computers");
  case sk_mechanics:
-  return "mechanics";
+  return _("mechanics");
  case sk_electronics:
-  return "electronics";
+  return _("electronics");
  case sk_cooking:
-  return "cooking";
+  return _("cooking");
  case sk_carpentry:
-  return "carpentry";
+  return _("carpentry");
  case sk_survival:
-  return "survival";
+  return _("survival");
  case sk_traps:
-  return "traps";
+  return _("traps");
  case sk_tailor:
-  return "tailoring";
+  return _("tailoring");
  case sk_firstaid:
-  return "first aid";
+  return _("first aid");
  case sk_speech:
-  return "speech";
+  return _("speech");
  case sk_barter:
-  return "barter";
+  return _("barter");
  case sk_swimming:
-  return "swimming";
+  return _("swimming");
  case num_skill_types:
-  return "out of bounds";
+  return _("out of bounds");
  }
- return "the skill with no name";
+ return _("the skill with no name");
 }
 
 std::string skill_description(int sk)
 {
  switch (sk) {
  case sk_null:
-  return "No skill at all.";
+  return _("No skill at all.");
  case sk_dodge:
-  return "\
+  return _("\
 Your skill at dodging, whether it be from an attack, a trap, or a natural\n\
 occurrence.  It is also used when attempting to fall gracefully, or in other\n\
-acrobatic feats.";
+acrobatic feats.");
  case sk_melee:
-  return "\
+  return _("\
 Your skill at hand-to-hand combat, both with and without a weapon. At low\n\
 levels this merely increases your chance to hit, but at higher levels it also\n\
-increases the damage done significantly.";
+increases the damage done significantly.");
  case sk_unarmed:
-  return "\
+  return _("\
 Your skill at combat without a weapon. While at low levels, unarmed combat is\n\
 a good way to die quickly, those skilled in it can eventually use throws and\n\
-crushing blows to quickly dispatch enemies.";
+crushing blows to quickly dispatch enemies.");
  case sk_bashing:
-  return "\
+  return _("\
 Your skill at combat with weapons that club or bash your enemies. This\n\
 includes everything from rocks to baseball bats, and even the butt of rifles.\n\
-This increases damage, and at higher levels will improve your chance to hit.";
+This increases damage, and at higher levels will improve your chance to hit.");
  case sk_cutting:
-  return "\
+  return _("\
 Your skill at combat with weapons that cut or slice your enemies. At first\n\
 this will simply slightly increase accuracy and damage; later on it will\n\
-help you bypass armor and thick hides.";
+help you bypass armor and thick hides.");
  case sk_stabbing:
-  return "\
+  return _("\
 Your skill at combat that involves piercing weapons.  This includes spears,\n\
 which only have a stabbing attack, and things like knives, which can cut or\n\
-pierce.  This increases your accuracy and chance of a deadly critical.";
+pierce.  This increases your accuracy and chance of a deadly critical.");
  case sk_throw:
-  return "\
+  return _("\
 Your skill at throwing items and getting them to go where you want. Increases\n\
-both accuracy and, at higher levels, range.";
+both accuracy and, at higher levels, range.");
  case sk_gun:
-  return "\
+  return _("\
 Your general skill at firearms. This increases your accuracy with any gun,\n\
-but not as much as the skill associated with the gun in question.";
+but not as much as the skill associated with the gun in question.");
  case sk_pistol:
-  return "\
+  return _("\
 Your skill with handguns. These have poor accuracy, but generally are fired\n\
-and reloaded faster than other guns, and are good in close quarters.";
+and reloaded faster than other guns, and are good in close quarters.");
  case sk_shotgun:
-  return "\
+  return _("\
 Your skill with shotguns. Shot is easy to hit with, and does massive damage,\n\
 but has short range. Shotguns may also be loaded with slugs, which go further\n\
-and do as much damage, but are not very accurate.";
+and do as much damage, but are not very accurate.");
  case sk_smg:
-  return "\
+  return _("\
 Your skill with submachine guns and machine pistols. Halfway between a pistol\n\
 and an assault rifle, these weapons fire and reload quickly, and may fire in\n\
-bursts, but they are not very accurate.";
+bursts, but they are not very accurate.");
  case sk_rifle:
-  return "\
+  return _("\
 Your skill with rifles, both assault rifles and semi-auto hunting rifles.\n\
 These have terrific range and accuracy, but are very slow to fire and reload,\n\
-and are not very good in close quarters.";
+and are not very good in close quarters.");
  case sk_archery:
-  return "\
+  return _("\
 Your skill with all kinds of bows, from crossbows to handmade long bows.\n\
 These are quiet, but require some amount of strength to use, and are not\n\
-terribly accurate. They can only be deadly in skilled hands.";
+terribly accurate. They can only be deadly in skilled hands.");
  case sk_launcher:
-  return "\
+  return _("\
 Your skill with grenade launchers, whether standalone or as a rifle mod.\n\
 These launchers fire a variety of 40mm grenades with different uses,\n\
-but they and their rounds are hard to find.";
+but they and their rounds are hard to find.");
  case sk_computer:
-  return "\
+  return _("\
 Your skill with computers, both in terms of legitimate use, and hacking. This\n\
-will help you use complex systems, and bypass their security.";
+will help you use complex systems, and bypass their security.");
  case sk_mechanics:
-  return "\
+  return _("\
 Your skill with repairs to mechanical systems, and the crafting of many items\n\
-that use complex parts, but are not electronics.";
+that use complex parts, but are not electronics.");
  case sk_electronics:
-  return "\
+  return _("\
 Your skill with repairs to electrical systems, and the crafting of many items\n\
-that use electrical parts.";
+that use electrical parts.");
  case sk_cooking:
-  return "\
+  return _("\
 Your skill in combining food ingredients to make other, tastier food items.\n\
-This may also be used in mixing chemicals and other more esoteric tasks.";
+This may also be used in mixing chemicals and other more esoteric tasks.");
  case sk_carpentry:
-  return "\
+  return _("\
 Your general knowledge in construction.  This is used primarily when building\n\
-terrain, via the * screen.";
+terrain, via the * screen.");
  case sk_survival:
-  return "\
+  return _("\
 Your skill in wilderness survival.  This helps you butcher meat from a corpse\n\
 and craft various basic survival items.  High levels may allow you to remove\n\
-poison from tainted meat. Also used for skinning corpses to acquire pelts.";
+poison from tainted meat. Also used for skinning corpses to acquire pelts.");
  case sk_traps:
-  return "\
+  return _("\
 Your skill at setting and disarming traps safely and effectively. Note that\n\
 this does not help you detect traps, or avoid their effects if you activate\n\
-them.";
+them.");
  case sk_tailor:
-  return "\
+  return _("\
 Your skill at repairing clothing, and at higher levels, creating clothing\n\
 from basic materials.  Generally a sewing kit is needed.  Also applies to\n\
-other methods of clothing repair and textile crafting.";
+other methods of clothing repair and textile crafting.");
  case sk_firstaid:
-  return "\
+  return _("\
 Your skill at emergency medical treatment, such as that from first aid kits\n\
 and bandages. High levels of this skill may help heal more HP. Some drugs\n\
-may be more effective as well.";
+may be more effective as well.");
  case sk_speech:
-  return "\
+  return _("\
 Your skill at talking to people, convincing them of things, lying, and many\n\
-others. Works best in conjunction with a high intelligence.";
+others. Works best in conjunction with a high intelligence.");
  case sk_barter:
-  return "\
+  return _("\
 Your skill at getting a good deal when trading with others. Very high levels\n\
-might even see you getting freebies.";
+might even see you getting freebies.");
  case sk_swimming:
-  return "\
+  return _("\
 Your skill at swimming.  This affects speed, your ability to swim while\n\
-wearing clothes or carrying weights, and in-water combat.";
+wearing clothes or carrying weights, and in-water combat.");
  case num_skill_types:
-  return "out of bounds";
+  return _("out of bounds");
  default:
-  return "What is this skill I don't even know!  BUG!";
+  return _("What is this skill I don't even know!  BUG!");
  }
 }
 

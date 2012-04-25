@@ -2,6 +2,8 @@
 #define _SKILL_H_
 
 #include <string>
+#include <libintl.h>
+#define _(String) gettext (String)
 
 enum skill {
  sk_null = 0,
