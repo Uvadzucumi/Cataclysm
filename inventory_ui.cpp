@@ -5,8 +5,8 @@
 #include <vector>
 
 std::string CATEGORIES[8] =
- {"FIREARMS:", "AMMUNITION:", "CLOTHING:", "COMESTIBLES:",
-  "TOOLS:", "BOOKS:", "WEAPONS:", "OTHER:"};
+ {_("FIREARMS:"), _("AMMUNITION:"), _("CLOTHING:"), _("COMESTIBLES:"),
+  _("TOOLS:"), _("BOOKS:"), _("WEAPONS:"), _("OTHER:")};
 
 void print_inv_statics(game *g, WINDOW* w_inv, std::string title,
                        std::vector<char> dropped_items)
@@ -15,7 +15,7 @@ void print_inv_statics(game *g, WINDOW* w_inv, std::string title,
  mvwprintw(w_inv, 0, 0, title.c_str());
 
 // Print weight
- mvwprintw(w_inv, 0, 40, "Weight: ");
+ mvwprintw(w_inv, 0, 40, _("Weight: "));
  if (g->u.weight_carried() >= g->u.weight_capacity() * .25)
   wprintz(w_inv, c_red, "%d", g->u.weight_carried());
  else
@@ -24,7 +24,7 @@ void print_inv_statics(game *g, WINDOW* w_inv, std::string title,
                                     g->u.weight_capacity());
 
 // Print volume
- mvwprintw(w_inv, 0, 60, "Volume: ");
+ mvwprintw(w_inv, 0, 60, _("Volume: "));
  if (g->u.volume_carried() > g->u.volume_capacity() - 2)
   wprintz(w_inv, c_red, "%d", g->u.volume_carried());
  else
@@ -32,7 +32,7 @@ void print_inv_statics(game *g, WINDOW* w_inv, std::string title,
  wprintw(w_inv, "/%d", g->u.volume_capacity() - 2);
 
 // Print our weapon
- mvwprintz(w_inv, 2, 40, c_magenta, "WEAPON:");
+ mvwprintz(w_inv, 2, 40, c_magenta, _("WEAPON:"));
  int dropping_weapon = false;
  for (int i = 0; i < dropped_items.size() && !dropping_weapon; i++) {
   if (dropped_items[i] == g->u.weapon.invlet)
@@ -49,7 +49,7 @@ void print_inv_statics(game *g, WINDOW* w_inv, std::string title,
   mvwprintz(w_inv, 3, 42, c_ltgray, g->u.weapname().c_str());
 // Print worn items
  if (g->u.worn.size() > 0)
-  mvwprintz(w_inv, 5, 40, c_magenta, "ITEMS WORN:");
+  mvwprintz(w_inv, 5, 40, c_magenta, _("ITEMS WORN:"));
  for (int i = 0; i < g->u.worn.size(); i++) {
   bool dropping_armor = false;
   for (int j = 0; j < dropped_items.size() && !dropping_armor; j++) {
@@ -149,9 +149,9 @@ char game::inv(std::string title)
    cur_line++;
   }
   if (start > 0)
-   mvwprintw(w_inv, maxitems + 4, 0, "< Go Back");
+   mvwprintw(w_inv, maxitems + 4, 0, _("< Go Back"));
   if (cur_it < u.inv.size())
-   mvwprintw(w_inv, maxitems + 4, 12, "> More items");
+   mvwprintw(w_inv, maxitems + 4, 12, _("> More items"));
   wrefresh(w_inv);
   ch = getch();
  } while (ch == '<' || ch == '>');
@@ -174,7 +174,7 @@ std::vector<item> game::multidrop()
  bool warned_about_bionic = false; // Printed add_msg re: dropping bionics
  u.inv.restack(this);
  u.sort_inv();
- print_inv_statics(this, w_inv, "Multidrop:", weapon_and_armor);
+ print_inv_statics(this, w_inv, _("Multidrop:"), weapon_and_armor);
 // Gun, ammo, weapon, armor, food, tool, book, other
  std::vector<int> firsts = find_firsts(u.inv);
 
@@ -227,9 +227,9 @@ std::vector<item> game::multidrop()
    cur_line++;
   }
   if (start > 0)
-   mvwprintw(w_inv, maxitems + 4, 0, "< Go Back");
+   mvwprintw(w_inv, maxitems + 4, 0, _("< Go Back"));
   if (cur_it < u.inv.size())
-   mvwprintw(w_inv, maxitems + 4, 12, "> More items");
+   mvwprintw(w_inv, maxitems + 4, 12, _("> More items"));
   wrefresh(w_inv);
   ch = getch();
   if (ch >= '0' && ch <= '9') {
@@ -244,18 +244,18 @@ std::vector<item> game::multidrop()
      if (weapon_and_armor[i] == ch) {
       weapon_and_armor.erase(weapon_and_armor.begin() + i);
       found = true;
-      print_inv_statics(this, w_inv, "Multidrop:", weapon_and_armor);
+      print_inv_statics(this, w_inv, _("Multidrop:"), weapon_and_armor);
      }
     }
     if (!found) {
      if (ch == u.weapon.invlet && u.weapon.type->id > num_items &&
          u.weapon.type->id < num_all_items) {
       if (!warned_about_bionic)
-       add_msg("You cannot drop your %s.", u.weapon.tname(this).c_str());
+       add_msg(_("You cannot drop your %s."), u.weapon.tname(this).c_str());
       warned_about_bionic = true;
      } else {
       weapon_and_armor.push_back(ch);
-      print_inv_statics(this, w_inv, "Multidrop:", weapon_and_armor);
+      print_inv_statics(this, w_inv, _("Multidrop:"), weapon_and_armor);
      }
     }
    } else {
