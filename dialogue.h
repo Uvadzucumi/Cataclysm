@@ -61,7 +61,7 @@ enum talk_trial
 };
 
 std::string talk_trial_text[NUM_TALK_TRIALS] = {
-"", "LIE", "PERSUADE", "INTIMIDATE"
+"", _("LIE"), _("PERSUADE"), _("INTIMIDATE")
 };
 
 struct talk_response
@@ -123,26 +123,26 @@ struct tag_data
 
 std::string talk_needs[num_needs][5] = {
 {"", "", "", "", ""},
-{"Hey<punc> You got any <ammo>?", "I'll need some <ammo> soon, got any?",
- "I really need some <ammo><punc>", "I need <ammo> for my <mywp>, got any?",
- "I need some <ammo> <very> bad<punc>"},
-{"Got anything I can use as a weapon?",
- "<ill_die> without a good weapon<punc>",
- "I'm sick of fighting with my <swear> <mywp>, got something better?",
- "Hey <name_g>, care to sell me a weapon?",
- "My <mywp> just won't cut it, I need a real weapon..."},
-{"Hey <name_g>, I could really use a gun.",
- "Hey, you got a spare gun?  It'd be better than my <swear> <mywp><punc>",
- "<ill_die> if I don't find a gun soon!",
- "<name_g><punc> Feel like selling me a gun?",
- "I need a gun, any kind will do!"},
-{"I could use some food, here.", "I need some food, <very> bad!",
- "Man, am I <happy> to see you!  Got any food to trade?",
- "<ill_die> unless I get some food in me<punc> <okay>?",
- "Please tell me you have some food to trade!"},
-{"Got anything to drink?", "I need some water or something.",
- "<name_g>, I need some water... got any?",
- "<ill_die> without something to drink.", "You got anything to drink?"}
+{_("Hey<punc> You got any <ammo>?"), _("I'll need some <ammo> soon, got any?"),
+ _("I really need some <ammo><punc>"), _("I need <ammo> for my <mywp>, got any?"),
+ _("I need some <ammo> <very> bad<punc>")},
+{_("Got anything I can use as a weapon?"),
+ _("<ill_die> without a good weapon<punc>"),
+ _("I'm sick of fighting with my <swear> <mywp>, got something better?"),
+ _("Hey <name_g>, care to sell me a weapon?"),
+ _("My <mywp> just won't cut it, I need a real weapon...")},
+{_("Hey <name_g>, I could really use a gun."),
+ _("Hey, you got a spare gun?  It'd be better than my <swear> <mywp><punc>"),
+ _("<ill_die> if I don't find a gun soon!"),
+ _("<name_g><punc> Feel like selling me a gun?"),
+ _("I need a gun, any kind will do!")},
+{_("I could use some food, here."), _("I need some food, <very> bad!"),
+ _("Man, am I <happy> to see you!  Got any food to trade?"),
+ _("<ill_die> unless I get some food in me<punc> <okay>?"),
+ _("Please tell me you have some food to trade!")},
+{_("Got anything to drink?"), _("I need some water or something."),
+ _("<name_g>, I need some water... got any?"),
+ _("<ill_die> without something to drink."), _("You got anything to drink?")}
 /*
 {"<ill_die> unless I get healed<punc>", "You gotta heal me up, <name_g><punc>",
  "Help me<punc> <ill_die> if you don't heal me<punc>",
@@ -151,170 +151,170 @@ std::string talk_needs[num_needs][5] = {
 };
 
 std::string talk_okay[10] = {
-"okay", "get it", "you dig", "dig", "got it", "you see", "see, <name_g>",
-"alright", "that clear"};
+_("okay"), _("get it"), _("you dig"), _("dig"), _("got it"), _("you see"), _("see, <name_g>"),
+_("alright"), _("that clear")};
 
 std::string talk_no[10] = {
-"no", "fuck no", "hell no", "no way", "not a chance",
-"I don't think so", "no way in hell", "nuh uh", "nope", "fat chance"};
+_("no"), _("fuck no"), _("hell no"), _("no way"), _("not a chance"),
+_("I don't think so"), _("no way in hell"), _("nuh uh"), _("nope"), _("fat chance")};
 
 std::string talk_bad_names[10] = {
-"punk",		"bitch",	"dickhead",	"asshole",	"fucker",
-"sucker",	"fuckwad",	"cocksucker",	"motherfucker",	"shithead"};
+_("punk"),		_("bitch"),	_("dickhead"),	_("asshole"),	_("fucker"),
+_("sucker"),	_("fuckwad"),	_("cocksucker"),	_("motherfucker"),	_("shithead")};
 
 std::string talk_good_names[10] = {
-"stranger",	"friend",	"pilgrim",	"traveler",	"pal",
-"fella",	"you",		"dude",		"buddy",	"man"};
+_("stranger"),	_("friend"),	_("pilgrim"),	_("traveler"),	_("pal"),
+_("fella"),	_("you"),		_("dude"),		_("buddy"),	_("man")};
 
 std::string talk_swear[10] = { // e.g. "drop the <swear> weapon"
-"fucking", "goddamn", "motherfucking", "freaking", "damn", "<swear> <swear>",
-"fucking", "fuckin'", "god damn", "mafuckin'"};
+_("fucking"), _("goddamn"), _("motherfucking"), _("freaking"), _("damn"), _("<swear> <swear>"),
+_("fucking"), _("fuckin'"), _("god damn"), _("mafuckin'")};
 
 std::string talk_swear_interjection[10] = {
-"fuck", "damn", "damnit", "shit", "cocksucker", "crap",
-"motherfucker", "<swear><punc> <swear!>", "<very> <swear!>", "son of a bitch"};
+_("fuck"), _("damn"), _("damnit"), _("shit"), _("cocksucker"), _("crap"),
+_("motherfucker"), _("<swear><punc> <swear!>"), _("<very> <swear!>"), _("son of a bitch")};
 
 std::string talk_fuck_you[10] = {
-"fuck you", "fuck off", "go fuck yourself", "<fuck_you>, <name_b>",
-"<fuck_you>, <swear> <name_b>", "<name_b>", "<swear> <name_b>",
-"fuck you", "fuck off", "go fuck yourself"};
+_("fuck you"), _("fuck off"), _("go fuck yourself"), _("<fuck_you>, <name_b>"),
+_("<fuck_you>, <swear> <name_b>"), _("<name_b>"), _("<swear> <name_b>"),
+_("fuck you"), _("fuck off"), _("go fuck yourself")};
 
 std::string talk_very[10] = { // Synonyms for "very" -- applied to adjectives
-"really", "fucking", "super", "wicked", "very", "mega", "uber", "ultra",
-"so <very>", "<very> <very>"};
+_("really"), _("fucking"), _("super"), _("wicked"), _("very"), _("mega"), _("uber"), _("ultra"),
+_("so <very>"), _("<very> <very>")};
 
 std::string talk_really[10] = { // Synonyms for "really" -- applied to verbs
-"really", "fucking", "absolutely", "definitely", "for real", "honestly",
-"<really> <really>", "most <really>", "urgently", "REALLY"};
+_("really"), _("fucking"), _("absolutely"), _("definitely"), _("for real"), _("honestly"),
+_("<really> <really>"), _("most <really>"), _("urgently"), _("REALLY")};
 
 std::string talk_happy[10] = {
-"glad", "happy", "overjoyed", "ecstatic", "thrilled", "stoked",
-"<very> <happy>", "tickled pink", "delighted", "pumped"};
+_("glad"), _("happy"), _("overjoyed"), _("ecstatic"), _("thrilled"), _("stoked"),
+_("<very> <happy>"), _("tickled pink"), _("delighted"), _("pumped")};
 
 std::string talk_sad[10] = {
-"sad", "bummed", "depressed", "pissed", "unhappy", "<very> <sad>", "dejected",
-"down", "blue", "glum"};
+_("sad"), _("bummed"), _("depressed"), _("pissed"), _("unhappy"), _("<very> <sad>"), _("dejected"),
+_("down"), _("blue"), _("glum")};
 
 std::string talk_greeting_gen[10] = {
-"Hey <name_g>.", "Greetings <name_g>.", "Hi <name_g><punc> You okay?",
-"<name_g><punc>  Let's talk.", "Well hey there.",
-"<name_g><punc>  Hello.", "What's up, <name_g>?", "You okay, <name_g>?",
-"Hello, <name_g>.", "Hi <name_g>"};
+_("Hey <name_g>."), _("Greetings <name_g>."), _("Hi <name_g><punc> You okay?"),
+_("<name_g><punc>  Let's talk."), _("Well hey there."),
+_("<name_g><punc>  Hello."), _("What's up, <name_g>?"), _("You okay, <name_g>?"),
+_("Hello, <name_g>."), _("Hi <name_g>")};
 
 std::string talk_ill_die[10] = {
-"I'm not gonna last much longer", "I'll be dead soon", "I'll be a goner",
-"I'm dead, <name_g>,", "I'm dead meat", "I'm in <very> serious trouble",
-"I'm <very> doomed", "I'm done for", "I won't last much longer",
-"my days are <really> numbered"};
+_("I'm not gonna last much longer"), _("I'll be dead soon"), _("I'll be a goner"),
+_("I'm dead, <name_g>,"), _("I'm dead meat"), _("I'm in <very> serious trouble"),
+_("I'm <very> doomed"), _("I'm done for"), _("I won't last much longer"),
+_("my days are <really> numbered")};
 
 std::string talk_ill_kill_you[10] = {
-"I'll kill you", "you're dead", "I'll <swear> kill you", "you're dead meat",
-"<ill_kill_you>, <name_b>", "you're a dead <man>", "you'll taste my <mywp>",
-"you're <swear> dead", "<name_b>, <ill_kill_you>"};
+_("I'll kill you"), _("you're dead"), _("I'll <swear> kill you"), _("you're dead meat"),
+_("<ill_kill_you>, <name_b>"), _("you're a dead <man>"), _("you'll taste my <mywp>"),
+_("you're <swear> dead"), _("<name_b>, <ill_kill_you>")};
 
 std::string talk_drop_weapon[10] = {
-"Drop your <swear> weapon!",
-"Okay <name_b>, drop your weapon!",
-"Put your <swear> weapon down!",
-"Drop the <yrwp>, <name_b>!",
-"Drop the <swear> <yrwp>!",
-"Drop your <yrwp>!",
-"Put down the <yrwp>!",
-"Drop your <swear> weapon, <name_b>!",
-"Put down your <yrwp>!",
-"Alright, drop the <yrwp>!"
+_("Drop your <swear> weapon!"),
+_("Okay <name_b>, drop your weapon!"),
+_("Put your <swear> weapon down!"),
+_("Drop the <yrwp>, <name_b>!"),
+_("Drop the <swear> <yrwp>!"),
+_("Drop your <yrwp>!"),
+_("Put down the <yrwp>!"),
+_("Drop your <swear> weapon, <name_b>!"),
+_("Put down your <yrwp>!"),
+_("Alright, drop the <yrwp>!")
 };
 
 std::string talk_hands_up[10] = {
-"Put your <swear> hands up!",
-"Put your hands up, <name_b>!",
-"Reach for the sky!",
-"Hands up!",
-"Hands in the air!",
-"Hands up, <name_b>!",
-"Hands where I can see them!",
-"Okay <name_b>, hands up!",
-"Okay <name_b><punc> hands up!",
-"Hands in the air, <name_b>!"
+_("Put your <swear> hands up!"),
+_("Put your hands up, <name_b>!"),
+_("Reach for the sky!"),
+_("Hands up!"),
+_("Hands in the air!"),
+_("Hands up, <name_b>!"),
+_("Hands where I can see them!"),
+_("Okay <name_b>, hands up!"),
+_("Okay <name_b><punc> hands up!"),
+_("Hands in the air, <name_b>!")
 };
 
 std::string talk_no_faction[10] = {
-"I'm unaffiliated.",
-"I don't run with a crew.",
-"I'm a solo artist, <okay>?",
-"I don't kowtow to any group, <okay>?",
-"I'm a freelancer.",
-"I work alone, <name_g>.",
-"I'm a free agent, more money that way.",
-"I prefer to work uninhibited by that kind of connection.",
-"I haven't found one that's good enough for me.",
-"I don't belong to a faction, <name_g>."
+_("I'm unaffiliated."),
+_("I don't run with a crew."),
+_("I'm a solo artist, <okay>?"),
+_("I don't kowtow to any group, <okay>?"),
+_("I'm a freelancer."),
+_("I work alone, <name_g>."),
+_("I'm a free agent, more money that way."),
+_("I prefer to work uninhibited by that kind of connection."),
+_("I haven't found one that's good enough for me."),
+_("I don't belong to a faction, <name_g>.")
 };
 
 std::string talk_come_here[10] = {
-"Wait up, let's talk!",
-"Hey, I <really> want to talk to you!",
-"Come on, talk to me!",
-"Hey <name_g>, let's talk!",
-"<name_g>, we <really> need to talk!",
-"Hey, we should talk, <okay>?",
-"<name_g>!  Wait up!",
-"Wait up, <okay>?",
-"Let's talk, <name_g>!",
-"Look, <name_g><punc> let's talk!"
+_("Wait up, let's talk!"),
+_("Hey, I <really> want to talk to you!"),
+_("Come on, talk to me!"),
+_("Hey <name_g>, let's talk!"),
+_("<name_g>, we <really> need to talk!"),
+_("Hey, we should talk, <okay>?"),
+_("<name_g>!  Wait up!"),
+_("Wait up, <okay>?"),
+_("Let's talk, <name_g>!"),
+_("Look, <name_g><punc> let's talk!")
 };
 
 std::string talk_wait[10] = {
-"Hey, where are you?",
-"Wait up, <name_g>!",
-"<name_g>, wait for me!",
-"Hey, wait up, <okay>?",
-"You <really> need to wait for me!",
-"You <swear> need to wait!",
-"<name_g>, where are you?",
-"Hey <name_g><punc> Wait for me!",
-"Where are you?!",
-"Hey, I'm over here!"
+_("Hey, where are you?"),
+_("Wait up, <name_g>!"),
+_("<name_g>, wait for me!"),
+_("Hey, wait up, <okay>?"),
+_("You <really> need to wait for me!"),
+_("You <swear> need to wait!"),
+_("<name_g>, where are you?"),
+_("Hey <name_g><punc> Wait for me!"),
+_("Where are you?!"),
+_("Hey, I'm over here!")
 };
 
 std::string talk_let_me_pass[10] = {
-"Excuse me, let me pass.",
-"Hey <name_g>, can I get through?",
-"Let me get past you, <name_g>.",
-"Let me through, <okay>?",
-"Can I get past you, <name_g>?",
-"I need to get past you, <name_g>.",
-"Move your <swear> ass, <name_b>!",
-"Out of my way, <name_b>!",
-"Move it, <name_g>!",
-"You need to move, <name_g>, <okay>?"
+_("Excuse me, let me pass."),
+_("Hey <name_g>, can I get through?"),
+_("Let me get past you, <name_g>."),
+_("Let me through, <okay>?"),
+_("Can I get past you, <name_g>?"),
+_("I need to get past you, <name_g>."),
+_("Move your <swear> ass, <name_b>!"),
+_("Out of my way, <name_b>!"),
+_("Move it, <name_g>!"),
+_("You need to move, <name_g>, <okay>?")
 };
 
 // Used to tell player to move to avoid friendly fire
 std::string talk_move[10] = {
-"Move",
-"Move your ass",
-"Get out of the way",
-"You need to move"
-"Hey <name_g>, move",
-"<swear> move it",
-"Move your <swear> ass",
-"Get out of my way, <name_b>,",
-"Move to the side",
-"Get out of my line of fire"
+_("Move"),
+_("Move your ass"),
+_("Get out of the way"),
+_("You need to move"),
+_("Hey <name_g>, move"),
+_("<swear> move it"),
+_("Move your <swear> ass"),
+_("Get out of my way, <name_b>,"),
+_("Move to the side"),
+_("Get out of my line of fire")
 };
 
 std::string talk_done_mugging[10] = {
-"Thanks for the cash, <name_b>!",
-"So long, <name_b>!",
-"Thanks a lot, <name_g>!",
-"Catch you later, <name_g>!",
-"See you later, <name_b>!",
-"See you in hell, <name_b>!",
-"Hasta luego, <name_g>!",
-"I'm outta here! <done_mugging>",
-"Bye bye, <name_b>!",
-"Thanks, <name_g>!"
+_("Thanks for the cash, <name_b>!"),
+_("So long, <name_b>!"),
+_("Thanks a lot, <name_g>!"),
+_("Catch you later, <name_g>!"),
+_("See you later, <name_b>!"),
+_("See you in hell, <name_b>!"),
+_("Hasta luego, <name_g>!"),
+_("I'm outta here! <done_mugging>"),
+_("Bye bye, <name_b>!"),
+_("Thanks, <name_g>!")
 };
 
 #define NUM_STATIC_TAGS 23
