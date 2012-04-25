@@ -141,11 +141,11 @@ void player::mutate_towards(game *g, pl_flag mut)
 
  toggle_trait(mut);
  if (replacing != PF_NULL) {
-  g->add_msg("Your %s turns into %s!", traits[replacing].name.c_str(),
+  g->add_msg(_("Your %s turns into %s!"), traits[replacing].name.c_str(),
              traits[mut].name.c_str());
   toggle_trait(replacing);
  } else
-  g->add_msg("You gain %s!", traits[mut].name.c_str());
+  g->add_msg(_("You gain %s!"), traits[mut].name.c_str());
  mutation_effect(g, *this, mut);
 
 // Weight us towards any categories that include this mutation
@@ -181,12 +181,12 @@ void player::remove_mutation(game *g, pl_flag mut)
 
  toggle_trait(mut);
  if (replacing != PF_NULL) {
-  g->add_msg("Your %s turns into %s.", traits[mut].name.c_str(),
+  g->add_msg(_("Your %s turns into %s."), traits[mut].name.c_str(),
              traits[replacing].name.c_str());
   toggle_trait(replacing);
   mutation_effect(g, *this, replacing);
  } else
-  g->add_msg("You lose your %s.", traits[mut].name.c_str());
+  g->add_msg(_("You lose your %s."), traits[mut].name.c_str());
 
 }
 
@@ -267,10 +267,10 @@ void mutation_effect(game *g, player &p, pl_flag mut)
    if ((dynamic_cast<it_armor*>(p.worn[i].type))->covers & mfb(bps[j])) {
     if (destroy) {
      if (is_u)
-      g->add_msg("Your %s is destroyed!", p.worn[i].tname().c_str());
+      g->add_msg(_("Your %s is destroyed!"), p.worn[i].tname().c_str());
     } else {
      if (is_u)
-      g->add_msg("Your %s is pushed off.", p.worn[i].tname().c_str());
+      g->add_msg(_("Your %s is pushed off."), p.worn[i].tname().c_str());
      g->m.add_item(p.posx, p.posy, p.worn[i]);
     }
     p.worn.erase(p.worn.begin() + i);
