@@ -14,78 +14,78 @@ void dis_msg(game *g, dis_type type)
 {
  switch (type) {
  case DI_GLARE:
-  g->add_msg("The sunlight's glare makes it hard to see.");
+  g->add_msg(_("The sunlight's glare makes it hard to see."));
   break;
  case DI_WET:
-  g->add_msg("You're getting soaked!");
+  g->add_msg(_("You're getting soaked!"));
   break;
  case DI_HEATSTROKE:
-  g->add_msg("You have heatstroke!");
+  g->add_msg(_("You have heatstroke!"));
   break;
  case DI_FBFACE:
-  g->add_msg("Your face is frostbitten.");
+  g->add_msg(_("Your face is frostbitten."));
   break;
  case DI_FBHANDS:
-  g->add_msg("Your hands are frostbitten.");
+  g->add_msg(_("Your hands are frostbitten."));
   break;
  case DI_FBFEET:
-  g->add_msg("Your feet are frostbitten.");
+  g->add_msg(_("Your feet are frostbitten."));
   break;
  case DI_COMMON_COLD:
-  g->add_msg("You feel a cold coming on...");
+  g->add_msg(_("You feel a cold coming on..."));
   break;
  case DI_FLU:
-  g->add_msg("You feel a flu coming on...");
+  g->add_msg(_("You feel a flu coming on..."));
   break;
  case DI_ONFIRE:
-  g->add_msg("You're on fire!");
+  g->add_msg(_("You're on fire!"));
   break;
  case DI_SMOKE:
-  g->add_msg("You inhale a lungful of thick smoke.");
+  g->add_msg(_("You inhale a lungful of thick smoke."));
   break;
  case DI_TEARGAS:
-  g->add_msg("You inhale a lungful of tear gas.");
+  g->add_msg(_("You inhale a lungful of tear gas."));
   break;
  case DI_BOOMERED:
-  g->add_msg("You're covered in bile!");
+  g->add_msg(_("You're covered in bile!"));
   break;
  case DI_SAP:
-  g->add_msg("You're coated in sap!");
+  g->add_msg(_("You're coated in sap!"));
   break;
  case DI_SPORES:
-  g->add_msg("You're covered in tiny spores!");
+  g->add_msg(_("You're covered in tiny spores!"));
   break;
  case DI_SLIMED:
-  g->add_msg("You're covered in thick goo!");
+  g->add_msg(_("You're covered in thick goo!"));
   break;
  case DI_LYING_DOWN:
-  g->add_msg("You lie down to go to sleep...");
+  g->add_msg(_("You lie down to go to sleep..."));
   break;
  case DI_FORMICATION:
-  g->add_msg("There's bugs crawling under your skin!");
+  g->add_msg(_("There's bugs crawling under your skin!"));
   break;
  case DI_WEBBED:
-  g->add_msg("You're covered in webs!");
+  g->add_msg(_("You're covered in webs!"));
   break;
  case DI_DRUNK:
  case DI_HIGH:
-  g->add_msg("You feel lightheaded.");
+  g->add_msg(_("You feel lightheaded."));
   break;
  case DI_ADRENALINE:
-  g->add_msg("You feel a surge of adrenaline!");
+  g->add_msg(_("You feel a surge of adrenaline!"));
   g->u.moves += 800;
   break;
  case DI_ASTHMA:
-  g->add_msg("You can't breathe... asthma attack!");
+  g->add_msg(_("You can't breathe... asthma attack!"));
   break;
  case DI_DEAF:
-  g->add_msg("You're deafened!");
+  g->add_msg(_("You're deafened!"));
   break;
  case DI_BLIND:
-  g->add_msg("You're blinded!");
+  g->add_msg(_("You're blinded!"));
   break;
  case DI_AMIGARA:
-  g->add_msg("You can't look away from the fautline...");
+  g->add_msg(_("You can't look away from the fautline..."));
   break;
  default:
   break;
@@ -171,10 +171,10 @@ void dis_effect(game *g, player &p, disease &dis)
   if (one_in(300)) {
    p.moves -= 80;
    if (!p.is_npc()) {
-    g->add_msg("You cough noisily.");
+    g->add_msg(_("You cough noisily."));
     g->sound(p.posx, p.posy, 12, "");
    } else
-    g->sound(p.posx, p.posy, 12, "loud coughing");
+    g->sound(p.posx, p.posy, 12, _("loud coughing"));
   }
   break;
 
@@ -193,10 +193,10 @@ void dis_effect(game *g, player &p, disease &dis)
   if (one_in(300)) {
    p.moves -= 80;
    if (!p.is_npc()) {
-    g->add_msg("You cough noisily.");
+    g->add_msg(_("You cough noisily."));
     g->sound(p.posx, p.posy, 12, "");
    } else
-    g->sound(p.posx, p.posy, 12, "loud coughing");
+    g->sound(p.posx, p.posy, 12, _("loud coughing"));
   }
   if (one_in(3600) || (p.has_trait(PF_WEAKSTOMACH) && one_in(3000)) ||
       (p.has_trait(PF_NAUSEA) && one_in(2400))) {
@@ -210,10 +210,10 @@ void dis_effect(game *g, player &p, disease &dis)
   p.dex_cur--;
   if (one_in(5)) {
    if (!p.is_npc()) {
-    g->add_msg("You cough heavily.");
+    g->add_msg(_("You cough heavily."));
     g->sound(p.posx, p.posy, 12, "");
    } else
-    g->sound(p.posx, p.posy, 12, "a hacking cough.");
+    g->sound(p.posx, p.posy, 12, _("a hacking cough."));
    p.moves -= 80;
    p.hurt(g, bp_torso, 0, 1 - (rng(0, 1) * rng(0, 1)));
   }
@@ -226,10 +226,10 @@ void dis_effect(game *g, player &p, disease &dis)
   p.per_cur -= 4;
   if (one_in(3)) {
    if (!p.is_npc()) {
-    g->add_msg("You cough heavily.");
+    g->add_msg(_("You cough heavily."));
     g->sound(p.posx, p.posy, 12, "");
    } else
-    g->sound(p.posx, p.posy, 12, "a hacking cough");
+    g->sound(p.posx, p.posy, 12, _("a hacking cough"));
    p.moves -= 100;
    p.hurt(g, bp_torso, 0, rng(0, 3) * rng(0, 1));
   }
@@ -276,24 +276,24 @@ void dis_effect(game *g, player &p, disease &dis)
   if (dis.duration > -600) {	// First hour symptoms
    if (one_in(160 + bonus)) {
     if (!p.is_npc()) {
-     g->add_msg("You cough heavily.");
+     g->add_msg(_("You cough heavily."));
      g->sound(p.posx, p.posy, 12, "");
     } else
-     g->sound(p.posx, p.posy, 12, "a hacking cough");
+     g->sound(p.posx, p.posy, 12, _("a hacking cough"));
     p.pain++;
    }
    if (one_in(100 + bonus)) {
     if (!p.is_npc())
-     g->add_msg("You feel nauseous.");
+     g->add_msg(_("You feel nauseous."));
    }
    if (one_in(100 + bonus)) {
     if (!p.is_npc())
-     g->add_msg("You smell and taste mushrooms.");
+     g->add_msg(_("You smell and taste mushrooms."));
    }
   } else if (dis.duration > -3600) {	// One to six hours
    if (one_in(600 + bonus * 3)) {
     if (!p.is_npc())
-     g->add_msg("You spasm suddenly!");
+     g->add_msg(_("You spasm suddenly!"));
     p.moves -= 100;
     p.hurt(g, bp_torso, 0, 5);
    }
@@ -301,9 +301,9 @@ void dis_effect(game *g, player &p, disease &dis)
        (p.has_trait(PF_NAUSEA) && one_in(800 + bonus * 6)) ||
        one_in(2000 + bonus * 10)) {
     if (!p.is_npc())
-     g->add_msg("You vomit a thick, gray goop.");
+     g->add_msg(_("You vomit a thick, gray goop."));
     else if (g->u_see(p.posx, p.posy, junk))
-     g->add_msg("%s vomits a thick, gray goop.", p.name.c_str());
+     g->add_msg(_("%s vomits a thick, gray goop."), p.name.c_str());
     p.moves = -200;
     p.hunger += 50;
     p.thirst += 68;
@@ -311,9 +311,9 @@ void dis_effect(game *g, player &p, disease &dis)
   } else {	// Full symptoms
    if (one_in(1000 + bonus * 8)) {
     if (!p.is_npc())
-     g->add_msg("You double over, spewing live spores from your mouth!");
+     g->add_msg(_("You double over, spewing live spores from your mouth!"));
     else if (g->u_see(p.posx, p.posy, junk))
-     g->add_msg("%s coughs up a stream of live spores!", p.name.c_str());
+     g->add_msg(_("%s coughs up a stream of live spores!"), p.name.c_str());
     p.moves = -500;
     int sporex, sporey;
     monster spore(g->mtypes[mon_spore]);
@@ -324,7 +324,7 @@ void dis_effect(game *g, player &p, disease &dis)
       if (g->m.move_cost(sporex, sporey) > 0 && one_in(5)) {
        if (g->mon_at(sporex, sporey) >= 0) {	// Spores hit a monster
         if (g->u_see(sporex, sporey, junk))
-         g->add_msg("The %s is covered in tiny spores!",
+         g->add_msg(_("The %s is covered in tiny spores!"),
                     g->z[g->mon_at(sporex, sporey)].name().c_str());
         if (!g->z[g->mon_at(sporex, sporey)].make_fungus(g))
          g->kill_mon(g->mon_at(sporex, sporey));
@@ -337,9 +337,9 @@ void dis_effect(game *g, player &p, disease &dis)
     }
    } else if (one_in(6000 + bonus * 20)) {
     if (!p.is_npc())
-     g->add_msg("Fungus stalks burst through your hands!");
+     g->add_msg(_("Fungus stalks burst through your hands!"));
     else if (g->u_see(p.posx, p.posy, junk))
-     g->add_msg("Fungus stalks burst through %s's hands!", p.name.c_str());
+     g->add_msg(_("Fungus stalks burst through %s's hands!"), p.name.c_str());
     p.hurt(g, bp_arms, 0, 60);
     p.hurt(g, bp_arms, 1, 60);
    }
@@ -355,12 +355,12 @@ void dis_effect(game *g, player &p, disease &dis)
   if (p.can_sleep(g)) {
    dis.duration = 1;
    if (!p.is_npc())
-    g->add_msg("You fall asleep.");
+    g->add_msg(_("You fall asleep."));
    p.add_disease(DI_SLEEP, 6000, g);
   }
   if (dis.duration == 1 && !p.has_disease(DI_SLEEP))
    if (!p.is_npc())
-    g->add_msg("You try to sleep, but can't...");
+    g->add_msg(_("You try to sleep, but can't..."));
   break;
 
  case DI_SLEEP:
@@ -374,7 +374,7 @@ void dis_effect(game *g, player &p, disease &dis)
     p.healall(rng(0, 1) * rng(0, 1) * rng(0, 1));
    if (p.fatigue <= 0 && p.fatigue > -20) {
     p.fatigue = -25;
-    g->add_msg("Fully rested.");
+    g->add_msg(_("Fully rested."));
     dis.duration = dice(3, 100);
    }
   }
@@ -386,7 +386,7 @@ void dis_effect(game *g, player &p, disease &dis)
   if (rng(5, 80) + rng(0, 120) + rng(0, abs(p.fatigue)) +
       rng(0, abs(p.fatigue * 5)) < g->light_level() &&
       (p.fatigue < 10 || one_in(p.fatigue / 2))) {
-   g->add_msg("The light wakes you up.");
+   g->add_msg(_("The light wakes you up."));
    dis.duration = 1;
   }
   break;
@@ -443,7 +443,7 @@ void dis_effect(game *g, player &p, disease &dis)
   if (!p.has_disease(DI_SLEEP) && dis.duration >= 4500 &&
       one_in(500 - int(dis.duration / 80))) {
    if (!p.is_npc())
-    g->add_msg("You pass out.");
+    g->add_msg(_("You pass out."));
    p.add_disease(DI_SLEEP, dis.duration / 2, g);
   }
   break;
@@ -472,7 +472,7 @@ void dis_effect(game *g, player &p, disease &dis)
   if ((!p.has_trait(PF_POISRESIST) && one_in(150)) ||
       ( p.has_trait(PF_POISRESIST) && one_in(900))   ) {
    if (!p.is_npc())
-    g->add_msg("You're suddenly wracked with pain!");
+    g->add_msg(_("You're suddenly wracked with pain!"));
    p.pain++;
    p.hurt(g, bp_torso, 0, rng(0, 2) * rng(0, 1));
   }
@@ -486,7 +486,7 @@ void dis_effect(game *g, player &p, disease &dis)
   if ((!p.has_trait(PF_POISRESIST) && one_in(100)) ||
       ( p.has_trait(PF_POISRESIST) && one_in(500))   ) {
    if (!p.is_npc())
-    g->add_msg("You're suddenly wracked with pain!");
+    g->add_msg(_("You're suddenly wracked with pain!"));
    p.pain += 2;
    p.hurt(g, bp_torso, 0, rng(0, 2));
   }
@@ -504,7 +504,7 @@ void dis_effect(game *g, player &p, disease &dis)
    bonus = 600;
   if (one_in(300 + bonus)) {
    if (!p.is_npc())
-    g->add_msg("You're suddenly wracked with pain and nausea!");
+    g->add_msg(_("You're suddenly wracked with pain and nausea!"));
    p.hurt(g, bp_torso, 0, 1);
   }
   if ((p.has_trait(PF_WEAKSTOMACH) && one_in(350 + bonus)) ||
@@ -550,9 +550,9 @@ void dis_effect(game *g, player &p, disease &dis)
     int t;
     p.rem_disease(DI_DERMATIK); // No more infection!  yay.
     if (!p.is_npc())
-     g->add_msg("Insects erupt from your skin!");
+     g->add_msg(_("Insects erupt from your skin!"));
     else if (g->u_see(p.posx, p.posy, t))
-     g->add_msg("Insects erupt from %s's skin!", p.name.c_str());
+     g->add_msg(_("Insects erupt from %s's skin!"), p.name.c_str());
     p.moves -= 600;
     monster grub(g->mtypes[mon_dermatik_larva]);
     while (valid_spawns.size() > 0 && num_insects > 0) {
@@ -602,11 +602,11 @@ void dis_effect(game *g, player &p, disease &dis)
   if (one_in(10 + 40 * p.int_cur)) {
    int t;
    if (!p.is_npc()) {
-    g->add_msg("You start scratching yourself all over!");
+    g->add_msg(_("You start scratching yourself all over!"));
     g->cancel_activity();
    } else if (g->u_see(p.posx, p.posy, t))
-    g->add_msg("%s starts scratching %s all over!", p.name.c_str(),
-               (p.male ? "himself" : "herself"));
+    g->add_msg(_("%s starts scratching %s all over!"), p.name.c_str(),
+               (p.male ? _("himself") : _("herself")));
    p.moves -= 150;
    p.hurt(g, bp_torso, 0, 1);
   }
@@ -617,21 +617,21 @@ void dis_effect(game *g, player &p, disease &dis)
   if (dis.duration > 3000) {	// First hour symptoms
    if (one_in(300)) {
     if (!p.is_npc())
-     g->add_msg("You feel a little strange.");
+     g->add_msg(_("You feel a little strange."));
    }
   } else if (dis.duration > 2400) {	// Coming up
    if (one_in(100) || (p.has_trait(PF_WEAKSTOMACH) && one_in(100))) {
     if (!p.is_npc())
-     g->add_msg("You feel nauseous.");
+     g->add_msg(_("You feel nauseous."));
     p.hunger -= 5;
    }
    if (!p.is_npc()) {
     if (one_in(200))
-     g->add_msg("Huh?  What was that?");
+     g->add_msg(_("Huh?  What was that?"));
     else if (one_in(200))
-     g->add_msg("Oh god, what's happening?");
+     g->add_msg(_("Oh god, what's happening?"));
     else if (one_in(200))
-     g->add_msg("Of course... it's all fractals!");
+     g->add_msg(_("Of course... it's all fractals!"));
    }
   } else if (dis.duration == 2400)	// Visuals start
    p.add_disease(DI_VISUALS, 2400, g);
@@ -656,7 +656,7 @@ void dis_effect(game *g, player &p, disease &dis)
    p.per_cur += 1;
   } else if (dis.duration == 150) {	// 15 minutes come-down
    if (!p.is_npc())
-    g->add_msg("Your adrenaline rush wears off.  You feel AWFUL!");
+    g->add_msg(_("Your adrenaline rush wears off.  You feel AWFUL!"));
    p.moves -= 300;
   } else {
    p.str_cur -= 2;
@@ -669,7 +669,7 @@ void dis_effect(game *g, player &p, disease &dis)
  case DI_ASTHMA:
   if (dis.duration > 1200) {
    if (!p.is_npc())
-    g->add_msg("Your asthma overcomes you.  You stop breathing and die...");
+    g->add_msg(_("Your asthma overcomes you.  You stop breathing and die..."));
    p.hurtall(500);
   }
   p.str_cur -= 2;
@@ -696,14 +696,14 @@ void dis_effect(game *g, player &p, disease &dis)
   if (dis.duration > 6000) {	// 20 teles (no decay; in practice at least 21)
    if (one_in(1000 - ((dis.duration - 6000) / 10))) {
     if (!p.is_npc())
-     g->add_msg("Glowing lights surround you, and you teleport.");
+     g->add_msg(_("Glowing lights surround you, and you teleport."));
     g->teleport();
     if (one_in(10))
      p.rem_disease(DI_TELEGLOW);
    }
    if (one_in(1200 - ((dis.duration - 6000) / 5)) && one_in(20)) {
     if (!p.is_npc())
-     g->add_msg("You pass out.");
+     g->add_msg(_("You pass out."));
     p.add_disease(DI_SLEEP, 1200, g);
     if (one_in(6))
      p.rem_disease(DI_TELEGLOW);
@@ -727,14 +727,14 @@ void dis_effect(game *g, player &p, disease &dis)
      beast.spawn(x, y);
      g->z.push_back(beast);
      if (g->u_see(x, y, junk))
-      g->add_msg("A portal opens nearby, and a monster crawls through!");
+      g->add_msg(_("A portal opens nearby, and a monster crawls through!"));
      if (one_in(2))
       p.rem_disease(DI_TELEGLOW);
     }
    }
    if (one_in(3500 - int(.25 * (dis.duration - 3600)))) {
     if (!p.is_npc())
-     g->add_msg("You shudder suddenly.");
+     g->add_msg(_("You shudder suddenly."));
     p.mutate(g);
     if (one_in(4))
      p.rem_disease(DI_TELEGLOW);
@@ -745,7 +745,7 @@ void dis_effect(game *g, player &p, disease &dis)
     p.add_disease(DI_SHAKES, rng(40, 80), g);
    if (one_in(12000 - dis.duration)) {
     if (!p.is_npc())
-     g->add_msg("Your vision is filled with bright lights...");
+     g->add_msg(_("Your vision is filled with bright lights..."));
     p.add_disease(DI_BLIND, rng(10, 20), g);
     if (one_in(8))
      p.rem_disease(DI_TELEGLOW);
@@ -758,7 +758,7 @@ void dis_effect(game *g, player &p, disease &dis)
   }
   if (one_in(4000)) {
    if (!p.is_npc())
-    g->add_msg("You're suddenly covered in ectoplasm.");
+    g->add_msg(_("You're suddenly covered in ectoplasm."));
    p.add_disease(DI_BOOMERED, 100, g);
    if (one_in(4))
     p.rem_disease(DI_TELEGLOW);
@@ -787,7 +787,7 @@ void dis_effect(game *g, player &p, disease &dis)
     beast.spawn(x, y);
     g->z.push_back(beast);
     if (g->u_see(x, y, junk))
-     g->add_msg("A portal opens nearby, and a monster crawls through!");
+     g->add_msg(_("A portal opens nearby, and a monster crawls through!"));
     dis.duration /= 2;
    }
   }
@@ -857,58 +857,58 @@ std::string dis_name(disease dis)
 {
  switch (dis.type) {
  case DI_NULL:		return "";
- case DI_GLARE:		return "Glare";
- case DI_COLD:		return "Cold";
- case DI_COLD_FACE:	return "Cold face";
- case DI_COLD_HANDS:	return "Cold hands";
- case DI_COLD_LEGS:	return "Cold legs";
- case DI_COLD_FEET:	return "Cold feet";
- case DI_HOT:		return "Hot";
- case DI_HEATSTROKE:	return "Heatstroke";
- case DI_FBFACE:	return "Frostbite - Face";
- case DI_FBHANDS:	return "Frostbite - Hands";
- case DI_FBFEET:	return "Frostbite - Feet";
- case DI_COMMON_COLD:	return "Common Cold";
- case DI_FLU:		return "Influenza";
- case DI_SMOKE:		return "Smoke";
- case DI_TEARGAS:	return "Tear gas";
- case DI_ONFIRE:	return "On Fire";
- case DI_BOOMERED:	return "Boomered";
- case DI_SAP:		return "Sap-coated";
- case DI_SPORES:	return "Spores";
- case DI_SLIMED:	return "Slimed";
- case DI_DEAF:		return "Deaf";
- case DI_BLIND:		return "Blind";
- case DI_POISON:	return "Poisoned";
- case DI_BADPOISON:	return "Badly Poisoned";
- case DI_FOODPOISON:	return "Food Poisoning";
- case DI_SHAKES:	return "Shakes";
- case DI_FORMICATION:	return "Bugs Under Skin";
- case DI_WEBBED:	return "Webbed";
- case DI_RAT:		return "Ratting";
+ case DI_GLARE:		return _("Glare");
+ case DI_COLD:		return _("Cold");
+ case DI_COLD_FACE:	return _("Cold face");
+ case DI_COLD_HANDS:	return _("Cold hands");
+ case DI_COLD_LEGS:	return _("Cold legs");
+ case DI_COLD_FEET:	return _("Cold feet");
+ case DI_HOT:		return _("Hot");
+ case DI_HEATSTROKE:	return _("Heatstroke");
+ case DI_FBFACE:	return _("Frostbite - Face");
+ case DI_FBHANDS:	return _("Frostbite - Hands");
+ case DI_FBFEET:	return _("Frostbite - Feet");
+ case DI_COMMON_COLD:	return _("Common Cold");
+ case DI_FLU:		return _("Influenza");
+ case DI_SMOKE:		return _("Smoke");
+ case DI_TEARGAS:	return _("Tear gas");
+ case DI_ONFIRE:	return _("On Fire");
+ case DI_BOOMERED:	return _("Boomered");
+ case DI_SAP:		return _("Sap-coated");
+ case DI_SPORES:	return _("Spores");
+ case DI_SLIMED:	return _("Slimed");
+ case DI_DEAF:		return _("Deaf");
+ case DI_BLIND:		return _("Blind");
+ case DI_POISON:	return _("Poisoned");
+ case DI_BADPOISON:	return _("Badly Poisoned");
+ case DI_FOODPOISON:	return _("Food Poisoning");
+ case DI_SHAKES:	return _("Shakes");
+ case DI_FORMICATION:	return _("Bugs Under Skin");
+ case DI_WEBBED:	return _("Webbed");
+ case DI_RAT:		return _("Ratting");
  case DI_DRUNK:
-  if (dis.duration > 2200) return "Wasted";
-  if (dis.duration > 1400) return "Trashed";
-  if (dis.duration > 800)  return "Drunk";
-                           return "Tipsy";
+  if (dis.duration > 2200) return _("Wasted");
+  if (dis.duration > 1400) return _("Trashed");
+  if (dis.duration > 800)  return _("Drunk");
+                           return _("Tipsy");
 
- case DI_CIG:		return "Cigarette";
- case DI_HIGH:		return "High";
- case DI_VISUALS:	return "Hallucinating";
+ case DI_CIG:		return _("Cigarette");
+ case DI_HIGH:		return _("High");
+ case DI_VISUALS:	return _("Hallucinating");
 
  case DI_ADRENALINE:
-  if (dis.duration > 150) return "Adrenaline Rush";
-                          return "Adrenaline Comedown";
+  if (dis.duration > 150) return _("Adrenaline Rush");
+                          return _("Adrenaline Comedown");
 
  case DI_ASTHMA:
-  if (dis.duration > 800) return "Heavy Asthma";
-                          return "Asthma";
+  if (dis.duration > 800) return _("Heavy Asthma");
+                          return _("Asthma");
 
  case DI_METH:
-  if (dis.duration > 600) return "High on Meth";
-                          return "Meth Comedown";
+  if (dis.duration > 600) return _("High on Meth");
+                          return _("Meth Comedown");
 
- case DI_IN_PIT:	return "Stuck in Pit";
+ case DI_IN_PIT:	return _("Stuck in Pit");
  default:		return "";
  }
 }
@@ -920,150 +920,150 @@ std::string dis_description(disease dis)
  switch (dis.type) {
 
  case DI_NULL:
-  return "None";
+  return _("None");
 
  case DI_GLARE:
-  return "Perception - 1";
+  return _("Perception - 1");
 
  case DI_COLD:
-  stream << "Your body in general is uncomfortably cold.\n";
+  stream << _("Your body in general is uncomfortably cold.\n");
   if (dis.duration >=  5)
-   stream << "Speed -" << int(dis.duration / 5) << "%;";
+   stream << _("Speed -") << int(dis.duration / 5) << "%;";
   if (dis.duration >= 80)
-   stream << "       Dexterity - " << int(dis.duration / 80);
+   stream << _("       Dexterity - ") << int(dis.duration / 80);
   return stream.str();
 
  case DI_COLD_FACE:
-  stream << "Your face is cold.";
+  stream << _("Your face is cold.");
   if (dis.duration >= 100)
-   stream << "  It may become frostbitten.";
+   stream << _("  It may become frostbitten.");
   stream << "\n";
   if (dis.duration >=  80)
-   stream << "Perception - " << int(dis.duration / 80);
+   stream << _("Perception - ") << int(dis.duration / 80);
   return stream.str();
 
  case DI_COLD_HANDS:
-  stream << "Your hands are cold.";
+  stream << _("Your hands are cold.");
   if (dis.duration >= 100)
-   stream << "  They may become frostbitten.";
+   stream << _("  They may become frostbitten.");
   stream << "\n";
   if (dis.duration >=  40)
-   stream << "Dexterity - " << int(dis.duration / 40);
+   stream << _("Dexterity - ") << int(dis.duration / 40);
   return stream.str();
 
  case DI_COLD_LEGS:
-  stream << "Your legs are cold.\n";
+  stream << _("Your legs are cold.\n");
   if (dis.duration >= 2)
-   stream << "Speed -" << (dis.duration > 60 ? 30 : int(dis.duration / 2)) <<
+   stream << _("Speed -") << (dis.duration > 60 ? 30 : int(dis.duration / 2)) <<
              "%";
   return stream.str();
 
  case DI_COLD_FEET:
-  stream << "Your feet are cold.";
+  stream << _("Your feet are cold.");
   if (dis.duration >= 100)
-   stream << "  They may become frostbitten.";
+   stream << _("  They may become frostbitten.");
   stream << "\n";
   if (dis.duration >= 4)
-   stream << "Speed -" << (dis.duration > 60 ? 15 : int(dis.duration / 4)) <<
+   stream << _("Speed -") << (dis.duration > 60 ? 15 : int(dis.duration / 4)) <<
              "%";
   return stream.str();
 
- case DI_HOT:		return "\
+ case DI_HOT:		return _("\
 You are uncomfortably hot.\n\
 Intelligence - 2\n\
-You may start suffering heatstroke.";
+You may start suffering heatstroke.");
 
- case DI_HEATSTROKE:	return "\
-Speed -15%;     Strength - 2;    Intelligence - 2;     Perception - 1";
+ case DI_HEATSTROKE:	return _("\
+Speed -15%;     Strength - 2;    Intelligence - 2;     Perception - 1");
 
- case DI_FBFACE:	return "\
-Perception - 2";
+ case DI_FBFACE:	return _("\
+Perception - 2");
 
- case DI_FBHANDS:	return "\
-Dexterity - 2";
+ case DI_FBHANDS:	return _("\
+Dexterity - 2");
 
- case DI_FBFEET:	return "\
-Speed -40%;     Strength - 1";
+ case DI_FBFEET:	return _("\
+Speed -40%;     Strength - 1");
 
- case DI_COMMON_COLD:	return "\
+ case DI_COMMON_COLD:	return _("\
 Increased thirst;  Frequent coughing\n\
 Strength - 3;  Dexterity - 1;  Intelligence - 2;  Perception - 1\n\
-Symptoms alleviated by medication (Dayquil or Nyquil).";
+Symptoms alleviated by medication (Dayquil or Nyquil).");
 
- case DI_FLU:		return "\
+ case DI_FLU:		return _("\
 Increased thirst;  Frequent coughing;  Occasional vomiting\n\
 Strength - 4;  Dexterity - 2;  Intelligence - 2;  Perception - 1\n\
-Symptoms alleviated by medication (Dayquil or Nyquil).";
+Symptoms alleviated by medication (Dayquil or Nyquil).");
 
- case DI_SMOKE:		return "\
+ case DI_SMOKE:		return _("\
 Strength - 1;     Dexterity - 1;\n\
 Occasionally you will cough, costing movement and creating noise.\n\
-Loss of health - Torso";
+Loss of health - Torso");
 
- case DI_TEARGAS:	return "\
+ case DI_TEARGAS:	return _("\
 Strength - 2;     Dexterity - 2;    Intelligence - 1;    Perception - 4\n\
 Occasionally you will cough, costing movement and creating noise.\n\
-Loss of health - Torso";
+Loss of health - Torso");
 
- case DI_ONFIRE:	return "\
+ case DI_ONFIRE:	return _("\
 Loss of health - Entire Body\n\
-Your clothing and other equipment may be consumed by the flames.";
+Your clothing and other equipment may be consumed by the flames.");
 
- case DI_BOOMERED:	return "\
+ case DI_BOOMERED:	return _("\
 Perception - 5\n\
-Range of Sight: 1;     All sight is tinted magenta";
+Range of Sight: 1;     All sight is tinted magenta");
 
- case DI_SAP:		return "\
-Dexterity - 3;   Speed - 25";
+ case DI_SAP:		return _("\
+Dexterity - 3;   Speed - 25");
 
- case DI_SPORES:	return "\
+ case DI_SPORES:	return _("\
 Speed -40%\
-You can feel the tiny spores sinking directly into your flesh.";
+You can feel the tiny spores sinking directly into your flesh.");
 
- case DI_SLIMED:	return "\
-Speed -40%;     Dexterity - 2";
+ case DI_SLIMED:	return _("\
+Speed -40%;     Dexterity - 2");
 
- case DI_DEAF:		return "\
-Sounds will not be reported.  You cannot talk with NPCs.";
+ case DI_DEAF:		return _("\
+Sounds will not be reported.  You cannot talk with NPCs.");
 
- case DI_BLIND:		return "\
-Range of Sight: 0";
+ case DI_BLIND:		return _("\
+Range of Sight: 0");
 
- case DI_POISON:	return "\
+ case DI_POISON:	return _("\
 Perception - 1;    Dexterity - 1;   Strength - 2 IF not resistant\n\
-Occasional pain and/or damage.";
+Occasional pain and/or damage.");
 
- case DI_BADPOISON:	return "\
+ case DI_BADPOISON:	return _("\
 Perception - 2;    Dexterity - 2;\n\
 Strength - 3 IF not resistant, -1 otherwise\n\
-Frequent pain and/or damage.";
+Frequent pain and/or damage.");
 
- case DI_FOODPOISON:	return "\
+ case DI_FOODPOISON:	return _("\
 Speed - 35%;     Strength - 3;     Dexterity - 1;     Perception - 1\n\
-Your stomach is extremely upset, and you keep having pangs of pain and nausea.";
+Your stomach is extremely upset, and you keep having pangs of pain and nausea.");
 
- case DI_SHAKES:	return "\
-Strength - 1;     Dexterity - 4;";
+ case DI_SHAKES:	return _("\
+Strength - 1;     Dexterity - 4;");
 
- case DI_FORMICATION:	return "\
+ case DI_FORMICATION:	return _("\
 Strength - 1;     Intelligence - 2;\n\
 You stop to scratch yourself frequently; high intelligence helps you resist\n\
-this urge.";
+this urge.");
 
- case DI_WEBBED:	return "\
-Strength - 1;     Dexterity - 4;    Speed - 25";
+ case DI_WEBBED:	return _("\
+Strength - 1;     Dexterity - 4;    Speed - 25");
 
  case DI_RAT:
   intpen = int(dis.duration / 20);
   perpen = int(dis.duration / 25);
   strpen = int(dis.duration / 50);
-  stream << "You feal nauseated and rat-like.\n";
+  stream << _("You feal nauseated and rat-like.\n");
   if (intpen > 0)
-   stream << "Intelligence - " << intpen << ";   ";
+   stream << _("Intelligence - ") << intpen << ";   ";
   if (perpen > 0)
-   stream << "Perception - " << perpen << ";   ";
+   stream << _("Perception - ") << perpen << ";   ";
   if (strpen > 0)
-   stream << "Strength - " << strpen << ";   ";
+   stream << _("Strength - ") << strpen << ";   ";
   return stream.str();
 
  case DI_DRUNK:
@@ -1072,59 +1072,59 @@ Strength - 1;     Dexterity - 4;    Speed - 25";
   intpen = int(dis.duration /  700);
   strpen = int(dis.duration / 1500);
   if (strpen > 0)
-   stream << "Strength - " << strpen << ";    ";
+   stream << _("Strength - ") << strpen << ";    ";
   else if (dis.duration <= 600)
-   stream << "Strength + 1;    ";
+   stream << _("Strength + 1;    ");
   if (dexpen > 0)
-   stream << "Dexterity - " << dexpen << ";    ";
+   stream << _("Dexterity - ") << dexpen << ";    ";
   if (intpen > 0)
-   stream << "Intelligence - " << intpen << ";    ";
+   stream << _("Intelligence - ") << intpen << ";    ";
   if (perpen > 0)
-   stream << "Perception - " << perpen;
+   stream << _("Perception - ") << perpen;
   
   return stream.str();
 
  case DI_CIG:
   if (dis.duration >= 600)
-   return "\
+   return _("\
 Strength - 1;     Dexterity - 1\n\
-You smoked too much.";
-  return "\
-Dexterity + 1;     Intelligence + 1;     Perception + 1";
+You smoked too much.");
+  return _("\
+Dexterity + 1;     Intelligence + 1;     Perception + 1");
 
  case DI_HIGH:
-  return "\
-Intelligence - 1;     Perception - 1";
+  return _("\
+Intelligence - 1;     Perception - 1");
 
  case DI_VISUALS:
-  return "\
-You can't trust everything that you see.";
+  return _("\
+You can't trust everything that you see.");
 
  case DI_ADRENALINE:
   if (dis.duration > 150)
-   return "\
-Speed +80;   Strength + 5;   Dexterity + 3;   Intelligence - 8;   Perception + 1";
-  return "\
-Strength - 2;     Dexterity - 1;     Intelligence - 1;     Perception - 1";
+   return _("\
+Speed +80;   Strength + 5;   Dexterity + 3;   Intelligence - 8;   Perception + 1");
+  return _("\
+Strength - 2;     Dexterity - 1;     Intelligence - 1;     Perception - 1");
 
  case DI_ASTHMA:
-  stream<< "Speed - " << int(dis.duration / 5) << "%;     Strength - 2;     " <<
-           "Dexterity - 3";
+  stream<< _("Speed - ") << int(dis.duration / 5) << _("%;     Strength - 2;     ") <<
+           _("Dexterity - 3");
   return stream.str();
 
  case DI_METH:
   if (dis.duration > 600)
-   return "\
-Speed +50;  Strength + 2;  Dexterity + 2;  Intelligence + 3;  Perception + 3";
-   return "\
-Speed -40;   Strength - 3;   Dexterity - 2;   Intelligence - 2";
+   return _("\
+Speed +50;  Strength + 2;  Dexterity + 2;  Intelligence + 3;  Perception + 3");
+   return _("\
+Speed -40;   Strength - 3;   Dexterity - 2;   Intelligence - 2");
 
  case DI_IN_PIT:
-  return "\
-You're stuck in a pit.  Sight distance is limited and you have to climb out.";
+  return _("\
+You're stuck in a pit.  Sight distance is limited and you have to climb out.");
 
  default:
-  return "Who knows?  This is probably a bug.";
+  return _("Who knows?  This is probably a bug.");
  }
 }
 

@@ -11,6 +11,9 @@
 #include <vector>
 #include <string>
 
+#include <libintl.h>
+#define _(String) gettext (String)
+
 #include "mapdata.h"
 #include "mapitems.h"
 #include "overmap.h"

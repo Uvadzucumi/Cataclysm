@@ -83,13 +83,13 @@ std::string map::features(int x, int y)
 // to take up one line.  So, make sure it does that.
  std::string ret;
  if (has_flag(bashable, x, y))
-  ret += "Smashable. ";	// 11 chars (running total)
+  ret += _("Smashable. ");	// 11 chars (running total)
  if (has_flag(diggable, x, y))
-  ret += "Diggable. ";	// 21 chars
+  ret += _("Diggable. ");	// 21 chars
  if (has_flag(rough, x, y))
-  ret += "Rough. ";	// 28 chars
+  ret += _("Rough. ");	// 28 chars
  if (has_flag(sharp, x, y))
-  ret += "Sharp. ";	// 35 chars
+  ret += _("Sharp. ");	// 35 chars
  return ret;
 }
 
@@ -175,12 +175,12 @@ bool map::bash(int x, int y, int str, std::string &sound)
   remove_field(x, y);
  }
 
- for (int i = 0; i < i_at(x, y).size(); i++) {	// Destroy glass items (maybe)
+ for (int i = 0; i < i_at(x, y).size(); i++) {	/// Destroy glass items (maybe)
   if (i_at(x, y)[i].made_of(GLASS) && one_in(2)) {
    if (sound == "")
-    sound = "A " + i_at(x, y)[i].tname() + " shatters!  ";
+    sound = _("A ") + i_at(x, y)[i].tname() + _(" shatters!  ");
    else
-    sound = "Some items shatter!  ";
+    sound = _("Some items shatter!  ");
    for (int j = 0; j < i_at(x, y)[i].contents.size(); j++)
     i_at(x, y).push_back(i_at(x, y)[i].contents[j]);
    i_rem(x, y, i);
@@ -191,42 +191,42 @@ bool map::bash(int x, int y, int str, std::string &sound)
  switch (ter(x, y)) {
  case t_wall_wood:
   if (str >= rng(0, 120) && str >= rng(0, 120)) {
-   sound += "crunch!";
+   sound += _("crunch!");
    ter(x, y) = t_wall_wood_chipped;
    int num_boards = rng(0, 2);
    for (int i = 0; i < num_boards; i++)
     add_item(x, y, (*itypes)[itm_2x4], 0);
    return true;
   } else {
-   sound += "whump!";
+   sound += _("whump!");
    return true;
   }
   break;
 
  case t_wall_wood_chipped:
   if (str >= rng(0, 100) && str >= rng(0, 100)) {
-   sound += "crunch!";
+   sound += _("crunch!");
    ter(x, y) = t_wall_wood_broken;
    int num_boards = rng(3, 8);
    for (int i = 0; i < num_boards; i++)
     add_item(x, y, (*itypes)[itm_2x4], 0);
    return true;
   } else {
-   sound += "whump!";
+   sound += _("whump!");
    return true;
   }
   break;
 
  case t_wall_wood_broken:
   if (str >= rng(0, 80) && str >= rng(0, 80)) {
-   sound += "crash!";
+   sound += _("crash!");
    ter(x, y) = t_dirt;
    int num_boards = rng(4, 10);
    for (int i = 0; i < num_boards; i++)
     add_item(x, y, (*itypes)[itm_2x4], 0);
    return true;
   } else {
-   sound += "whump!";
+   sound += _("whump!");
    return true;
   }
   break;
@@ -235,25 +235,25 @@ bool map::bash(int x, int y, int str, std::string &sound)
  case t_door_locked:
  case t_door_locked_alarm:
   if (str >= rng(0, 40)) {
-   sound += "smash!";
+   sound += _("smash!");
    ter(x, y) = t_door_b;
    return true;
   } else {
-   sound += "whump!";
+   sound += _("whump!");
    return true;
   }
   break;
 
  case t_door_b:
   if (str >= rng(0, 30)) {
-   sound += "crash!";
+   sound += _("crash!");
    ter(x, y) = t_door_frame;
    int num_boards = rng(2, 6);
    for (int i = 0; i < num_boards; i++)
     add_item(x, y, (*itypes)[itm_2x4], 0);
    return true;
   } else {
-   sound += "wham!";
+   sound += _("wham!");
    return true;
   }
   break;
@@ -261,61 +261,61 @@ bool map::bash(int x, int y, int str, std::string &sound)
  case t_window:
  case t_window_alarm:
   if (str >= rng(0, 6)) {
-   sound += "glass breaking!";
+   sound += _("glass breaking!");
    ter(x, y) = t_window_frame;
    return true;
   } else {
-   sound += "whack!";
+   sound += _("whack!");
    return true;
   }
   break;
 
  case t_door_boarded:
   if (str >= dice(3, 50)) {
-   sound += "crash!";
+   sound += _("crash!");
    ter(x, y) = t_door_frame;
    int num_boards = rng(0, 2);
    for (int i = 0; i < num_boards; i++)
     add_item(x, y, (*itypes)[itm_2x4], 0);
    return true;
   } else {
-   sound += "wham!";
+   sound += _("wham!");
    return true;
   }
   break;
 
  case t_window_boarded:
   if (str >= dice(3, 30)) {
-   sound += "crash!";
+   sound += _("crash!");
    ter(x, y) = t_window_frame;
    int num_boards = rng(0, 2) * rng(0, 1);
    for (int i = 0; i < num_boards; i++)
     add_item(x, y, (*itypes)[itm_2x4], 0);
    return true;
   } else {
-   sound += "wham!";
+   sound += _("wham!");
    return true;
   }
   break;
 
  case t_paper:
   if (str >= dice(2, 6) - 2) {
-   sound += "rrrrip!";
+   sound += _("rrrrip!");
    ter(x, y) = t_dirt;
    return true;
   } else {
-   sound += "slap!";
+   sound += _("slap!");
    return true;
   }
   break;
 
  case t_toilet:
   if (str >= dice(8, 4) - 8) {
-   sound += "porcelain breaking!";
+   sound += _("porcelain breaking!");
    ter(x, y) = t_rubble;
    return true;
   } else {
-   sound += "whunk!";
+   sound += _("whunk!");
    return true;
   }
   break;
@@ -323,14 +323,14 @@ bool map::bash(int x, int y, int str, std::string &sound)
  case t_dresser:
  case t_bookcase:
   if (str >= dice(3, 45)) {
-   sound += "smash!";
+   sound += _("smash!");
    ter(x, y) = t_floor;
    int num_boards = rng(4, 12);
    for (int i = 0; i < num_boards; i++)
     add_item(x, y, (*itypes)[itm_2x4], 0);
    return true;
   } else {
-   sound += "whump.";
+   sound += _("whump.");
    return true;
   }
   break;
@@ -341,11 +341,11 @@ bool map::bash(int x, int y, int str, std::string &sound)
  case t_wall_glass_v_alarm:
  case t_door_glass_c:
   if (str >= rng(0, 20)) {
-   sound += "glass breaking!";
+   sound += _("glass breaking!");
    ter(x, y) = t_floor;
    return true;
   } else {
-   sound += "whack!";
+   sound += _("whack!");
    return true;
   }
   break;
@@ -353,88 +353,88 @@ bool map::bash(int x, int y, int str, std::string &sound)
  case t_reinforced_glass_h:
  case t_reinforced_glass_v:
   if (str >= rng(60, 100)) {
-   sound += "glass breaking!";
+   sound += _("glass breaking!");
    ter(x, y) = t_floor;
    return true;
   } else {
-   sound += "whack!";
+   sound += _("whack!");
    return true;
   }
   break;
 
  case t_tree_young:
   if (str >= rng(0, 50)) {
-   sound += "crunch!";
+   sound += _("crunch!");
    ter(x, y) = t_underbrush;
    int num_sticks = rng(0, 3);
    for (int i = 0; i < num_sticks; i++)
     add_item(x, y, (*itypes)[itm_stick], 0);
    return true;
   } else {
-   sound += "whack!";
+   sound += _("whack!");
    return true;
   }
   break;
 
  case t_underbrush:
   if (str >= rng(0, 30) && !one_in(4)) {
-   sound += "crunch.";
+   sound += _("crunch.");
    ter(x, y) = t_dirt;
    return true;
   } else {
-   sound += "brush.";
+   sound += _("brush.");
    return true;
   }
   break;
 
  case t_shrub:
   if (str >= rng(0, 30) && str >= rng(0, 30) && str >= rng(0, 30) && one_in(2)){
-   sound += "crunch.";
+   sound += _("crunch.");
    ter(x, y) = t_underbrush;
    return true;
   } else {
-   sound += "brush.";
+   sound += _("brush.");
    return true;
   }
   break;
 
  case t_marloss:
   if (str > rng(0, 40)) {
-   sound += "crunch!";
+   sound += _("crunch!");
    ter(x, y) = t_fungus;
    return true;
   } else {
-   sound += "whack!";
+   sound += _("whack!");
    return true;
   }
   break;
 
  case t_vat:
   if (str >= dice(2, 20)) {
-   sound += "ker-rash!";
+   sound += _("ker-rash!");
    ter(x, y) = t_floor;
    return true;
   } else {
-   sound += "plunk.";
+   sound += _("plunk.");
    return true;
   }
  case t_crate_c:
  case t_crate_o:
   if (str >= dice(4, 20)) {
-   sound += "smash";
+   sound += _("smash");
    ter(x, y) = t_dirt;
    int num_boards = rng(1, 5);
    for (int i = 0; i < num_boards; i++)
     add_item(x, y, (*itypes)[itm_2x4], 0);
    return true;
   } else {
-   sound += "wham!";
+   sound += _("wham!");
    return true;
   }
    
  }
  if (move_cost(x, y) == 0) {
-  sound += "thump!";
+  sound += _("thump!");
   return true;
  }
  return smashed_web;// If we kick empty space, the action is cancelled
@@ -491,14 +491,14 @@ void map::destroy(game *g, int x, int y, bool makesound)
   ter(x, y) = t_rubble;
  }
  if (makesound)
-  g->sound(x, y, 40, "SMASH!!");
+  g->sound(x, y, 40, _("SMASH!!"));
 }
 
 void map::shoot(game *g, int x, int y, int &dam, bool hit_items, unsigned flags)
 {
 
  if (has_flag(alarmed, x, y) && !g->event_queued(EVENT_WANTED)) {
-  g->sound(g->u.posx, g->u.posy, 30, "An alarm sounds!");
+  g->sound(g->u.posx, g->u.posy, 30, _("An alarm sounds!"));
   g->add_event(EVENT_WANTED, int(g->turn) + 300, 0, g->levx, g->levy);
  }
 
@@ -578,7 +578,7 @@ void map::shoot(game *g, int x, int y, int &dam, bool hit_items, unsigned flags)
 
  case t_vat:
   if (dam >= 10) {
-   g->sound(x, y, 15, "ke-rash!");
+   g->sound(x, y, 15, _("ke-rash!"));
    ter(x, y) = t_floor;
   } else
    dam = 0;
@@ -1045,7 +1045,7 @@ void map::disarm_trap(game *g, int x, int y)
  while ((rng(5, 20) < g->u.per_cur || rng(1, 20) < g->u.dex_cur) && roll < 50)
   roll++;
  if (roll >= diff) {
-  g->add_msg("You disarm the trap!");
+  g->add_msg(_("You disarm the trap!"));
   std::vector<itype_id> comp = g->traps[tr_at(x, y)]->components;
   for (int i = 0; i < comp.size(); i++) {
    if (comp[i] != itm_null)
@@ -1053,9 +1053,9 @@ void map::disarm_trap(game *g, int x, int y)
   }
   tr_at(x, y) = tr_null;
  } else if (roll >= diff * .8)
-  g->add_msg("You fail to disarm the trap.");
+  g->add_msg(_("You fail to disarm the trap."));
  else {
-  g->add_msg("You fail to disarm the trap, and you set it off!");
+  g->add_msg(_("You fail to disarm the trap, and you set it off!"));
   trap* tr = g->traps[tr_at(x, y)];
   trapfunc f;
   (f.*(tr->act))(g, x, y);
@@ -1100,7 +1100,7 @@ bool map::add_field(game *g, int x, int y, field_id t, unsigned char density)
  if (g != NULL && x == g->u.posx && y == g->u.posy &&
      grid[nonant].fld[x][y].is_dangerous()) {
   g->cancel_activity();
-  g->add_msg("You're in a %s!", fieldlist[t].name[density - 1].c_str());
+  g->add_msg(_("You're in a %s!"), fieldlist[t].name[density - 1].c_str());
  }
  return true;
 }
@@ -1136,12 +1136,12 @@ computer* map::computer_at(int x, int y)
 
 void map::debug()
 {
- mvprintw(0, 0, "MAP DEBUG");
+ mvprintw(0, 0, _("MAP DEBUG"));
  getch();
  for (int i = 0; i <= SEEX * 2; i++) {
   for (int j = 0; j <= SEEY * 2; j++) {
    if (i_at(i, j).size() > 0) {
-    mvprintw(1, 0, "%d, %d: %d items", i, j, i_at(i, j).size());
+    mvprintw(1, 0, _("%d, %d: %d items"), i, j, i_at(i, j).size());
     mvprintw(2, 0, "%c, %d", i_at(i, j)[0].symbol(), i_at(i, j)[0].color());
     getch();
    }
@@ -1835,7 +1835,7 @@ void map::spawn_monsters(game *g)
      tmp.spawnmapy = g->levy + gy;
      tmp.faction_id = grid[n].spawns[i].faction_id;
      tmp.mission_id = grid[n].spawns[i].mission_id;
-     if (grid[n].spawns[i].name != "NONE")
+     if (grid[n].spawns[i].name != _("NONE"))
       tmp.unique_name = grid[n].spawns[i].name;
      if (grid[n].spawns[i].friendly)
       tmp.friendly = -1;
