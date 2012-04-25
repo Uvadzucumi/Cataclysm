@@ -129,7 +129,7 @@ void event::actualize(game *g)
     }
    }
    if (saw_grate)
-    g->add_msg("The nearby grates open to reveal a staircase!");
+    g->add_msg(_("The nearby grates open to reveal a staircase!"));
   } break;
 
   case EVENT_TEMPLE_FLOOD: {
@@ -173,9 +173,9 @@ void event::actualize(game *g)
 // Check if we should print a message
    if (copy.ter(g->u.posx, g->u.posy) != g->m.ter(g->u.posx, g->u.posy)) {
     if (copy.ter(g->u.posx, g->u.posy) == t_water_sh)
-     g->add_msg("Water quickly floods up to your knees.");
+     g->add_msg(_("Water quickly floods up to your knees."));
     else { // Must be deep water!
-     g->add_msg("Water fills nearly to the ceiling!");
+     g->add_msg(_("Water fills nearly to the ceiling!"));
      g->plswim(g->u.posx, g->u.posy);
     }
    }
@@ -228,7 +228,7 @@ void event::per_turn(game *g)
     g->z.push_back(eyebot);
     int t;
     if (g->u_see(place.x, place.y, t))
-     g->add_msg("An eyebot swoops down nearby!");
+     g->add_msg(_("An eyebot swoops down nearby!"));
    }
   } break;
 
@@ -238,15 +238,15 @@ void event::per_turn(game *g)
     return;
    }
    if (int(g->turn) % 3 == 0)
-    g->add_msg("You hear screeches from the rock above and around you!");
+    g->add_msg(_("You hear screeches from the rock above and around you!"));
    break;
 
   case EVENT_AMIGARA:
-   g->add_msg("The entire cavern shakes!");
+   g->add_msg(_("The entire cavern shakes!"));
    break;
 
   case EVENT_TEMPLE_OPEN:
-   g->add_msg("The earth rumbles.");
+   g->add_msg(_("The earth rumbles."));
    break;
 
 
