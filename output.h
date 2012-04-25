@@ -6,30 +6,33 @@
 #include <string>
 #include <vector>
 
-//      LINE_NESW  - X for on, O for off
-//#define LINE_XOXO 4194424
-//#define LINE_OXOX 4194417
-//#define LINE_XXOO 4194413
-//#define LINE_OXXO 4194412
-//#define LINE_OOXX 4194411
-//#define LINE_XOOX 4194410
-//#define LINE_XXXO 4194420
-//#define LINE_XXOX 4194422
-//#define LINE_XOXX 4194421
-//#define LINE_OXXX 4194423
-//#define LINE_XXXX 4194414
-#define LINE_XOXO ACS_VLINE
-#define LINE_OXOX ACS_HLINE
-#define LINE_XXOO ACS_LLCORNER
-#define LINE_OXXO ACS_ULCORNER
-#define LINE_OOXX ACS_URCORNER
-#define LINE_XOOX ACS_LRCORNER
+#include <libintl.h>
+#define _(String) gettext (String)
 
-#define LINE_XXXO ACS_LTEE
-#define LINE_XXOX ACS_BTEE
-#define LINE_XOXX ACS_RTEE
-#define LINE_OXXX ACS_TTEE
-#define LINE_XXXX ACS_PLUS
+//      LINE_NESW  - X for on, O for off
+#define LINE_XOXO 4194424
+#define LINE_OXOX 4194417
+#define LINE_XXOO 4194413
+#define LINE_OXXO 4194412
+#define LINE_OOXX 4194411
+#define LINE_XOOX 4194410
+#define LINE_XXXO 4194420
+#define LINE_XXOX 4194422
+#define LINE_XOXX 4194421
+#define LINE_OXXX 4194423
+#define LINE_XXXX 4194414
+//#define LINE_XOXO WACS_VLINE
+//#define LINE_OXOX WACS_HLINE
+//#define LINE_XXOO WACS_LLCORNER
+//#define LINE_OXXO WACS_ULCORNER
+//#define LINE_OOXX WACS_URCORNER
+//#define LINE_XOOX WACS_LRCORNER
+
+//#define LINE_XXXO WACS_LTEE
+//#define LINE_XXOX WACS_BTEE
+//#define LINE_XOXX WACS_RTEE
+//#define LINE_OXXX WACS_TTEE
+//#define LINE_XXXX WACS_PLUS
 
 void mvputch(int y, int x, nc_color FG, long ch);
 void wputch(WINDOW* w, nc_color FG, long ch);
