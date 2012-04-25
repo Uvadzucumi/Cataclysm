@@ -129,7 +129,7 @@ fivedozenwhales@gmail.com."));
   dir = opendir("save");
  }
  if (!dir) {
-  debugmsg(_("Could not make './save' directory"));
+  debugmsg("Could not make './save' directory");
   endwin();
   exit(1);
  }
@@ -900,7 +900,7 @@ int game::reserve_random_mission(mission_origin origin, point p, int npc_id)
  }
 
  if (valid.empty()) {
-  debugmsg(_("No missions with origin %d found."), origin);
+  debugmsg("No missions with origin %d found.", origin);
   return -1;
  }
 
@@ -944,7 +944,7 @@ bool game::mission_complete(int id, int npc_id)
 {
  mission* miss = find_mission(id);
  if (miss == NULL) {
-  debugmsg(_("game::mission_complete(%d) - it's NULL!"), id);
+  debugmsg("game::mission_complete(%d) - it's NULL!", id);
   return false;
  }
  mission_type* type = miss->type;
@@ -1371,7 +1371,7 @@ void game::update_scent()
         newscent[x][y] < 10 * m.field_at(x, y).density)
      newscent[x][y] = 10 * m.field_at(x, y).density;
     if (newscent[x][y] > 10000) {
-     debugmsg(_("Wacky scent at %d, %d (%d)"), x, y, newscent[x][y]);
+     debugmsg("Wacky scent at %d, %d (%d)", x, y, newscent[x][y]);
      newscent[x][y] = 0; // Scent should never be higher
     }
    }
@@ -1474,7 +1474,7 @@ void game::load(std::string name)
  fin.open(playerfile.str().c_str());
 // First, read in basic game state information.
  if (!fin.is_open()) {
-  debugmsg(_("No save game exists!"));
+  debugmsg("No save game exists!");
   return;
  }
  u = player();
@@ -1685,7 +1685,7 @@ void game::debug()
   } break;
 
   case 4:
-   debugmsg(_("%d radio towers"), cur_om.radios.size());
+   debugmsg("%d radio towers", cur_om.radios.size());
    for (int i = 0; i < OMAPX; i++) {
     for (int j = 0; j < OMAPY; j++)
      cur_om.seen(i, j) = true;
@@ -1742,9 +1742,9 @@ void game::mondebug()
   z[i].debug(u);
   if (z[i].has_flag(MF_SEES) &&
       m.sees(z[i].posx, z[i].posy, u.posx, u.posy, -1, tc))
-   debugmsg(_("The %s can see you."), z[i].name().c_str());
+   debugmsg("The %s can see you.", z[i].name().c_str());
   else
-   debugmsg(_("The %s can't see you..."), z[i].name().c_str());
+   debugmsg("The %s can't see you...", z[i].name().c_str());
  }
 }
 
@@ -2265,7 +2265,7 @@ void game::draw_minimap()
     cur_ter = om_vert->ter(omx, omy);
     seen    = om_vert->seen(omx, omy);
    } else
-    debugmsg(_("No data loaded! omx: %d omy: %d"), omx, omy);
+    debugmsg("No data loaded! omx: %d omy: %d", omx, omy);
    nc_color ter_color = oterlist[cur_ter].color;
    long ter_sym = oterlist[cur_ter].sym;
    if (seen) {
@@ -2672,11 +2672,11 @@ void game::monmove()
  for (int i = 0; i < z.size(); i++) {
   bool dead = false;
   if (i < 0 || i > z.size())
-   debugmsg(_("Moving out of bounds monster! i %d, z.size() %d"), i, z.size());
+   debugmsg("Moving out of bounds monster! i %d, z.size() %d", i, z.size());
   while (!z[i].can_move_to(m, z[i].posx, z[i].posy) && i < z.size()) {
 // If we can't move to our current position, assign us to a new one
    if (debugmon)
-    debugmsg(_("%s can't move to its location! (%d:%d), %s"), z[i].name().c_str(),
+    debugmsg("%s can't move to its location! (%d:%d), %s", z[i].name().c_str(),
              z[i].posx, z[i].posy, m.tername(z[i].posx, z[i].posy).c_str());
    bool okay = false;
    int xdir = rng(1, 2) * 2 - 3, ydir = rng(1, 2) * 2 - 3; // -1 or 1
@@ -3141,7 +3141,7 @@ void game::use_computer(int x, int y)
  computer* used = m.computer_at(x, y);
 
  if (used == NULL) {
-  debugmsg(_("Tried to use computer at (%d, %d) - none there"), x, y);
+  debugmsg("Tried to use computer at (%d, %d) - none there", x, y);
   return;
  }
  
@@ -3312,7 +3312,7 @@ bool game::is_in_sunlight(int x, int y)
 void game::kill_mon(int index)
 {
  if (index < 0 || index >= z.size()) {
-  debugmsg(_("Tried to kill monster %d! (%d in play)"), index, z.size());
+  debugmsg("Tried to kill monster %d! (%d in play)", index, z.size());
   return;
  }
  if (z[index].dead)
@@ -3332,7 +3332,7 @@ void game::kill_mon(int index)
 void game::explode_mon(int index)
 {
  if (index < 0 || index >= z.size()) {
-  debugmsg(_("Tried to explode monster %d! (%d in play)"), index, z.size());
+  debugmsg("Tried to explode monster %d! (%d in play)", index, z.size());
   return;
  }
  if (z[index].dead)
@@ -4161,7 +4161,7 @@ void game::pickup(int posx, int posy, int min)
 bool game::handle_liquid(item &liquid, bool from_ground, bool infinite)
 {
  if (!liquid.made_of(LIQUID)) {
-  debugmsg(_("Tried to handle_liquid a non-liquid!"));
+  debugmsg("Tried to handle_liquid a non-liquid!");
   return false;
  }
  if (!from_ground &&
@@ -5134,7 +5134,7 @@ void game::plswim(int x, int y)
  u.posx = x;
  u.posy = y;
  if (!m.has_flag(swimmable, x, y)) {
-  debugmsg(_("Tried to swim in %s!"), m.tername(x, y).c_str());
+  debugmsg("Tried to swim in %s!", m.tername(x, y).c_str());
   return;
  }
  int movecost = u.swim_speed();
@@ -5442,17 +5442,17 @@ void game::update_map(int &x, int &y)
               int(MAPSIZE / 2) + 1) {
    int dx = cur_om.npcs[i].mapx - levx, dy = cur_om.npcs[i].mapy - levy;
    if (debugmon)
-    debugmsg(_("Spawning static NPC, %d:%d (%d:%d)"), levx, levy,
+    debugmsg("Spawning static NPC, %d:%d (%d:%d)", levx, levy,
              cur_om.npcs[i].mapx, cur_om.npcs[i].mapy);
    temp = cur_om.npcs[i];
    if (temp.posx == -1 || temp.posy == -1) {
-    debugmsg(_("Static NPC with no fine location data (%d:%d)."),
+    debugmsg("Static NPC with no fine location data (%d:%d).",
              temp.posx, temp.posy);
     temp.posx = SEEX * 2 * (temp.mapx - levx) + rng(0 - SEEX, SEEX);
     temp.posy = SEEY * 2 * (temp.mapy - levy) + rng(0 - SEEY, SEEY);
    } else {
     if (debugmon)
-     debugmsg(_("Static NPC fine location %d:%d (%d:%d)"), temp.posx, temp.posy,
+     debugmsg("Static NPC fine location %d:%d (%d:%d)", temp.posx, temp.posy,
               temp.posx + dx * SEEX, temp.posy + dy * SEEY);
     temp.posx += dx * SEEX;
     temp.posy += dy * SEEY;
