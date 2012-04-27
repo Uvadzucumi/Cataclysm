@@ -306,7 +306,7 @@ int player::current_speed(game *g)
   newmoves = int(newmoves * 1.10);
 
  if (g != NULL) {
-  if (has_trait(PF_SUNLIGHT_DEPENDANT) && !g->is_in_sunlight(posx, posy))
+  if (has_trait(PF_SUNLIGHT_DEPENDENT) && !g->is_in_sunlight(posx, posy))
    newmoves -= (g->light_level() >= 12 ? 5 : 10);
   if ((has_trait(PF_COLDBLOOD) || has_trait(PF_COLDBLOOD2) ||
        has_trait(PF_COLDBLOOD3)) && g->temperature < 65) {
@@ -885,7 +885,7 @@ Strength - 4;    Dexterity - 4;    Intelligence - 4;    Dexterity - 4"));
             (pen < 10 ? " " : ""), pen);
   line++;
  }
- if (has_trait(PF_SUNLIGHT_DEPENDANT) && !g->is_in_sunlight(posx, posy)) {
+ if (has_trait(PF_SUNLIGHT_DEPENDENT) && !g->is_in_sunlight(posx, posy)) {
   pen = (g->light_level() >= 12 ? 5 : 10);
   mvwprintz(w_speed, line, 1, c_red, _("Out of Sunlight     -%s%d%%%%"),
             (pen < 10 ? " " : ""), pen);
@@ -3381,7 +3381,7 @@ bool player::eat(game *g, int index)
   }
 // At this point, we've definitely eaten the item, so use up some turns.
   if (has_trait(PF_GOURMAND))
-   moves -= 150;
+   moves -= 150; 
   else
    moves -= 250;
 // If it's poisonous... poison us.  TODO: More several poison effects
@@ -3399,8 +3399,7 @@ bool player::eat(game *g, int index)
   } else if (g->u_see(posx, posy, linet))
    g->add_msg(_("%s eats a %s."), name.c_str(), eaten->tname(g).c_str());
 
-  if (g->itypes[comest->tool]->is_tool() &&
-      g->itypes[comest->tool]->count_by_charges())
+  if (g->itypes[comest->tool]->is_tool())
    use_charges(comest->tool, 1); // Tools like lighters get used
   if (comest->stim > 0) {
    if (comest->stim < 10 && stim < comest->stim) {

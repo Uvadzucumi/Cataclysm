@@ -263,7 +263,7 @@ enum pl_flag {
  PF_PONDEROUS1,	// 10% movement penalty
  PF_PONDEROUS2, // 20%
  PF_PONDEROUS3, // 30%
- PF_SUNLIGHT_DEPENDANT,//
+ PF_SUNLIGHT_DEPENDENT,//
  PF_COLDBLOOD,//
  PF_COLDBLOOD2,//
  PF_COLDBLOOD3,//
@@ -768,14 +768,14 @@ Your muscles are generally slow to move.  You run 10%% slower.")},
 Your muscles are quite slow to move.  You run 20%% slower.")},
 {_("Extremely Ponderous"), -8, 0, 0, _("\
 Your muscles are very slow to move.  You run 30%% slower.")},
-{_("Sunlight Dependant"), -5, 0, 0, _("\
+{_("Sunlight dependent"), -5, 0, 0, _("\
 You feel very sluggish when not in direct sunlight.  You suffer a 5%% drop in\n\
 speed when in shade, and a 10%% drop in speed when in the dark.")},
-{_("Heat Dependant"), -2, 0, 0, _("\
-Your muscle response is dependant on ambient temperatures.  You lose 1%% of\n\
+{_("Heat dependent"), -2, 0, 0, _("\
+Your muscle response is dependent on ambient temperatures.  You lose 1%% of\n\
 your speed for every 5 degrees below 65 F.")},
-{_("Very Heat Dependant"), -3, 0, 0, _("\
-Your muscle response is highly dependant on ambient temperatures.  You lose\n\
+{_("Very Heat dependent"), -3, 0, 0, _("\
+Your muscle response is highly dependent on ambient temperatures.  You lose\n\
 1%% of your speed for every 3 degrees below 65 F.")},
 {_("Cold Blooded"), -5, 0, 0, _("\
 You are cold-blooded and rely on heat to keep moving.  Your lose 1%% of your\n\
